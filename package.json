@@ -1,0 +1,18 @@
+{
+  "name": "agentspend",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "types",
+    "sdk",
+    "cli"
+  ],
+  "scripts": {
+    "build": "npm run build -w @agentspend/types && npm run build -w @agentspend/sdk && npm run build -w @agentspend/cli",
+    "typecheck": "npm run typecheck --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "typescript": "^5.9.3"
+  }
+}
