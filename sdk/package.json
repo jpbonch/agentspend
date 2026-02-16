@@ -1,10 +1,13 @@
 {
   "name": "@agentspend/sdk",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "@agentspend/types": "*"
+    "@x402/core": "^2.3.1"
   },
   "scripts": {
     "build": "tsc",

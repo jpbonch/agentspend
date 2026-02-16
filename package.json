@@ -1,14 +1,13 @@
 {
-  "name": "agentspend",
+  "name": "agentspend-monorepo",
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "types",
     "sdk",
     "cli"
   ],
   "scripts": {
-    "build": "npm run build -w @agentspend/types && npm run build -w @agentspend/sdk && npm run build -w @agentspend/cli",
+    "build": "npm run build -w @agentspend/sdk && npm run build -w agentspend",
     "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "devDependencies": {

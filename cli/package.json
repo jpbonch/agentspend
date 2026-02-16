@@ -1,12 +1,12 @@
 {
-  "name": "@agentspend/cli",
+  "name": "agentspend",
   "version": "0.1.0",
   "bin": {
     "agentspend": "dist/index.js"
   },
   "dependencies": {
-    "@agentspend/types": "*",
-    "commander": "^13.0.0"
+    "commander": "^13.0.0",
+    "viem": "^2.0.0"
   },
   "scripts": {
     "build": "tsc",
