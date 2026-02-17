@@ -8,13 +8,19 @@ when_to_use:
   - You need to set up a card or wallet to pay for a service.
 
 commands:
-  card setup: |
-    npx agentspend card setup
-    # Links user's credit card via Stripe Checkout. Opens browser, polls
-    # until complete. Saves to ~/.agentspend/card.json.
+  card configure: |
+    npx agentspend card configure
+    # First time: opens a page where the user sets their weekly spending limit,
+    # then adds their card via Stripe Checkout. Saves to ~/.agentspend/card.json.
+    # Re-run: opens the configuration page where the user can change their
+    # weekly limit, swap their card, or remove it entirely.
   card status: |
     npx agentspend card status
-    # Checks setup status of a pending card.
+    # Shows full card dashboard:
+    #   - Weekly budget usage: amount spent vs weekly limit
+    #   - Authorized services: list of services the card is bound to
+    #   - Recent charges: last 10 transactions with service name, amount, date
+    # If no card is set up yet, shows pending setup status.
   wallet create: |
     npx agentspend wallet create
     # Generates a new crypto wallet (keypair) for x402 payments.
@@ -37,7 +43,11 @@ payment:
     crypto payment is attempted as fallback.
 
 user_interaction:
-  - `card setup`: Tell the user to complete card entry in the browser.
+  - `card configure`: Tell the user to configure their spending settings in the browser.
+    On first setup, they'll set a weekly limit and add a card.
+    Re-run to let the user change their limit, swap their card, or remove it.
+  - `card status`: Use to check remaining weekly budget, see which services are authorized,
+    and review recent charge history. Useful before attempting a payment.
   - `wallet create`: Tell the user the wallet address and ask them to fund it with USDC.
   - Never show card IDs, private keys, or Stripe URLs in messages.
   - On card success: "Your card is set up. I can now pay for services on your behalf."
