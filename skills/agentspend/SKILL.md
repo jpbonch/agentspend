@@ -23,6 +23,13 @@ commands:
   wallet status: |
     npx agentspend wallet status
     # Shows wallet address, network, and USDC balance.
+  pay: |
+    npx agentspend pay <url>
+    # Pays a paywall-protected endpoint using card or crypto wallet.
+    # Options:
+    #   --method card|crypto   Force payment method (default: auto-detect)
+    #   --body <json>          Request body JSON
+    #   --header <key:value>   Extra headers (repeatable)
 
 payment:
   - Cards are tried first (via x-card-id header).

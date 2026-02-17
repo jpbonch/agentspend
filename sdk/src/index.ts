@@ -171,6 +171,26 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
   const platformApiBaseUrl = resolvePlatformApiBaseUrl(options.platformApiBaseUrl);
 
   // -------------------------------------------------------------------
+  // Lazy service_id fetch + cache
+  // -------------------------------------------------------------------
+  let cachedServiceId: string | null = null;
+
+  async function getServiceId(): Promise<string | null> {
+    if (cachedServiceId) return cachedServiceId;
+    if (!options.serviceApiKey) return null;
+    try {
+      const res = await fetchImpl(joinUrl(platformApiBaseUrl, "/v1/service/me"), {
+        headers: { authorization: `Bearer ${options.serviceApiKey}` }
+      });
+      if (res.ok) {
+        const data = (await res.json()) as { id?: string };
+        cachedServiceId = data.id ?? null;
+      }
+    } catch { /* graceful fallback */ }
+    return cachedServiceId;
+  }
+
+  // -------------------------------------------------------------------
   // x402 singleton setup (Decision 9)
   // Server-side: facilitator handles verify + settle over HTTP.
   // No client-side EVM scheme needed — we delegate to the facilitator.
@@ -336,6 +356,10 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
       c.set(PAYMENT_CONTEXT_KEY, paymentContext);
     } catch (error) {
       if (error instanceof AgentSpendChargeError) {
+        if (error.statusCode === 403) {
+          // No binding — return 402 so agent can discover service_id and bind
+          return return402Response(c, amountCents, currency);
+        }
         if (error.statusCode === 402) {
           return c.json({ error: "Payment required", details: error.details }, 402);
         }
@@ -446,6 +470,8 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
     amountCents: number,
     currency: string
   ): Promise<Response> {
+    const serviceId = await getServiceId();
+
     try {
       const payTo = await resolvePayToAddress();
 
@@ -477,11 +503,31 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
       ).toString("base64");
       c.header("Payment-Required", headerValue);
 
-      return c.json({ error: "Payment required", amount_cents: amountCents, currency }, 402);
+      return c.json({
+        error: "Payment required",
+        amount_cents: amountCents,
+        currency,
+        ...(serviceId ? {
+          agentspend: {
+            service_id: serviceId,
+            amount_cents: amountCents,
+          }
+        } : {})
+      }, 402);
     } catch {
       // If we can't resolve a payTo address, return a plain 402
       return c.json(
-        { error: "Payment required", amount_cents: amountCents, currency },
+        {
+          error: "Payment required",
+          amount_cents: amountCents,
+          currency,
+          ...(serviceId ? {
+            agentspend: {
+              service_id: serviceId,
+              amount_cents: amountCents,
+            }
+          } : {})
+        },
         402
       );
     }

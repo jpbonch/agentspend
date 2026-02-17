@@ -18,6 +18,7 @@ interface CardSetupStatusResponse {
   status: CardSetupStatus;
   expires_at: string;
   card_id?: string;
+  card_secret?: string;
 }
 
 const CONFIG_DIR = join(homedir(), ".agentspend");
@@ -121,7 +122,10 @@ export function registerCardCommands(program: Command): void {
           if (status.status === "ready") {
             console.log(`Card is ready!`);
             if (status.card_id) {
-              await writeFile(CARD_FILE, JSON.stringify({ card_id: status.card_id }, null, 2));
+              await writeFile(CARD_FILE, JSON.stringify({
+                card_id: status.card_id,
+                card_secret: status.card_secret,
+              }, null, 2));
               console.log(`Card ID saved to ${CARD_FILE}`);
             }
             // Clean up setup file

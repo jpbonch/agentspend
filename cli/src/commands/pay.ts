@@ -6,9 +6,11 @@ import { join } from "node:path";
 const CONFIG_DIR = join(homedir(), ".agentspend");
 const CARD_FILE = join(CONFIG_DIR, "card.json");
 const WALLET_FILE = join(CONFIG_DIR, "wallet.json");
+const API_BASE = process.env.AGENTSPEND_API_URL ?? "https://api.agentspend.co";
 
 interface CardConfig {
   card_id: string;
+  card_secret: string;
 }
 
 interface WalletConfig {
@@ -20,7 +22,7 @@ interface WalletConfig {
 async function readCardConfig(): Promise<CardConfig | null> {
   try {
     const data = JSON.parse(await readFile(CARD_FILE, "utf-8"));
-    if (typeof data.card_id === "string" && data.card_id) {
+    if (typeof data.card_id === "string" && data.card_id && typeof data.card_secret === "string" && data.card_secret) {
       return data as CardConfig;
     }
   } catch {
@@ -55,36 +57,80 @@ function parseHeaders(headerArgs: string[]): Record<string, string> {
 
 async function payWithCard(
   url: string,
-  cardId: string,
+  cardConfig: CardConfig,
   body: string | undefined,
   extraHeaders: Record<string, string>
 ): Promise<void> {
   const headers: Record<string, string> = {
     ...extraHeaders,
-    "x-card-id": cardId,
+    "x-card-id": cardConfig.card_id,
   };
   if (body) {
     headers["content-type"] = "application/json";
   }
 
+  // Try with x-card-id
   const res = await fetch(url, {
     method: "POST",
     headers,
     body: body ?? undefined,
   });
 
-  const data = await res.text();
-  if (!res.ok) {
-    console.error(`Request failed (${res.status}): ${data}`);
-    process.exit(1);
+  // Success
+  if (res.ok) {
+    console.log("Payment successful (card)");
+    const data = await res.text();
+    try { console.log(JSON.stringify(JSON.parse(data), null, 2)); }
+    catch { console.log(data); }
+    return;
   }
 
-  console.log("Payment successful (card)");
-  try {
-    console.log(JSON.stringify(JSON.parse(data), null, 2));
-  } catch {
-    console.log(data);
+  // 402 with agentspend.service_id — need to bind
+  if (res.status === 402) {
+    const errorBody = await res.json().catch(() => ({})) as Record<string, unknown>;
+    const agentspend = errorBody?.agentspend as Record<string, unknown> | undefined;
+    const serviceId = agentspend?.service_id as string | undefined;
+
+    if (serviceId) {
+      console.log(`Binding to service ${serviceId}...`);
+      const bindRes = await fetch(
+        `${API_BASE}/v1/card/${encodeURIComponent(cardConfig.card_id)}/bind`,
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            card_secret: cardConfig.card_secret,
+            service_id: serviceId,
+          }),
+        }
+      );
+
+      if (!bindRes.ok) {
+        const bindError = await bindRes.text();
+        console.error(`Failed to bind (${bindRes.status}): ${bindError}`);
+        process.exit(1);
+      }
+
+      console.log("Bound. Retrying payment...");
+
+      // Retry with x-card-id
+      const retryRes = await fetch(url, { method: "POST", headers, body: body ?? undefined });
+      if (!retryRes.ok) {
+        console.error(`Retry failed (${retryRes.status}): ${await retryRes.text()}`);
+        process.exit(1);
+      }
+
+      console.log("Payment successful (card)");
+      const data = await retryRes.text();
+      try { console.log(JSON.stringify(JSON.parse(data), null, 2)); }
+      catch { console.log(data); }
+      return;
+    }
   }
+
+  // Other error
+  console.error(`Request failed (${res.status}): ${await res.text().catch(() => "")}`);
+  process.exit(1);
 }
 
 async function payWithCrypto(
@@ -185,7 +231,7 @@ export function registerPayCommand(program: Command): void {
             console.error("No card configured. Run: agentspend card setup");
             process.exit(1);
           }
-          await payWithCard(url, card.card_id, opts.body, extraHeaders);
+          await payWithCard(url, card, opts.body, extraHeaders);
           return;
         }
 
@@ -202,7 +248,7 @@ export function registerPayCommand(program: Command): void {
         // Auto-detect: try card first, then crypto
         const card = await readCardConfig();
         if (card) {
-          await payWithCard(url, card.card_id, opts.body, extraHeaders);
+          await payWithCard(url, card, opts.body, extraHeaders);
           return;
         }
 
