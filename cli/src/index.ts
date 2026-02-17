@@ -3,6 +3,7 @@
 import { Command } from "commander";
 import { registerCardCommands } from "./commands/card.js";
 import { registerWalletCommands } from "./commands/wallet.js";
+import { registerPayCommand } from "./commands/pay.js";
 
 const program = new Command();
 
@@ -13,5 +14,6 @@ program
 
 registerCardCommands(program);
 registerWalletCommands(program);
+registerPayCommand(program);
 
 program.parse();
