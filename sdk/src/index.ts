@@ -399,8 +399,15 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
         return c.json({ error: "Invalid payment payload encoding" }, 400);
       }
 
-      // Resolve the payTo address for verification context
-      const payTo = await resolvePayToAddress();
+      // Extract payTo from the payment payload's accepted requirements
+      // rather than generating a new deposit address.
+      // resolvePayToAddress() creates a fresh Stripe PaymentIntent each
+      // time, which would return a *different* address than the one in the
+      // 402 response the client signed against → facilitator verification
+      // would fail.
+      const acceptedPayTo = (paymentPayload as unknown as { accepted?: { payTo?: string } })
+        .accepted?.payTo;
+      const payTo: string = acceptedPayTo ?? await resolvePayToAddress();
 
       // Build the payment requirements that the payment should satisfy
       const paymentRequirements: PaymentRequirements = {
@@ -514,8 +521,14 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
           }
         } : {})
       }, 402);
-    } catch {
-      // If we can't resolve a payTo address, return a plain 402
+    } catch (error) {
+      // Log clearly so service developers can diagnose why crypto is unavailable
+      console.error(
+        "[agentspend] Failed to resolve crypto payTo address — returning card-only 402:",
+        error instanceof Error ? error.message : error
+      );
+      // Return card-only 402 (no Payment-Required header → crypto clients
+      // will see "Invalid payment required response")
       return c.json(
         {
           error: "Payment required",
