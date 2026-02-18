@@ -1,6 +1,6 @@
 {
   "name": "agentspend",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "CLI for AgentSpend — manage cards and crypto wallets for AI agent payments",
   "repository": {
     "type": "git",
