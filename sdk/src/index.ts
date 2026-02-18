@@ -417,7 +417,7 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
         asset: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC on Base
         payTo,
         maxTimeoutSeconds: 300,
-        extra: {}
+        extra: { name: "USD Coin", version: "2" }
       };
 
       // Verify payment via facilitator
@@ -489,7 +489,7 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
         asset: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913", // USDC on Base
         payTo,
         maxTimeoutSeconds: 300,
-        extra: {}
+        extra: { name: "USD Coin", version: "2" }
       };
 
       // Build x402 v2 PaymentRequired response
