@@ -293,8 +293,9 @@ export function createAgentSpend(options: AgentSpendOptions): AgentSpend {
 
       const currency = opts.currency ?? "usd";
 
-      // Step 3: Check for x-payment header → crypto payment
-      const paymentHeader = c.req.header("x-payment");
+      // Step 3: Check for payment header → crypto payment
+      // x402 v2 uses "Payment-Signature", v1 uses "X-Payment"
+      const paymentHeader = c.req.header("payment-signature") ?? c.req.header("x-payment");
       if (paymentHeader) {
         return handleCryptoPayment(c, next, paymentHeader, effectiveAmount, currency, body, opts);
       }
