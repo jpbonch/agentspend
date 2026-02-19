@@ -1,7 +1,6 @@
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
 import { requireApiKey } from "../lib/credentials.js";
-import { formatJson, formatPaymentRequirementDetails, formatUsd, formatUsdEstimate, usd6ToUsd } from "../lib/output.js";
-import type { PaymentRequirementInfo, PayResponse } from "../types.js";
+import { formatJson, formatUsd, formatUsdEstimate, usd6ToUsd } from "../lib/output.js";
 
 export interface PayCommandOptions {
   method?: string;
@@ -44,64 +43,6 @@ function parseBody(rawBody: string | undefined): unknown {
   }
 }
 
-function requirementFromPayResponse(response: PayResponse): PaymentRequirementInfo | null {
-  if (response.payment_requirement) {
-    return response.payment_requirement;
-  }
-
-  if (!response.payment) {
-    return null;
-  }
-
-  return {
-    price_usd6: response.payment.charged_usd6,
-    price_usd: response.payment.charged_usd,
-    estimated_usd: response.payment.estimated_usd,
-    currency: response.payment.charged_currency,
-    pay_to: response.payment.paid_to,
-    amount_minor: response.payment.charged_amount_minor,
-    amount_display: response.payment.charged_amount_display,
-    decimals: null,
-    description: null,
-    network: response.payment.network,
-    scheme: response.payment.scheme,
-    resource: response.payment.resource,
-    max_timeout_seconds: null,
-    mime_type: null,
-    pricing_note: response.payment.pricing_note,
-  };
-}
-
-function requirementFromErrorDetails(details: unknown): PaymentRequirementInfo | null {
-  if (!details || typeof details !== "object") {
-    return null;
-  }
-
-  const candidate = details as Record<string, unknown>;
-  if (typeof candidate.currency !== "string") {
-    return null;
-  }
-
-  return {
-    price_usd6: typeof candidate.price_usd6 === "number" ? candidate.price_usd6 : null,
-    price_usd: typeof candidate.price_usd === "number" ? candidate.price_usd : null,
-    estimated_usd: typeof candidate.estimated_usd === "number" ? candidate.estimated_usd : null,
-    currency: candidate.currency,
-    pay_to: typeof candidate.pay_to === "string" ? candidate.pay_to : null,
-    amount_minor: typeof candidate.amount_minor === "number" ? candidate.amount_minor : null,
-    amount_display: typeof candidate.amount_display === "string" ? candidate.amount_display : null,
-    decimals: typeof candidate.decimals === "number" ? candidate.decimals : null,
-    description: typeof candidate.description === "string" ? candidate.description : null,
-    network: typeof candidate.network === "string" ? candidate.network : null,
-    scheme: typeof candidate.scheme === "string" ? candidate.scheme : null,
-    resource: typeof candidate.resource === "string" ? candidate.resource : null,
-    max_timeout_seconds:
-      typeof candidate.max_timeout_seconds === "number" ? candidate.max_timeout_seconds : null,
-    mime_type: typeof candidate.mime_type === "string" ? candidate.mime_type : null,
-    pricing_note: typeof candidate.pricing_note === "string" ? candidate.pricing_note : null,
-  };
-}
-
 export async function runPay(apiClient: AgentspendApiClient, url: string, options: PayCommandOptions): Promise<void> {
   const apiKey = await requireApiKey();
   const method = (options.method ?? "GET").toUpperCase();
@@ -118,26 +59,9 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
     console.log(formatJson(response.body));
 
     if (response.payment) {
-      const requirement = requirementFromPayResponse(response);
-
-      if (requirement) {
-        console.log("\nPayment requirement:");
-        console.log(formatPaymentRequirementDetails(requirement));
-      }
-
       console.log(
         `\nCharged: ${formatUsd(response.payment.charged_usd)} | Remaining: ${formatUsd(response.payment.remaining_budget_usd)}`,
       );
-
-      if (response.payment.transaction_hash) {
-        console.log(`Transaction: ${response.payment.transaction_hash}`);
-      }
-
-      if (response.payment.pricing_note) {
-        console.log(`Note: ${response.payment.pricing_note}`);
-      }
-    } else {
-      console.log("\nNo payment required.");
     }
   } catch (error) {
     if (error instanceof ApiError) {
@@ -187,11 +111,6 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
 
       if (error.status === 400 && body?.code === "PRICE_NOT_CONVERTIBLE") {
         console.error("Price could not be converted to 6-decimal USD units for policy checks.");
-        const requirement = requirementFromErrorDetails(body.details);
-        if (requirement) {
-          console.error("Payment requirement:");
-          console.error(formatPaymentRequirementDetails(requirement));
-        }
         return;
       }
 

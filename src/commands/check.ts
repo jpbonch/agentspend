@@ -1,6 +1,6 @@
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
 import { requireApiKey } from "../lib/credentials.js";
-import { formatPaymentRequirementDetails, formatUsd, usd6ToUsd } from "../lib/output.js";
+import { formatUsd, usd6ToUsd } from "../lib/output.js";
 import type { CheckResponse, PaymentRequirementInfo } from "../types.js";
 
 function requirementFromCheck(response: CheckResponse): PaymentRequirementInfo | null {
@@ -50,17 +50,16 @@ export async function runCheck(apiClient: AgentspendApiClient, url: string): Pro
     const requirement = requirementFromCheck(response);
     if (!requirement) {
       const fallbackUsd = response.price_usd ?? (response.price_usd6 !== null && response.price_usd6 !== undefined ? usd6ToUsd(response.price_usd6) : 0);
-      console.log(`This endpoint charges ${formatUsd(fallbackUsd)} (${response.currency ?? "USDC"})`);
+      console.log(`Price: ${formatUsd(fallbackUsd)}`);
+      console.log("Description: unavailable");
       return;
     }
 
-    console.log("Payment requirement:");
-    console.log(formatPaymentRequirementDetails(requirement));
-
-    if (requirement.price_usd6 === null) {
-      console.log("");
-      console.log("Price could not be safely converted into 6-decimal USD units for policy checks.");
-    }
+    const policyUsd = requirement.price_usd ?? (requirement.price_usd6 !== null ? usd6ToUsd(requirement.price_usd6) : null);
+    const price = policyUsd !== null ? formatUsd(policyUsd) : "unavailable";
+    const description = requirement.description ?? "unavailable";
+    console.log(`Price: ${price}`);
+    console.log(`Description: ${description}`);
 
     return;
   } catch (error) {
