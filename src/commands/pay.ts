@@ -9,6 +9,97 @@ export interface PayCommandOptions {
   maxCost?: number;
 }
 
+type PayErrorCode =
+  | "PRICE_EXCEEDS_MAX"
+  | "PRICE_NOT_CONVERTIBLE"
+  | "WEEKLY_BUDGET_EXCEEDED"
+  | "DOMAIN_NOT_ALLOWLISTED";
+
+interface PayErrorDetails {
+  offered_price_usd6?: number;
+  offered_price_usd?: number;
+  max_cost_usd6?: number;
+  max_cost_usd?: number;
+  weekly_limit_usd6?: number;
+  weekly_limit_usd?: number;
+  spent_this_week_usd6?: number;
+  spent_this_week_usd?: number;
+  attempted_charge_usd6?: number;
+  attempted_charge_usd?: number;
+  estimated_usd?: number;
+  amount_display?: string;
+  currency?: string;
+}
+
+interface ParsedPayErrorBody {
+  code?: PayErrorCode;
+  details?: PayErrorDetails;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function readNumber(record: Record<string, unknown>, key: string): number | undefined {
+  const value = record[key];
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+
+function readString(record: Record<string, unknown>, key: string): string | undefined {
+  const value = record[key];
+  return typeof value === "string" ? value : undefined;
+}
+
+function parsePayErrorCode(value: unknown): PayErrorCode | undefined {
+  if (typeof value !== "string") {
+    return undefined;
+  }
+
+  if (
+    value === "PRICE_EXCEEDS_MAX" ||
+    value === "PRICE_NOT_CONVERTIBLE" ||
+    value === "WEEKLY_BUDGET_EXCEEDED" ||
+    value === "DOMAIN_NOT_ALLOWLISTED"
+  ) {
+    return value;
+  }
+
+  return undefined;
+}
+
+function parsePayErrorBody(body: unknown): ParsedPayErrorBody {
+  if (!isRecord(body)) {
+    return {};
+  }
+
+  const parsed: ParsedPayErrorBody = {
+    code: parsePayErrorCode(body.code),
+  };
+
+  if (!isRecord(body.details)) {
+    return parsed;
+  }
+
+  const detailsRecord = body.details;
+  parsed.details = {
+    offered_price_usd6: readNumber(detailsRecord, "offered_price_usd6"),
+    offered_price_usd: readNumber(detailsRecord, "offered_price_usd"),
+    max_cost_usd6: readNumber(detailsRecord, "max_cost_usd6"),
+    max_cost_usd: readNumber(detailsRecord, "max_cost_usd"),
+    weekly_limit_usd6: readNumber(detailsRecord, "weekly_limit_usd6"),
+    weekly_limit_usd: readNumber(detailsRecord, "weekly_limit_usd"),
+    spent_this_week_usd6: readNumber(detailsRecord, "spent_this_week_usd6"),
+    spent_this_week_usd: readNumber(detailsRecord, "spent_this_week_usd"),
+    attempted_charge_usd6: readNumber(detailsRecord, "attempted_charge_usd6"),
+    attempted_charge_usd: readNumber(detailsRecord, "attempted_charge_usd"),
+    estimated_usd: readNumber(detailsRecord, "estimated_usd"),
+    amount_display: readString(detailsRecord, "amount_display"),
+    currency: readString(detailsRecord, "currency"),
+  };
+
+  return parsed;
+}
+
 function parseHeaders(rawHeaders: string[] | undefined): Record<string, string> {
   const parsed: Record<string, string> = {};
 
@@ -65,27 +156,9 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
     }
   } catch (error) {
     if (error instanceof ApiError) {
-      const body = error.body as {
-        code?: string;
-        details?: {
-          offered_price_usd6?: number;
-          offered_price_usd?: number;
-          max_cost_usd6?: number;
-          max_cost_usd?: number;
-          weekly_limit_usd6?: number;
-          weekly_limit_usd?: number;
-          spent_this_week_usd6?: number;
-          spent_this_week_usd?: number;
-          attempted_charge_usd6?: number;
-          attempted_charge_usd?: number;
-          estimated_usd?: number;
-          amount_display?: string;
-          currency?: string;
-          domain?: string;
-        };
-      };
+      const body = parsePayErrorBody(error.body);
 
-      if (error.status === 400 && body?.code === "PRICE_EXCEEDS_MAX") {
+      if (error.status === 400 && body.code === "PRICE_EXCEEDS_MAX") {
         const offered =
           body.details?.offered_price_usd ??
           (typeof body.details?.offered_price_usd6 === "number" ? usd6ToUsd(body.details.offered_price_usd6) : 0);
@@ -109,12 +182,12 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
         return;
       }
 
-      if (error.status === 400 && body?.code === "PRICE_NOT_CONVERTIBLE") {
+      if (error.status === 400 && body.code === "PRICE_NOT_CONVERTIBLE") {
         console.error("Price could not be converted to 6-decimal USD units for policy checks.");
         return;
       }
 
-      if (error.status === 402 && body?.code === "WEEKLY_BUDGET_EXCEEDED") {
+      if (error.status === 402 && body.code === "WEEKLY_BUDGET_EXCEEDED") {
         const weeklyLimit =
           body.details?.weekly_limit_usd ??
           (typeof body.details?.weekly_limit_usd6 === "number" ? usd6ToUsd(body.details.weekly_limit_usd6) : 0);
@@ -131,7 +204,7 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
         return;
       }
 
-      if (error.status === 403 && body?.code === "DOMAIN_NOT_ALLOWLISTED") {
+      if (error.status === 403 && body.code === "DOMAIN_NOT_ALLOWLISTED") {
         console.error("This domain is not in your AgentSpend allowlist.");
         return;
       }

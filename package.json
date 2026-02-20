@@ -2,7 +2,7 @@
   "name": "agentspend",
   "version": "0.2.0",
   "description": "AgentSpend CLI for managed x402 spending",
-  "files": ["dist", "src", "SKILL.md"],
+  "files": ["dist", "SKILL.md"],
   "type": "module",
   "bin": {
     "agentspend": "dist/index.js"
