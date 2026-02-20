@@ -26,7 +26,7 @@ async function main(): Promise<void> {
   const program = new Command();
   const apiClient = new AgentspendApiClient();
 
-  program.name("agentspend").description("AgentSpend v2 CLI").version("0.2.0");
+  program.name("agentspend").description("AgentSpend CLI").version("0.2.0");
 
   program.command("setup").description("Run one-time onboarding").action(async () => {
     await runSetup(apiClient);
