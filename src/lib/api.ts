@@ -79,40 +79,40 @@ export class AgentspendApiClient {
   }
 
   pay(apiKey: string, payload: PayRequest): Promise<PayResponse> {
-    return this.request<PayResponse>("/v1/pay", {
+    return this.request<PayResponse>("/pay", {
       method: "POST",
       body: JSON.stringify(payload),
     }, apiKey);
   }
 
   check(apiKey: string, payload: CheckRequest): Promise<CheckResponse> {
-    return this.request<CheckResponse>("/v1/check", {
+    return this.request<CheckResponse>("/check", {
       method: "POST",
       body: JSON.stringify(payload),
     }, apiKey);
   }
 
   status(apiKey: string): Promise<StatusResponse> {
-    return this.request<StatusResponse>("/v1/status", {
+    return this.request<StatusResponse>("/status", {
       method: "GET",
     }, apiKey);
   }
 
   configure(payload?: { weekly_limit_usd?: number }, apiKey?: string): Promise<ConfigureStatusResponse> {
-    return this.request<ConfigureStatusResponse>("/v1/configure", {
+    return this.request<ConfigureStatusResponse>("/configure", {
       method: "POST",
       body: payload ? JSON.stringify(payload) : undefined,
     }, apiKey);
   }
 
   configureStatus(token: string): Promise<ConfigureStatusResponse> {
-    return this.request<ConfigureStatusResponse>(`/v1/configure/${encodeURIComponent(token)}/status`, {
+    return this.request<ConfigureStatusResponse>(`/configure/${encodeURIComponent(token)}/status`, {
       method: "GET",
     });
   }
 
   claimConfigure(token: string, apiKeyHash: string): Promise<ConfigureClaimResponse> {
-    return this.request<ConfigureClaimResponse>(`/v1/configure/${encodeURIComponent(token)}/claim`, {
+    return this.request<ConfigureClaimResponse>(`/configure/${encodeURIComponent(token)}/claim`, {
       method: "POST",
       body: JSON.stringify({ api_key_hash: apiKeyHash }),
     });
