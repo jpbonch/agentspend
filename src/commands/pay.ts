@@ -81,7 +81,7 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
           estimated_usd?: number;
           amount_display?: string;
           currency?: string;
-          reason?: string;
+          domain?: string;
         };
       };
 
@@ -131,9 +131,8 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
         return;
       }
 
-      if (error.status === 403 && body?.code === "BLOCKLISTED_DOMAIN") {
-        const reason = body.details?.reason ? ` (${body.details.reason})` : "";
-        console.error(`This domain is blocked by AgentSpend${reason}.`);
+      if (error.status === 403 && body?.code === "DOMAIN_NOT_ALLOWLISTED") {
+        console.error("This domain is not in your AgentSpend allowlist.");
         return;
       }
     }
