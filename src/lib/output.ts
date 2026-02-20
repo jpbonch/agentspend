@@ -1,4 +1,4 @@
-import type { PaymentRequirementInfo, StatusCharge, StatusResponse } from "../types.js";
+import type { StatusCharge, StatusResponse } from "../types.js";
 
 const USD6_SCALE = 1_000_000;
 
@@ -71,83 +71,6 @@ export function relativeTime(iso: string): string {
 
   const days = Math.floor(hours / 24);
   return `${days}d ago`;
-}
-
-function maybeLine(label: string, value: string | null | undefined): string | null {
-  if (value === null || value === undefined || value === "") {
-    return null;
-  }
-
-  return `${label}: ${value}`;
-}
-
-export function formatPaymentRequirementDetails(info: PaymentRequirementInfo): string {
-  const lines: string[] = [];
-  const amount =
-    info.amount_display !== null && info.amount_display !== undefined
-      ? `${info.amount_display} ${info.currency}`
-      : info.amount_minor !== null && info.amount_minor !== undefined
-        ? `${String(info.amount_minor)} minor units ${info.currency}`
-        : null;
-
-  const policyUsd = info.price_usd ?? (info.price_usd6 !== null ? usd6ToUsd(info.price_usd6) : null);
-  const priceLine = policyUsd !== null ? formatUsd(policyUsd) : "unavailable";
-  const estimateLine = formatUsdEstimate(info.estimated_usd, policyUsd);
-
-  lines.push(`Policy price (USD-6): ${priceLine}`);
-  lines.push(`Estimated USD value: ${estimateLine}`);
-
-  const amountLine = maybeLine("Token amount", amount);
-  if (amountLine) {
-    lines.push(amountLine);
-  }
-
-  const decimalsLine = info.decimals !== null ? `Decimals: ${info.decimals}` : null;
-  if (decimalsLine) {
-    lines.push(decimalsLine);
-  }
-
-  const payToLine = maybeLine("Pay to", info.pay_to);
-  if (payToLine) {
-    lines.push(payToLine);
-  }
-
-  const networkLine = maybeLine("Network", info.network);
-  if (networkLine) {
-    lines.push(networkLine);
-  }
-
-  const schemeLine = maybeLine("Scheme", info.scheme);
-  if (schemeLine) {
-    lines.push(schemeLine);
-  }
-
-  const resourceLine = maybeLine("Resource", info.resource);
-  if (resourceLine) {
-    lines.push(resourceLine);
-  }
-
-  const descriptionLine = maybeLine("Description", info.description);
-  if (descriptionLine) {
-    lines.push(descriptionLine);
-  }
-
-  const timeoutLine = info.max_timeout_seconds !== null ? `Max timeout: ${info.max_timeout_seconds}s` : null;
-  if (timeoutLine) {
-    lines.push(timeoutLine);
-  }
-
-  const mimeTypeLine = maybeLine("Mime type", info.mime_type);
-  if (mimeTypeLine) {
-    lines.push(mimeTypeLine);
-  }
-
-  const noteLine = maybeLine("Pricing note", info.pricing_note);
-  if (noteLine) {
-    lines.push(noteLine);
-  }
-
-  return lines.map((line) => `  ${line}`).join("\n");
 }
 
 function formatCharge(charge: StatusCharge): string {

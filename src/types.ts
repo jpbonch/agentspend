@@ -11,24 +11,6 @@ export interface PayRequest {
   max_cost_usd?: number;
 }
 
-export interface PaymentRequirementInfo {
-  price_usd6: number | null;
-  price_usd: number | null;
-  estimated_usd: number | null;
-  currency: string;
-  pay_to: string | null;
-  amount_minor: number | null;
-  amount_display: string | null;
-  decimals: number | null;
-  description: string | null;
-  network: string | null;
-  scheme: string | null;
-  resource: string | null;
-  max_timeout_seconds: number | null;
-  mime_type: string | null;
-  pricing_note: string | null;
-}
-
 export interface PayResponse {
   status: number;
   headers: Record<string, string>;
@@ -49,7 +31,6 @@ export interface PayResponse {
     scheme: string | null;
     resource: string | null;
   } | null;
-  payment_requirement?: PaymentRequirementInfo | null;
 }
 
 export interface CheckRequest {
@@ -114,10 +95,4 @@ export interface ConfigureStatusResponse {
 export interface ConfigureClaimResponse {
   status: "claimed";
   agent_id: string;
-}
-
-export interface ApiErrorBody {
-  error?: string;
-  code?: string;
-  details?: unknown;
 }

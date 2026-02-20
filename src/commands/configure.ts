@@ -91,15 +91,7 @@ export async function runConfigure(apiClient: AgentspendApiClient): Promise<void
     const created = await apiClient.configure();
     token = created.token;
     await savePendingConfigureToken(token);
-    status = {
-      token: created.token,
-      configure_url: created.configure_url,
-      claim_status: created.claim_status,
-      has_card_on_file: created.has_card_on_file,
-      has_api_key: created.has_api_key,
-      weekly_limit_usd6: created.weekly_limit_usd6,
-      weekly_limit_usd: created.weekly_limit_usd,
-    };
+    status = created;
   }
 
   if (!status) {

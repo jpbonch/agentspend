@@ -7,10 +7,6 @@ const CREDENTIALS_DIR = path.join(os.homedir(), ".agentspend");
 const CREDENTIALS_FILE = path.join(CREDENTIALS_DIR, "credentials.json");
 const PENDING_CONFIGURE_FILE = path.join(CREDENTIALS_DIR, "pending-configure.json");
 
-export function getCredentialsPath(): string {
-  return CREDENTIALS_FILE;
-}
-
 export async function readCredentials(): Promise<Credentials | null> {
   try {
     const raw = await readFile(CREDENTIALS_FILE, "utf-8");
