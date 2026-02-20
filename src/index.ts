@@ -3,7 +3,6 @@ import { Command } from "commander";
 import { runCheck } from "./commands/check.js";
 import { runConfigure } from "./commands/configure.js";
 import { runPay } from "./commands/pay.js";
-import { runSetup } from "./commands/setup.js";
 import { runStatus } from "./commands/status.js";
 import { AgentspendApiClient } from "./lib/api.js";
 
@@ -27,10 +26,6 @@ async function main(): Promise<void> {
   const apiClient = new AgentspendApiClient();
 
   program.name("agentspend").description("AgentSpend CLI").version("0.2.0");
-
-  program.command("setup").description("Run one-time onboarding").action(async () => {
-    await runSetup(apiClient);
-  });
 
   program
     .command("pay")
@@ -58,7 +53,7 @@ async function main(): Promise<void> {
     await runStatus(apiClient);
   });
 
-  program.command("configure").description("Get dashboard configure URL").action(async () => {
+  program.command("configure").description("Run onboarding/configuration flow").action(async () => {
     await runConfigure(apiClient);
   });
 

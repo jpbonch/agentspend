@@ -1,12 +1,11 @@
 import type {
   CheckRequest,
   CheckResponse,
+  ConfigureClaimResponse,
+  ConfigureStatusResponse,
   ConfigureResponse,
   PayRequest,
   PayResponse,
-  SetupClaimResponse,
-  SetupCreateResponse,
-  SetupStatusResponse,
   StatusResponse,
 } from "../types.js";
 
@@ -80,23 +79,6 @@ export class AgentspendApiClient {
     return body as T;
   }
 
-  createSetup(): Promise<SetupCreateResponse> {
-    return this.request<SetupCreateResponse>("/v1/setup", {
-      method: "POST",
-    });
-  }
-
-  getSetupStatus(setupId: string): Promise<SetupStatusResponse> {
-    return this.request<SetupStatusResponse>(`/v1/setup/${encodeURIComponent(setupId)}`);
-  }
-
-  claimSetup(setupId: string, apiKeyHash: string): Promise<SetupClaimResponse> {
-    return this.request<SetupClaimResponse>(`/v1/setup/${encodeURIComponent(setupId)}/claim`, {
-      method: "POST",
-      body: JSON.stringify({ api_key_hash: apiKeyHash }),
-    });
-  }
-
   pay(apiKey: string, payload: PayRequest): Promise<PayResponse> {
     return this.request<PayResponse>("/v1/pay", {
       method: "POST",
@@ -117,9 +99,23 @@ export class AgentspendApiClient {
     }, apiKey);
   }
 
-  configure(apiKey: string): Promise<ConfigureResponse> {
+  configure(payload?: { weekly_limit_usd?: number }, apiKey?: string): Promise<ConfigureResponse> {
     return this.request<ConfigureResponse>("/v1/configure", {
       method: "POST",
+      body: payload ? JSON.stringify(payload) : undefined,
     }, apiKey);
+  }
+
+  configureStatus(token: string): Promise<ConfigureStatusResponse> {
+    return this.request<ConfigureStatusResponse>(`/v1/configure/${encodeURIComponent(token)}/status`, {
+      method: "GET",
+    });
+  }
+
+  claimConfigure(token: string, apiKeyHash: string): Promise<ConfigureClaimResponse> {
+    return this.request<ConfigureClaimResponse>(`/v1/configure/${encodeURIComponent(token)}/claim`, {
+      method: "POST",
+      body: JSON.stringify({ api_key_hash: apiKeyHash }),
+    });
   }
 }

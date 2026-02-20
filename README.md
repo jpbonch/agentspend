@@ -12,11 +12,10 @@ npm run build
 ## Commands
 
 ```bash
-agentspend setup
+agentspend configure
 agentspend pay <url> [--method GET|POST] [--body '{"hello":"world"}'] [--header 'Content-Type:application/json'] [--max-cost 5.000000]
 agentspend check <url>
 agentspend status
-agentspend configure
 ```
 
 ## Credentials

@@ -3,20 +3,6 @@ export interface Credentials {
   created_at: string;
 }
 
-export interface SetupCreateResponse {
-  setup_id: string;
-  setup_url: string;
-}
-
-export interface SetupStatusResponse {
-  status: "pending" | "ready" | "expired" | "claimed";
-}
-
-export interface SetupClaimResponse {
-  status: "claimed";
-  agent_id: string;
-}
-
 export interface PayRequest {
   url: string;
   method?: string;
@@ -114,8 +100,34 @@ export interface StatusResponse {
   recent_charges: StatusCharge[];
 }
 
+export type ConfigureClaimStatus = "awaiting_card" | "ready_to_claim" | "claimed" | "expired";
+
 export interface ConfigureResponse {
+  mode: "authenticated" | "unauthenticated";
+  token: string;
   configure_url: string;
+  dashboard_url: string;
+  claim_status: ConfigureClaimStatus;
+  has_card_on_file: boolean;
+  has_api_key: boolean;
+  weekly_limit_usd6: number | null;
+  weekly_limit_usd: number | null;
+}
+
+export interface ConfigureStatusResponse {
+  token: string;
+  configure_url: string;
+  dashboard_url: string;
+  claim_status: ConfigureClaimStatus;
+  has_card_on_file: boolean;
+  has_api_key: boolean;
+  weekly_limit_usd6: number | null;
+  weekly_limit_usd: number | null;
+}
+
+export interface ConfigureClaimResponse {
+  status: "claimed";
+  agent_id: string;
 }
 
 export interface ApiErrorBody {
