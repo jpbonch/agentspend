@@ -8,7 +8,7 @@ import {
   saveCredentials,
   savePendingConfigureToken,
 } from "../lib/credentials.js";
-import type { ConfigureResponse, ConfigureStatusResponse } from "../types.js";
+import type { ConfigureStatusResponse } from "../types.js";
 
 const POLL_INTERVAL_MS = 2_000;
 const CONFIGURE_TIMEOUT_MS = 10 * 60 * 1000;
@@ -43,7 +43,7 @@ async function getStatusOrNull(
 async function tryAuthenticatedConfigure(
   apiClient: AgentspendApiClient,
   apiKey: string,
-): Promise<ConfigureResponse | null> {
+): Promise<ConfigureStatusResponse | null> {
   try {
     return await apiClient.configure(undefined, apiKey);
   } catch (error) {
@@ -94,7 +94,6 @@ export async function runConfigure(apiClient: AgentspendApiClient): Promise<void
     status = {
       token: created.token,
       configure_url: created.configure_url,
-      dashboard_url: created.dashboard_url,
       claim_status: created.claim_status,
       has_card_on_file: created.has_card_on_file,
       has_api_key: created.has_api_key,

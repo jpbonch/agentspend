@@ -3,7 +3,6 @@ import type {
   CheckResponse,
   ConfigureClaimResponse,
   ConfigureStatusResponse,
-  ConfigureResponse,
   PayRequest,
   PayResponse,
   StatusResponse,
@@ -99,8 +98,8 @@ export class AgentspendApiClient {
     }, apiKey);
   }
 
-  configure(payload?: { weekly_limit_usd?: number }, apiKey?: string): Promise<ConfigureResponse> {
-    return this.request<ConfigureResponse>("/v1/configure", {
+  configure(payload?: { weekly_limit_usd?: number }, apiKey?: string): Promise<ConfigureStatusResponse> {
+    return this.request<ConfigureStatusResponse>("/v1/configure", {
       method: "POST",
       body: payload ? JSON.stringify(payload) : undefined,
     }, apiKey);

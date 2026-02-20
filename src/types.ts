@@ -77,7 +77,6 @@ export interface CheckResponse {
   mime_type?: string | null;
   pricing_note?: string | null;
   status?: number;
-  payment_requirement?: PaymentRequirementInfo;
 }
 
 export interface StatusCharge {
@@ -102,22 +101,9 @@ export interface StatusResponse {
 
 export type ConfigureClaimStatus = "awaiting_card" | "ready_to_claim" | "claimed" | "expired";
 
-export interface ConfigureResponse {
-  mode: "authenticated" | "unauthenticated";
-  token: string;
-  configure_url: string;
-  dashboard_url: string;
-  claim_status: ConfigureClaimStatus;
-  has_card_on_file: boolean;
-  has_api_key: boolean;
-  weekly_limit_usd6: number | null;
-  weekly_limit_usd: number | null;
-}
-
 export interface ConfigureStatusResponse {
   token: string;
   configure_url: string;
-  dashboard_url: string;
   claim_status: ConfigureClaimStatus;
   has_card_on_file: boolean;
   has_api_key: boolean;
