@@ -9,7 +9,7 @@ import type {
   StatusResponse,
 } from "../types.js";
 
-const DEFAULT_API_URL = process.env.AGENTSPEND_API_URL ?? "https://api.agentspend.co";
+const API_URL = "https://api.agentspend.co";
 
 export class ApiError extends Error {
   readonly status: number;
@@ -50,7 +50,7 @@ function errorMessageFromBody(body: unknown, fallback: string): string {
 }
 
 export class AgentspendApiClient {
-  constructor(private readonly baseUrl = DEFAULT_API_URL) {}
+  constructor(private readonly baseUrl = API_URL) {}
 
   private async request<T>(path: string, init: RequestInit = {}, apiKey?: string): Promise<T> {
     const headers: Record<string, string> = {

@@ -21,7 +21,3 @@ agentspend status
 ## Credentials
 
 Credentials are stored at `~/.agentspend/credentials.json`.
-
-## Dev API URL override
-
-Set `AGENTSPEND_API_URL` to target a local backend.
