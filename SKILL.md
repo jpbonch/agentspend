@@ -1,6 +1,6 @@
 ---
 name: agentspend
-description: Find and call external paid APIs: web search, places/Google Maps, generate images/video/audio, scraping, enrichment, and live search/news/location/product data.
+description: Find and call external paid APIs: web search, places/Google Maps, generate images/video/audio, scraping, enrichment, and live search/news/location/product data, and deploying software.
 ---
 
 # When To Use This Skill
