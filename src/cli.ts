@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { runCheck } from "./commands/check.js";
 import { runConfigure } from "./commands/configure.js";
 import { runPay } from "./commands/pay.js";
+import { runSearch } from "./commands/search.js";
 import { runStatus } from "./commands/status.js";
 import { AgentspendApiClient } from "./lib/api.js";
 
@@ -31,7 +32,7 @@ export async function runCli(options?: { baseUrl?: string; programName?: string 
     .command("pay")
     .argument("<url>", "URL to call")
     .description("Make a paid request")
-    .option("--method <method>", "HTTP method", "GET")
+    .option("-X, --method <method>", "HTTP method for target request", "GET")
     .option("--body <body>", "Request body (JSON or text)")
     .option("--header <header>", "Header in key:value form", (value, previous: string[]) => {
       return [...previous, value];
@@ -45,8 +46,21 @@ export async function runCli(options?: { baseUrl?: string; programName?: string 
     .command("check")
     .argument("<url>", "URL to check")
     .description("Discover endpoint price without paying")
-    .action(async (url: string) => {
-      await runCheck(apiClient, url);
+    .option("-X, --method <method>", "HTTP method for target request", "GET")
+    .option("--body <body>", "Request body (JSON or text)")
+    .option("--header <header>", "Header in key:value form", (value, previous: string[]) => {
+      return [...previous, value];
+    }, [])
+    .action(async (url: string, commandOptions: { method?: string; body?: string; header?: string[] }) => {
+      await runCheck(apiClient, url, commandOptions);
+    });
+
+  program
+    .command("search")
+    .argument("<query...>", "Keyword query")
+    .description("Search services by name and description")
+    .action(async (queryParts: string[]) => {
+      await runSearch(apiClient, queryParts.join(" "));
     });
 
   program.command("status").description("Show weekly budget and recent charges").action(async () => {

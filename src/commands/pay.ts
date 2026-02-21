@@ -1,6 +1,7 @@
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
 import { requireApiKey } from "../lib/credentials.js";
 import { formatJson, formatUsd, formatUsdEstimate, usd6ToUsd } from "../lib/output.js";
+import { normalizeMethod, parseBody, parseHeaders } from "../lib/request-options.js";
 
 export interface PayCommandOptions {
   method?: string;
@@ -100,43 +101,9 @@ function parsePayErrorBody(body: unknown): ParsedPayErrorBody {
   return parsed;
 }
 
-function parseHeaders(rawHeaders: string[] | undefined): Record<string, string> {
-  const parsed: Record<string, string> = {};
-
-  for (const header of rawHeaders ?? []) {
-    const separator = header.indexOf(":");
-    if (separator === -1) {
-      throw new Error(`Invalid header format: ${header}. Expected key:value.`);
-    }
-
-    const key = header.slice(0, separator).trim();
-    const value = header.slice(separator + 1).trim();
-
-    if (!key || !value) {
-      throw new Error(`Invalid header format: ${header}. Expected key:value.`);
-    }
-
-    parsed[key] = value;
-  }
-
-  return parsed;
-}
-
-function parseBody(rawBody: string | undefined): unknown {
-  if (rawBody === undefined) {
-    return undefined;
-  }
-
-  try {
-    return JSON.parse(rawBody);
-  } catch {
-    return rawBody;
-  }
-}
-
 export async function runPay(apiClient: AgentspendApiClient, url: string, options: PayCommandOptions): Promise<void> {
   const apiKey = await requireApiKey();
-  const method = (options.method ?? "GET").toUpperCase();
+  const method = normalizeMethod(options.method);
 
   try {
     const response = await apiClient.pay(apiKey, {

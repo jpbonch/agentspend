@@ -1,12 +1,28 @@
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
 import { requireApiKey } from "../lib/credentials.js";
 import { formatUsd, usd6ToUsd } from "../lib/output.js";
+import { normalizeMethod, parseBody, parseHeaders } from "../lib/request-options.js";
 
-export async function runCheck(apiClient: AgentspendApiClient, url: string): Promise<void> {
+export interface CheckCommandOptions {
+  method?: string;
+  body?: string;
+  header?: string[];
+}
+
+export async function runCheck(
+  apiClient: AgentspendApiClient,
+  url: string,
+  options: CheckCommandOptions,
+): Promise<void> {
   const apiKey = await requireApiKey();
 
   try {
-    const response = await apiClient.check(apiKey, { url });
+    const response = await apiClient.check(apiKey, {
+      url,
+      method: normalizeMethod(options.method),
+      headers: parseHeaders(options.header),
+      body: parseBody(options.body),
+    });
 
     if (response.free) {
       if ((response.status ?? 200) >= 400) {

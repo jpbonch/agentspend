@@ -96,3 +96,16 @@ export interface ConfigureClaimResponse {
   status: "claimed";
   agent_id: string;
 }
+
+export interface SearchService {
+  id: string;
+  name: string;
+  description: string;
+  domain: string;
+  skill_url: string | null;
+}
+
+export interface SearchResponse {
+  query: string;
+  services: SearchService[];
+}

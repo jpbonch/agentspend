@@ -5,6 +5,7 @@ import type {
   ConfigureStatusResponse,
   PayRequest,
   PayResponse,
+  SearchResponse,
   StatusResponse,
 } from "../types.js";
 
@@ -116,5 +117,12 @@ export class AgentspendApiClient {
       method: "POST",
       body: JSON.stringify({ api_key_hash: apiKeyHash }),
     });
+  }
+
+  search(apiKey: string, query: string): Promise<SearchResponse> {
+    const params = new URLSearchParams({ q: query });
+    return this.request<SearchResponse>(`/search?${params.toString()}`, {
+      method: "GET",
+    }, apiKey);
   }
 }

@@ -1,7 +1,14 @@
 ---
 name: agentspend
-description: Make paid API requests on behalf of AI agents using a credit card.
+description: Find the right APIs for any task and pay for them, without authentication.
 ---
+
+# When To Use This Skill
+Use this skill whenever the user asks to:
+- find data from external APIs
+- call an endpoint
+- fetch/search information outside local context
+- pay for x402 services
 
 ## Setup
 
@@ -60,6 +67,20 @@ npx agentspend check <url>
 **Returns:**
 - Price in USD
 - Description (if available)
+
+### Search
+
+```bash
+npx agentspend search <keywords>
+```
+
+Keyword search over service names and descriptions in the catalog. Returns up to 5 matching services.
+
+**Example:**
+
+```bash
+npx agentspend search "video generation"
+```
 
 ### Status
 

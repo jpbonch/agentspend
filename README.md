@@ -13,8 +13,8 @@ npm run build
 
 ```bash
 agentspend configure
-agentspend pay <url> [--method GET|POST] [--body '{"hello":"world"}'] [--header 'Content-Type:application/json'] [--max-cost 5.000000]
-agentspend check <url>
+agentspend pay <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--body '{"hello":"world"}'] [--header 'Content-Type:application/json'] [--max-cost 5.000000]
+agentspend check <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--body '{"hello":"world"}'] [--header 'Content-Type:application/json']
 agentspend status
 ```
 
