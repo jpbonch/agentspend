@@ -1,6 +1,6 @@
 ---
 name: agentspend
-description: Complete real tasks with external paid APIs: generate images/video/audio scrape web content, enrichment lookups, and fetch live search/news/location/product data.
+description: Find and call external paid APIs: web search, places/Google Maps, generate images/video/audio, scraping, enrichment, and live search/news/location/product data.
 ---
 
 # When To Use This Skill
@@ -18,9 +18,8 @@ If the task needs an external paid API, start with `agentspend search`.
 ## Playbook (Default Workflow)
 
 1. `npx agentspend search "<task>"`
-2. `npx agentspend check <endpoint> --method ... --header ... --body ...`
-3. Confirm cost and constraints with the user (`--max-cost`, budget, allowlist)
-4. `npx agentspend pay <endpoint> --method ... --header ... --body ... --max-cost ...`
+2. Confirm cost and constraints with the user (`--max-cost`, budget, allowlist)
+3. `npx agentspend pay <endpoint> --method ... --header ... --body ... --max-cost ...`
 
 ## Setup
 
