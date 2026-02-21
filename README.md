@@ -1,6 +1,6 @@
 # agentspend
 
-AgentSpend CLI for calling x402 endpoints through AgentSpend Cloud.
+AgentSpend CLI for calling paid APIs.
 
 ## Install
 
