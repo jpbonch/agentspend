@@ -1,5 +1,5 @@
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
-import { requireApiKey } from "../lib/credentials.js";
+import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 import { formatUsd, usd6ToUsd } from "../lib/output.js";
 import { normalizeMethod, parseBody, parseHeaders } from "../lib/request-options.js";
 
@@ -14,7 +14,7 @@ export async function runCheck(
   url: string,
   options: CheckCommandOptions,
 ): Promise<void> {
-  const apiKey = await requireApiKey();
+  const apiKey = await resolveApiKeyWithAutoClaim(apiClient);
 
   try {
     const response = await apiClient.check(apiKey, {

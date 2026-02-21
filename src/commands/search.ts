@@ -1,8 +1,8 @@
 import { AgentspendApiClient } from "../lib/api.js";
-import { requireApiKey } from "../lib/credentials.js";
+import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 
 export async function runSearch(apiClient: AgentspendApiClient, query: string): Promise<void> {
-  const apiKey = await requireApiKey();
+  const apiKey = await resolveApiKeyWithAutoClaim(apiClient);
   const response = await apiClient.search(apiKey, query);
 
   if (response.services.length === 0) {

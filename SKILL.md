@@ -1,6 +1,6 @@
 ---
 name: agentspend
-description: Find the right APIs for any task and pay for them, without authentication.
+description: Complete real tasks with external paid APIs: generate images/video/audio scrape web content, enrichment lookups, and fetch live search/news/location/product data.
 ---
 
 # When To Use This Skill
@@ -9,6 +9,18 @@ Use this skill whenever the user asks to:
 - call an endpoint
 - fetch/search information outside local context
 - pay for x402 services
+- generate an image, video, voice, transcription, or music with an external API
+- scrape/extract data from a URL
+- find an API for a task ("is there an API for X?")
+
+If the task needs an external paid API, start with `agentspend search`.
+
+## Playbook (Default Workflow)
+
+1. `npx agentspend search "<task>"`
+2. `npx agentspend check <endpoint> --method ... --header ... --body ...`
+3. Confirm cost and constraints with the user (`--max-cost`, budget, allowlist)
+4. `npx agentspend pay <endpoint> --method ... --header ... --body ... --max-cost ...`
 
 ## Setup
 
@@ -58,10 +70,19 @@ npx agentspend check <url>
 
 Discover an endpoint's price without paying.
 
+Important:
+- `check` must use the same request shape you plan to `pay` with.
+- Always pass `--method` for non-GET endpoints.
+- If the endpoint needs headers/body, include the same `--header` and `--body` on `check`.
+- If request shape is wrong, endpoint may return `404`/`400` instead of `402`, and no price can be extracted.
+
 **Example:**
 
 ```bash
-npx agentspend check <url>
+npx agentspend check <url> \
+  --method POST \
+  --header "content-type:application/json" \
+  --body '{"key":"value"}'
 ```
 
 **Returns:**

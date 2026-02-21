@@ -1,5 +1,5 @@
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
-import { requireApiKey } from "../lib/credentials.js";
+import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 import { formatJson, formatUsd, formatUsdEstimate, usd6ToUsd } from "../lib/output.js";
 import { normalizeMethod, parseBody, parseHeaders } from "../lib/request-options.js";
 
@@ -102,7 +102,7 @@ function parsePayErrorBody(body: unknown): ParsedPayErrorBody {
 }
 
 export async function runPay(apiClient: AgentspendApiClient, url: string, options: PayCommandOptions): Promise<void> {
-  const apiKey = await requireApiKey();
+  const apiKey = await resolveApiKeyWithAutoClaim(apiClient);
   const method = normalizeMethod(options.method);
 
   try {

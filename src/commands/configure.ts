@@ -1,44 +1,11 @@
-import bcrypt from "bcryptjs";
-import crypto from "node:crypto";
 import { ApiError, AgentspendApiClient } from "../lib/api.js";
 import {
   clearPendingConfigureToken,
   readCredentials,
-  readPendingConfigureToken,
-  saveCredentials,
   savePendingConfigureToken,
 } from "../lib/credentials.js";
+import { claimConfigureToken, getPendingConfigureStatus } from "../lib/auth-flow.js";
 import type { ConfigureStatusResponse } from "../types.js";
-
-const POLL_INTERVAL_MS = 2_000;
-const CONFIGURE_TIMEOUT_MS = 10 * 60 * 1000;
-
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function generateApiKey(): string {
-  return `sk_agent_${crypto.randomBytes(32).toString("hex")}`;
-}
-
-function isExpiredStatus(status: ConfigureStatusResponse): boolean {
-  return status.claim_status === "expired";
-}
-
-async function getStatusOrNull(
-  apiClient: AgentspendApiClient,
-  token: string,
-): Promise<ConfigureStatusResponse | null> {
-  try {
-    return await apiClient.configureStatus(token);
-  } catch (error) {
-    if (error instanceof ApiError && (error.status === 401 || error.status === 404 || error.status === 410)) {
-      return null;
-    }
-
-    throw error;
-  }
-}
 
 async function tryAuthenticatedConfigure(
   apiClient: AgentspendApiClient,
@@ -55,15 +22,6 @@ async function tryAuthenticatedConfigure(
   }
 }
 
-async function claimAndSaveCredentials(apiClient: AgentspendApiClient, token: string): Promise<void> {
-  const apiKey = generateApiKey();
-  const apiKeyHash = await bcrypt.hash(apiKey, 12);
-
-  await apiClient.claimConfigure(token, apiKeyHash);
-  await saveCredentials(apiKey);
-  await clearPendingConfigureToken();
-}
-
 export async function runConfigure(apiClient: AgentspendApiClient): Promise<void> {
   const credentials = await readCredentials();
 
@@ -75,61 +33,30 @@ export async function runConfigure(apiClient: AgentspendApiClient): Promise<void
     }
   }
 
-  let token: string | null = await readPendingConfigureToken();
-  let status: ConfigureStatusResponse | null = null;
+  const pending = await getPendingConfigureStatus(apiClient);
 
-  if (token) {
-    status = await getStatusOrNull(apiClient, token);
-    if (!status || isExpiredStatus(status)) {
-      token = null;
-      status = null;
-      await clearPendingConfigureToken();
-    }
-  }
-
-  if (!token) {
-    const created = await apiClient.configure();
-    token = created.token;
-    await savePendingConfigureToken(token);
-    status = created;
-  }
-
-  if (!status) {
-    throw new Error("Unable to initialize configure session. Run agentspend configure again.");
-  }
-
-  console.log(`Open this URL to configure settings:\n${status.configure_url}\n`);
-  console.log("Waiting for card setup and API key claim...");
-
-  const started = Date.now();
-
-  while (Date.now() - started < CONFIGURE_TIMEOUT_MS) {
-    if (status.claim_status === "ready_to_claim") {
-      await claimAndSaveCredentials(apiClient, token);
-      console.log("Ready! Your agent can now spend.");
+  if (pending) {
+    if (pending.status.claim_status === "awaiting_card") {
+      console.log(`Open this URL to configure settings:\n${pending.status.configure_url}`);
       return;
     }
 
-    if (status.claim_status === "expired") {
-      await clearPendingConfigureToken();
-      throw new Error("Configure session expired. Run agentspend configure again.");
+    if (pending.status.claim_status === "ready_to_claim") {
+      const apiKey = await claimConfigureToken(apiClient, pending.token);
+      const claimedResponse = await tryAuthenticatedConfigure(apiClient, apiKey);
+
+      if (claimedResponse) {
+        console.log(`Open this URL to configure settings:\n${claimedResponse.configure_url}`);
+        return;
+      }
+
+      throw new Error("API key was claimed, but configure session could not be created. Run agentspend configure again.");
     }
 
-    if (status.claim_status === "claimed") {
-      await clearPendingConfigureToken();
-      throw new Error("Configure session already claimed. Run agentspend configure again.");
-    }
-
-    await sleep(POLL_INTERVAL_MS);
-    const polled = await getStatusOrNull(apiClient, token);
-
-    if (!polled) {
-      await clearPendingConfigureToken();
-      throw new Error("Configure session expired. Run agentspend configure again.");
-    }
-
-    status = polled;
+    await clearPendingConfigureToken();
   }
 
-  throw new Error("Configure timed out. Run agentspend configure again.");
+  const created = await apiClient.configure();
+  await savePendingConfigureToken(created.token);
+  console.log(`Open this URL to configure settings:\n${created.configure_url}`);
 }
