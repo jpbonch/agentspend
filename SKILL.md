@@ -8,7 +8,6 @@ Use this skill whenever the user asks to:
 - find data from external APIs
 - call an endpoint
 - fetch/search information outside local context
-- pay for x402 services
 - generate an image, video, voice, transcription, or music with an external API
 - scrape/extract data from a URL
 - find an API for a task ("is there an API for X?")
@@ -39,7 +38,7 @@ If already configured, re-running opens the dashboard to update settings.
 npx agentspend pay <url>
 ```
 
-Make a paid request. AgentSpend handles the payment automatically. Works with endpoints that support x402 (HTTP 402-based payment protocol for APIs).
+Make a paid request. AgentSpend handles the payment automatically.
 
 **Options:**
 - `--method <method>` — HTTP method (default: `GET`)
@@ -135,4 +134,3 @@ Run onboarding or open the dashboard to update settings (weekly budget, domain a
 - **`WEEKLY_BUDGET_EXCEEDED`** — Weekly spending limit reached. Run `npx agentspend configure` to increase the budget.
 - **`DOMAIN_NOT_ALLOWLISTED`** — The target domain is not in the allowlist. Run `npx agentspend configure` to update allowed domains.
 - **`PRICE_EXCEEDS_MAX`** — Endpoint price is higher than `--max-cost`. Increase the value or remove the flag.
-- **`UNSUPPORTED_PAYMENT_REQUIRED_FORMAT`** — The endpoint returned a 402 response but doesn't use the x402 format AgentSpend supports.
