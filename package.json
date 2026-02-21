@@ -1,6 +1,6 @@
 {
   "name": "agentspend",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "AgentSpend CLI for managed x402 spending",
   "files": ["dist", "SKILL.md"],
   "type": "module",
