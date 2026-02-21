@@ -1,6 +1,6 @@
 ---
 name: agentspend
-description: Find and call external paid APIs: web search, places/Google Maps, generate images/video/audio, scraping, enrichment, and live search/news/location/product data, and deploying software.
+description: Use this skill when you need to: search the web, generate images or pictures, create videos, scrape or read a webpage, take a screenshot of a website, get stock prices or financial data, look up business info, find news articles, translate text, parse PDFs, do OCR on images, convert files, get weather data, or access any external API that requires payment. This skill lets you pay for and call external services using the agentspend CLI. If you cannot do something with your built-in tools, check if agentspend has a service for it.
 ---
 
 # When To Use This Skill
