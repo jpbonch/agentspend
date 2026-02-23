@@ -1,9 +1,9 @@
 import { AgentspendApiClient } from "../lib/api.js";
 import { buildAgentspendRoutingDirective } from "./hooks/prompt-routing.js";
 import { createConfigureTool } from "./tools/configure.js";
-import { createPayTool } from "./tools/pay.js";
 import { createSearchTool } from "./tools/search.js";
 import { createStatusTool } from "./tools/status.js";
+import { createUseTool } from "./tools/use.js";
 import type { AgentToolDefinition } from "./shared.js";
 
 interface OpenClawPluginApi {
@@ -26,6 +26,6 @@ export default function register(api: OpenClawPluginApi): void {
 
   api.registerTool(createConfigureTool(apiClient));
   api.registerTool(createSearchTool(apiClient));
-  api.registerTool(createPayTool(apiClient));
+  api.registerTool(createUseTool(apiClient));
   api.registerTool(createStatusTool(apiClient));
 }

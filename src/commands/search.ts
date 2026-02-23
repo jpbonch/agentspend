@@ -11,7 +11,7 @@ export async function runSearch(apiClient: AgentspendApiClient, query: string): 
   }
 
   for (const service of response.services) {
-    console.log(service.name);
+    console.log(`${service.name} (${service.slug})`);
     console.log(`Description: ${service.description}`);
     console.log(`Domain: ${service.domain}`);
     console.log(`Skill URL: ${service.skill_url ?? "n/a"}`);

@@ -3,32 +3,57 @@ export interface Credentials {
   created_at: string;
 }
 
-export interface PayRequest {
+export interface UseRequest {
   url: string;
   method?: string;
   headers?: Record<string, string>;
   body?: unknown;
 }
 
-export interface PayResponse {
+export interface UsePaymentSummary {
+  charged_usd6: number;
+  charged_usd: number;
+  charged_amount_minor: number | null;
+  charged_amount_display: string | null;
+  charged_currency: string;
+  estimated_usd: number | null;
+  pricing_note: string | null;
+  remaining_budget_usd6: number;
+  remaining_budget_usd: number;
+  transaction_hash: string | null;
+  paid_to: string | null;
+  network: string | null;
+  scheme: string | null;
+  resource: string | null;
+}
+
+export interface UseCloudHttpResult {
+  mode: "cloud_http_result";
   status: number;
   headers: Record<string, string>;
   body: unknown;
+  payment: UsePaymentSummary | null;
+}
+
+export interface UseActionRequiredResult {
+  mode: "action_required";
+  code: string;
+  message: string;
+  configure_url?: string;
+  details?: Record<string, unknown>;
+}
+
+export type UseResponse = UseCloudHttpResult | UseActionRequiredResult;
+
+export interface UseCommandResult {
+  status: number;
+  body: unknown;
   payment: {
-    charged_usd6: number;
     charged_usd: number;
-    charged_amount_minor: number | null;
-    charged_amount_display: string | null;
-    charged_currency: string;
-    estimated_usd: number | null;
-    pricing_note: string | null;
-    remaining_budget_usd6: number;
     remaining_budget_usd: number;
     transaction_hash: string | null;
     paid_to: string | null;
-    network: string | null;
-    scheme: string | null;
-    resource: string | null;
+    charged_currency: string | null;
   } | null;
 }
 
@@ -69,8 +94,9 @@ export interface ConfigureClaimResponse {
   agent_id: string;
 }
 
-export interface SearchService {
+export interface SearchServiceSummary {
   id: string;
+  slug: string;
   name: string;
   description: string;
   domain: string;
@@ -79,5 +105,5 @@ export interface SearchService {
 
 export interface SearchResponse {
   query: string;
-  services: SearchService[];
+  services: SearchServiceSummary[];
 }

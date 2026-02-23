@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import { runConfigure } from "./commands/configure.js";
-import { runPay } from "./commands/pay.js";
+import { runUse } from "./commands/use.js";
 import { runSearch } from "./commands/search.js";
 import { runStatus } from "./commands/status.js";
 import { AgentspendApiClient } from "./lib/api.js";
@@ -13,16 +13,16 @@ export async function runCli(options?: { baseUrl?: string; programName?: string 
   program.name(programName).description("AgentSpend CLI").version("0.2.0");
 
   program
-    .command("pay")
-    .argument("<url>", "URL to call")
-    .description("Make a paid request")
-    .option("-X, --method <method>", "HTTP method for target request", "GET")
+    .command("use")
+    .argument("<url>", "Direct HTTPS URL")
+    .description("Call a URL through AgentSpend")
+    .option("-X, --method <method>", "HTTP method")
     .option("--body <body>", "Request body (JSON or text)")
     .option("--header <header>", "Header in key:value form", (value, previous: string[]) => {
       return [...previous, value];
     }, [])
     .action(async (url: string, commandOptions: { method?: string; body?: string; header?: string[] }) => {
-      await runPay(apiClient, url, commandOptions);
+      await runUse(apiClient, url, commandOptions);
     });
 
   program

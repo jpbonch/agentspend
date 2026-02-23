@@ -2,19 +2,21 @@ import { ApiError, AgentspendApiClient } from "../lib/api.js";
 import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 import { formatJson, formatUsd, usd6ToUsd } from "../lib/output.js";
 import { normalizeMethod, parseBody, parseHeaders } from "../lib/request-options.js";
+import type { UseCloudHttpResult } from "../types.js";
 
-export interface PayCommandOptions {
+export interface UseCommandOptions {
   method?: string;
   body?: string;
   header?: string[];
 }
 
-type PayErrorCode =
+type UseErrorCode =
   | "PRICE_NOT_CONVERTIBLE"
   | "WEEKLY_BUDGET_EXCEEDED"
-  | "DOMAIN_NOT_ALLOWLISTED";
+  | "SERVICE_DOMAIN_NOT_REGISTERED"
+  | "SERVICE_AUTH_REQUIRED";
 
-interface PayErrorDetails {
+interface UseErrorDetails {
   weekly_limit_usd6?: number;
   weekly_limit_usd?: number;
   spent_this_week_usd6?: number;
@@ -24,11 +26,14 @@ interface PayErrorDetails {
   estimated_usd?: number;
   amount_display?: string;
   currency?: string;
+  configure_url?: string;
 }
 
-interface ParsedPayErrorBody {
-  code?: PayErrorCode;
-  details?: PayErrorDetails;
+interface ParsedUseErrorBody {
+  code?: UseErrorCode;
+  details?: UseErrorDetails;
+  message?: string;
+  configure_url?: string;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -45,7 +50,7 @@ function readString(record: Record<string, unknown>, key: string): string | unde
   return typeof value === "string" ? value : undefined;
 }
 
-function parsePayErrorCode(value: unknown): PayErrorCode | undefined {
+function parseUseErrorCode(value: unknown): UseErrorCode | undefined {
   if (typeof value !== "string") {
     return undefined;
   }
@@ -53,7 +58,8 @@ function parsePayErrorCode(value: unknown): PayErrorCode | undefined {
   if (
     value === "PRICE_NOT_CONVERTIBLE" ||
     value === "WEEKLY_BUDGET_EXCEEDED" ||
-    value === "DOMAIN_NOT_ALLOWLISTED"
+    value === "SERVICE_DOMAIN_NOT_REGISTERED" ||
+    value === "SERVICE_AUTH_REQUIRED"
   ) {
     return value;
   }
@@ -61,13 +67,15 @@ function parsePayErrorCode(value: unknown): PayErrorCode | undefined {
   return undefined;
 }
 
-function parsePayErrorBody(body: unknown): ParsedPayErrorBody {
+function parseUseErrorBody(body: unknown): ParsedUseErrorBody {
   if (!isRecord(body)) {
     return {};
   }
 
-  const parsed: ParsedPayErrorBody = {
-    code: parsePayErrorCode(body.code),
+  const parsed: ParsedUseErrorBody = {
+    code: parseUseErrorCode(body.code),
+    message: readString(body, "message"),
+    configure_url: readString(body, "configure_url"),
   };
 
   if (!isRecord(body.details)) {
@@ -85,33 +93,47 @@ function parsePayErrorBody(body: unknown): ParsedPayErrorBody {
     estimated_usd: readNumber(detailsRecord, "estimated_usd"),
     amount_display: readString(detailsRecord, "amount_display"),
     currency: readString(detailsRecord, "currency"),
+    configure_url: readString(detailsRecord, "configure_url"),
   };
 
   return parsed;
 }
 
-export async function runPay(apiClient: AgentspendApiClient, url: string, options: PayCommandOptions): Promise<void> {
+function printCloudHttpResult(result: UseCloudHttpResult): void {
+  console.log(formatJson(result.body));
+
+  if (result.payment) {
+    console.log(
+      `\nCharged: ${formatUsd(result.payment.charged_usd)} | Remaining: ${formatUsd(result.payment.remaining_budget_usd)}`,
+    );
+  }
+}
+
+export async function runUse(apiClient: AgentspendApiClient, url: string, options: UseCommandOptions): Promise<void> {
   const apiKey = await resolveApiKeyWithAutoClaim(apiClient);
-  const method = normalizeMethod(options.method);
 
   try {
-    const response = await apiClient.pay(apiKey, {
+    const response = await apiClient.use(apiKey, {
       url,
-      method,
+      method: options.method ? normalizeMethod(options.method) : undefined,
       headers: parseHeaders(options.header),
       body: parseBody(options.body),
     });
 
-    console.log(formatJson(response.body));
-
-    if (response.payment) {
-      console.log(
-        `\nCharged: ${formatUsd(response.payment.charged_usd)} | Remaining: ${formatUsd(response.payment.remaining_budget_usd)}`,
-      );
+    if (response.mode === "cloud_http_result") {
+      printCloudHttpResult(response);
+      return;
     }
+
+    if (response.mode === "action_required") {
+      const configureUrl = response.configure_url ? `\n${response.configure_url}` : "";
+      throw new Error(`${response.message}${configureUrl}`);
+    }
+
+    console.log(formatJson(response));
   } catch (error) {
     if (error instanceof ApiError) {
-      const body = parsePayErrorBody(error.body);
+      const body = parseUseErrorBody(error.body);
 
       if (error.status === 400 && body.code === "PRICE_NOT_CONVERTIBLE") {
         console.error("Price could not be converted to 6-decimal USD units for policy checks.");
@@ -135,8 +157,17 @@ export async function runPay(apiClient: AgentspendApiClient, url: string, option
         return;
       }
 
-      if (error.status === 403 && body.code === "DOMAIN_NOT_ALLOWLISTED") {
-        console.error("This domain is not in your AgentSpend allowlist.");
+      if (error.status === 403 && body.code === "SERVICE_DOMAIN_NOT_REGISTERED") {
+        console.error("This domain is not registered as an active AgentSpend service domain.");
+        return;
+      }
+
+      if (error.status === 403 && body.code === "SERVICE_AUTH_REQUIRED") {
+        const configureUrl = body.configure_url ?? body.details?.configure_url;
+        console.error(
+          body.message ??
+            `Service authentication required. Complete connection setup in configure.${configureUrl ? `\n${configureUrl}` : ""}`,
+        );
         return;
       }
     }

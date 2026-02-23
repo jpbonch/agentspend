@@ -125,6 +125,14 @@ export function optionalStringRecord(value: unknown, fieldName: string): Record<
   return output;
 }
 
+export function optionalRecord(value: unknown, fieldName: string): Record<string, unknown> | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  return assertRecord(value, `${fieldName} must be an object`);
+}
+
 export function requiredString(value: unknown, fieldName: string): string {
   if (typeof value !== "string") {
     throw new Error(`${fieldName} is required and must be a string`);

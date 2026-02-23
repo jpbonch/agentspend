@@ -1,6 +1,6 @@
 # agentspend
 
-AgentSpend CLI + MCP server for calling paid APIs.
+AgentSpend CLI, MCP server, and OpenClaw plugin.
 
 ## Install
 
@@ -9,9 +9,18 @@ npm install
 npm run build
 ```
 
-## OpenClaw Plugin (Primary for OpenClaw)
+## CLI commands
 
-Install AgentSpend as an in-process OpenClaw plugin:
+```bash
+agentspend configure
+agentspend search <query>
+agentspend use <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--header 'Content-Type:application/json'] [--body '{"hello":"world"}']
+agentspend status
+```
+
+`use` accepts direct HTTPS URLs only.
+
+## OpenClaw plugin (primary OpenClaw path)
 
 ```bash
 openclaw plugins install agentspend
@@ -19,7 +28,7 @@ openclaw plugins enable agentspend
 openclaw gateway restart
 ```
 
-For local testing from this repo:
+Local install from this repo:
 
 ```bash
 openclaw plugins install -l /Users/jpbonch/as/agentspend
@@ -27,72 +36,42 @@ openclaw plugins enable agentspend
 openclaw gateway restart
 ```
 
-After restart, AgentSpend tools are available natively in OpenClaw:
+Plugin tools:
 - `agentspend_configure`
 - `agentspend_search`
-- `agentspend_pay`
+- `agentspend_use`
 - `agentspend_status`
 
-## OpenClaw Routing Hook
+## OpenClaw routing hook
 
-When installed as an OpenClaw plugin, AgentSpend injects a routing directive each turn so the agent prefers:
+When installed as an OpenClaw plugin, AgentSpend injects routing guidance each turn so the agent prefers:
 1. `agentspend_search`
-2. `agentspend_pay`
-3. `agentspend_configure` if setup is needed
+2. Read the selected service `skill_url`
+3. `agentspend_use`
+4. `agentspend_configure` if setup is needed
 
-## Commands
+## MCP server (secondary)
 
-```bash
-agentspend configure
-agentspend search <query>
-agentspend pay <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--body '{"hello":"world"}'] [--header 'Content-Type:application/json']
-agentspend status
-```
-
-## MCP Server (Secondary)
-
-Run the local stdio MCP server:
+Run local stdio MCP server:
 
 ```bash
 agentspend-mcp
 ```
 
-OpenClaw MCP config example:
-
-```json
-{
-  "mcpServers": {
-    "agentspend": {
-      "command": "agentspend-mcp",
-      "args": []
-    }
-  }
-}
-```
-
-MCP tools exposed:
+MCP tools:
 - `agentspend_configure`
 - `agentspend_search`
-- `agentspend_pay`
+- `agentspend_use`
 - `agentspend_status`
-
-On some OpenClaw versions, root `mcpServers` config is not supported; use the plugin path above in those cases.
 
 ## Credentials
 
-Credentials are stored at `~/.agentspend/credentials.json`.
+Local credentials are in `~/.agentspend/credentials.json`.
 
 ## Local backend dev CLI
 
-Use the local entrypoint (hardcoded to `http://127.0.0.1:8787`) when testing against a local backend:
+Use the local entrypoint (fixed to `http://127.0.0.1:8787`) when testing against local backend:
 
 ```bash
 bun run dev:local -- configure
-```
-
-Build a non-published local binary:
-
-```bash
-bun run build
-node dist/dev-index.js configure
 ```

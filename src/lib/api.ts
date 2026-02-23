@@ -1,8 +1,8 @@
 import type {
   ConfigureClaimResponse,
   ConfigureStatusResponse,
-  PayRequest,
-  PayResponse,
+  UseRequest,
+  UseResponse,
   SearchResponse,
   StatusResponse,
 } from "../types.js";
@@ -77,8 +77,8 @@ export class AgentspendApiClient {
     return body as T;
   }
 
-  pay(apiKey: string, payload: PayRequest): Promise<PayResponse> {
-    return this.request<PayResponse>("/pay", {
+  use(apiKey: string, payload: UseRequest): Promise<UseResponse> {
+    return this.request<UseResponse>("/use", {
       method: "POST",
       body: JSON.stringify(payload),
     }, apiKey);

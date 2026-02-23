@@ -5,9 +5,9 @@ import { z } from "zod";
 import { AgentspendApiClient } from "../lib/api.js";
 import { mcpErrorResult } from "./shared.js";
 import { runConfigureTool } from "./tools/configure.js";
-import { runPayTool } from "./tools/pay.js";
 import { runSearchTool } from "./tools/search.js";
 import { runStatusTool } from "./tools/status.js";
+import { runUseTool } from "./tools/use.js";
 
 async function withToolErrorHandling(handler: () => Promise<CallToolResult>): Promise<CallToolResult> {
   try {
@@ -45,17 +45,17 @@ export async function runMcpServer(): Promise<void> {
   );
 
   server.registerTool(
-    "agentspend_pay",
+    "agentspend_use",
     {
-      description: "Execute a paid API request through AgentSpend.",
+      description: "Call a URL through AgentSpend.",
       inputSchema: z.object({
-        url: z.string().url(),
-        method: z.string().min(1),
+        url: z.string().min(1),
+        method: z.string().min(1).optional(),
         headers: z.record(z.string(), z.string()).optional(),
         body: z.unknown().optional(),
       }),
     },
-    async (args) => withToolErrorHandling(() => runPayTool(apiClient, args as Record<string, unknown>)),
+    async (args) => withToolErrorHandling(() => runUseTool(apiClient, args as Record<string, unknown>)),
   );
 
   server.registerTool(

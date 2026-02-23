@@ -1,5 +1,6 @@
 import { AgentspendApiClient } from "../../lib/api.js";
 import { normalizeMethod } from "../../lib/request-options.js";
+import type { UseCloudHttpResult } from "../../types.js";
 import {
   type AgentToolDefinition,
   optionalStringRecord,
@@ -31,15 +32,27 @@ function compactResponseBody(body: unknown): { body: unknown; body_omitted: bool
   };
 }
 
-export function createPayTool(apiClient: AgentspendApiClient): AgentToolDefinition {
+function formatCloudResult(result: UseCloudHttpResult) {
+  const compactBody = compactResponseBody(result.body);
   return {
-    name: "agentspend_pay",
-    description: "Execute a paid API request through AgentSpend.",
+    mode: result.mode,
+    status: result.status,
+    body: compactBody.body,
+    body_omitted: compactBody.body_omitted,
+    charged_usd: result.payment?.charged_usd ?? null,
+    remaining_budget_usd: result.payment?.remaining_budget_usd ?? null,
+  };
+}
+
+export function createUseTool(apiClient: AgentspendApiClient): AgentToolDefinition {
+  return {
+    name: "agentspend_use",
+    description: "Call a URL through AgentSpend.",
     parameters: {
       type: "object",
       additionalProperties: false,
       properties: {
-        url: { type: "string", format: "uri" },
+        url: { type: "string", minLength: 1 },
         method: { type: "string", minLength: 1 },
         headers: {
           type: "object",
@@ -47,30 +60,34 @@ export function createPayTool(apiClient: AgentspendApiClient): AgentToolDefiniti
         },
         body: {},
       },
-      required: ["url", "method"],
+      required: ["url"],
     },
     execute: async (_toolCallId, args) =>
       withToolErrorHandling(async () => {
         const url = requiredString(args.url, "url");
-        const method = normalizeMethod(requiredString(args.method, "method"));
+        const methodRaw = args.method;
+        const method = methodRaw === undefined ? undefined : normalizeMethod(requiredString(methodRaw, "method"));
         const headers = optionalStringRecord(args.headers, "headers");
         const body = args.body;
         const apiKey = await resolveApiKeyForTool(apiClient);
 
-        const response = await apiClient.pay(apiKey, {
+        const response = await apiClient.use(apiKey, {
           url,
           method,
           headers,
           body,
         });
-        const compactBody = compactResponseBody(response.body);
+
+        if (response.mode === "cloud_http_result") {
+          return toolSuccess(formatCloudResult(response));
+        }
 
         return toolSuccess({
-          status: response.status,
-          body: compactBody.body,
-          body_omitted: compactBody.body_omitted,
-          charged_usd: response.payment?.charged_usd ?? null,
-          remaining_budget_usd: response.payment?.remaining_budget_usd ?? null,
+          mode: response.mode,
+          code: response.code,
+          message: response.message,
+          configure_url: response.configure_url ?? null,
+          details: response.details ?? null,
         });
       }),
   };
