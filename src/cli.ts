@@ -1,25 +1,9 @@
 import { Command } from "commander";
-import { runCheck } from "./commands/check.js";
 import { runConfigure } from "./commands/configure.js";
 import { runPay } from "./commands/pay.js";
 import { runSearch } from "./commands/search.js";
 import { runStatus } from "./commands/status.js";
 import { AgentspendApiClient } from "./lib/api.js";
-
-function parsePositiveUsd(value: string): number {
-  const parsed = Number(value);
-
-  if (!Number.isFinite(parsed) || parsed <= 0) {
-    throw new Error(`Expected a positive USD value, received: ${value}`);
-  }
-
-  const rounded = Math.round(parsed * 1_000_000) / 1_000_000;
-  if (Math.abs(parsed - rounded) > 1e-9) {
-    throw new Error(`Expected at most 6 decimal places, received: ${value}`);
-  }
-
-  return parsed;
-}
 
 export async function runCli(options?: { baseUrl?: string; programName?: string }): Promise<void> {
   const program = new Command();
@@ -37,22 +21,8 @@ export async function runCli(options?: { baseUrl?: string; programName?: string 
     .option("--header <header>", "Header in key:value form", (value, previous: string[]) => {
       return [...previous, value];
     }, [])
-    .option("--max-cost <usd>", "Maximum acceptable charge in USD (up to 6 decimals)", parsePositiveUsd)
-    .action(async (url: string, commandOptions: { method?: string; body?: string; header?: string[]; maxCost?: number }) => {
-      await runPay(apiClient, url, commandOptions);
-    });
-
-  program
-    .command("check")
-    .argument("<url>", "URL to check")
-    .description("Discover endpoint price without paying")
-    .option("-X, --method <method>", "HTTP method for target request", "GET")
-    .option("--body <body>", "Request body (JSON or text)")
-    .option("--header <header>", "Header in key:value form", (value, previous: string[]) => {
-      return [...previous, value];
-    }, [])
     .action(async (url: string, commandOptions: { method?: string; body?: string; header?: string[] }) => {
-      await runCheck(apiClient, url, commandOptions);
+      await runPay(apiClient, url, commandOptions);
     });
 
   program

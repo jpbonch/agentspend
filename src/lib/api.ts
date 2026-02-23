@@ -1,6 +1,4 @@
 import type {
-  CheckRequest,
-  CheckResponse,
   ConfigureClaimResponse,
   ConfigureStatusResponse,
   PayRequest,
@@ -81,13 +79,6 @@ export class AgentspendApiClient {
 
   pay(apiKey: string, payload: PayRequest): Promise<PayResponse> {
     return this.request<PayResponse>("/pay", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    }, apiKey);
-  }
-
-  check(apiKey: string, payload: CheckRequest): Promise<CheckResponse> {
-    return this.request<CheckResponse>("/check", {
       method: "POST",
       body: JSON.stringify(payload),
     }, apiKey);

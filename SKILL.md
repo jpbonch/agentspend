@@ -14,11 +14,21 @@ Use this skill whenever the user asks to:
 
 If the task needs an external paid API, start with `agentspend search`.
 
+## MCP Integration (Preferred)
+
+If the host supports MCP tools, prefer the AgentSpend MCP server tools instead of shelling out to CLI commands:
+- `agentspend_configure`
+- `agentspend_search`
+- `agentspend_pay`
+- `agentspend_status`
+
+When running via the OpenClaw plugin, AgentSpend also injects turn-level routing guidance so the agent prefers AgentSpend discovery and pay flow for external API tasks.
+
 ## Playbook (Default Workflow)
 
 1. `npx agentspend search "<task>"`
-2. Confirm cost and constraints with the user (`--max-cost`, budget, allowlist)
-3. `npx agentspend pay <endpoint> --method ... --header ... --body ... --max-cost ...`
+2. Confirm constraints with the user (budget, allowlist)
+3. `npx agentspend pay <endpoint> --method ... --header ... --body ...`
 
 ## Setup
 
@@ -44,7 +54,6 @@ Make a paid request. AgentSpend handles the payment automatically.
 - `--method <method>` — HTTP method (default: `GET`)
 - `--body <body>` — Request body (JSON or text)
 - `--header <header>` — Header in `key:value` format (repeatable)
-- `--max-cost <usd>` — Maximum acceptable charge in USD (up to 6 decimal places)
 
 **Returns:**
 - Response body from the endpoint
@@ -56,36 +65,8 @@ Make a paid request. AgentSpend handles the payment automatically.
 npx agentspend pay <url> \
   --method POST \
   --header "key:value" \
-  --body '{"key": "value"}' \
-  --max-cost 0.05
+  --body '{"key": "value"}'
 ```
-
-### Check
-
-```bash
-npx agentspend check <url>
-```
-
-Discover an endpoint's price without paying.
-
-Important:
-- `check` must use the same request shape you plan to `pay` with.
-- Always pass `--method` for non-GET endpoints.
-- If the endpoint needs headers/body, include the same `--header` and `--body` on `check`.
-- If request shape is wrong, endpoint may return `404`/`400` instead of `402`, and no price can be extracted.
-
-**Example:**
-
-```bash
-npx agentspend check <url> \
-  --method POST \
-  --header "content-type:application/json" \
-  --body '{"key":"value"}'
-```
-
-**Returns:**
-- Price in USD
-- Description (if available)
 
 ### Search
 
@@ -126,11 +107,9 @@ Run onboarding or open the dashboard to update settings (weekly budget, domain a
 ## Spending Controls
 
 - **Weekly budget** — Set during configure. Requests that would exceed the budget are rejected.
-- **Per-request max cost** — Use `--max-cost` on `pay` to reject requests above a price threshold.
 - **Domain allowlist** — Configurable via the dashboard. Requests to non-allowlisted domains are rejected.
 
 ## Common Errors
 
 - **`WEEKLY_BUDGET_EXCEEDED`** — Weekly spending limit reached. Run `npx agentspend configure` to increase the budget.
 - **`DOMAIN_NOT_ALLOWLISTED`** — The target domain is not in the allowlist. Run `npx agentspend configure` to update allowed domains.
-- **`PRICE_EXCEEDS_MAX`** — Endpoint price is higher than `--max-cost`. Increase the value or remove the flag.

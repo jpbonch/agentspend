@@ -2,18 +2,24 @@
   "name": "agentspend",
   "version": "0.2.2",
   "description": "AgentSpend CLI for managed x402 spending",
-  "files": ["dist", "SKILL.md"],
+  "files": ["dist", "SKILL.md", "openclaw.plugin.json"],
   "type": "module",
   "bin": {
-    "agentspend": "dist/index.js"
+    "agentspend": "dist/index.js",
+    "agentspend-mcp": "dist/mcp-server.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "dev": "tsx src/index.ts",
     "dev:local": "tsx src/dev-index.ts",
+    "dev:mcp": "tsx src/mcp-server.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
+  "openclaw": {
+    "extensions": ["./dist/openclaw-plugin/index.js"]
+  },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.18.0",
     "bcryptjs": "^2.4.3",
     "commander": "^12.1.0"
   },

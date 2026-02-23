@@ -1,0 +1,10 @@
+{
+  "id": "agentspend",
+  "name": "AgentSpend",
+  "description": "AgentSpend paid API tools for OpenClaw agents.",
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

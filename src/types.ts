@@ -8,7 +8,6 @@ export interface PayRequest {
   method?: string;
   headers?: Record<string, string>;
   body?: unknown;
-  max_cost_usd?: number;
 }
 
 export interface PayResponse {
@@ -31,33 +30,6 @@ export interface PayResponse {
     scheme: string | null;
     resource: string | null;
   } | null;
-}
-
-export interface CheckRequest {
-  url: string;
-  method?: string;
-  headers?: Record<string, string>;
-  body?: unknown;
-}
-
-export interface CheckResponse {
-  free?: boolean;
-  price_usd6?: number | null;
-  price_usd?: number | null;
-  estimated_usd?: number | null;
-  currency?: string;
-  pay_to?: string | null;
-  amount_minor?: number | null;
-  amount_display?: string | null;
-  decimals?: number | null;
-  description?: string | null;
-  network?: string | null;
-  scheme?: string | null;
-  resource?: string | null;
-  max_timeout_seconds?: number | null;
-  mime_type?: string | null;
-  pricing_note?: string | null;
-  status?: number;
 }
 
 export interface StatusCharge {
