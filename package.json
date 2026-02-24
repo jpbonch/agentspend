@@ -1,7 +1,7 @@
 {
   "name": "agentspend",
-  "version": "0.2.2",
-  "description": "AgentSpend CLI for managed x402 spending",
+  "version": "0.3.2",
+  "description": "AgentSpend CLI for agent access to APIs",
   "files": ["dist", "SKILL.md", "openclaw.plugin.json"],
   "type": "module",
   "bin": {
