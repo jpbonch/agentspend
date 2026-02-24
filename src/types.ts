@@ -17,7 +17,6 @@ export interface UsePaymentSummary {
   charged_amount_display: string | null;
   charged_currency: string;
   estimated_usd: number | null;
-  pricing_note: string | null;
   remaining_budget_usd6: number;
   remaining_budget_usd: number;
   transaction_hash: string | null;
