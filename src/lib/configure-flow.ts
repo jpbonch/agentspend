@@ -39,13 +39,6 @@ export async function resolveConfigureStatus(apiClient: AgentspendApiClient): Pr
   const pending = await getPendingConfigureStatus(apiClient);
 
   if (pending) {
-    if (pending.status.claim_status === "awaiting_card") {
-      return {
-        status: pending.status,
-        message: "Card setup required. Open configure_url.",
-      };
-    }
-
     if (pending.status.claim_status === "ready_to_claim") {
       const apiKey = await claimConfigureToken(apiClient, pending.token);
       const claimedResponse = await tryAuthenticatedConfigure(apiClient, apiKey);
@@ -53,7 +46,7 @@ export async function resolveConfigureStatus(apiClient: AgentspendApiClient): Pr
       if (claimedResponse) {
         return {
           status: claimedResponse,
-          message: "Card setup detected and API key claimed.",
+          message: "Configure session ready and API key claimed.",
         };
       }
 

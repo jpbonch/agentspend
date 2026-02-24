@@ -1,0 +1,88 @@
+{
+  "skills": [
+    {
+      "file": "agentscale.md"
+    },
+    {
+      "file": "file-storage-upload-public-url-output.md"
+    },
+    {
+      "file": "github-api.md"
+    },
+    {
+      "file": "google-workspace-api.md"
+    },
+    {
+      "file": "image-generation-high-quality.md"
+    },
+    {
+      "file": "jira-api.md"
+    },
+    {
+      "file": "location-data-nearby-search-partial-fields.md"
+    },
+    {
+      "file": "location-data-text-search-partial-fields.md"
+    },
+    {
+      "file": "music-generation.md"
+    },
+    {
+      "file": "news-search.md"
+    },
+    {
+      "file": "notion-api.md"
+    },
+    {
+      "file": "people-search.md"
+    },
+    {
+      "file": "person-enrichment.md"
+    },
+    {
+      "file": "place-details-lookup-full-fields.md"
+    },
+    {
+      "file": "polymarket-markets.md"
+    },
+    {
+      "file": "product-shopping-search.md"
+    },
+    {
+      "file": "profile-scraping.md"
+    },
+    {
+      "file": "reddit-community-post-comments.md"
+    },
+    {
+      "file": "reddit-post-search.md"
+    },
+    {
+      "file": "slack-api.md"
+    },
+    {
+      "file": "speech-to-text.md"
+    },
+    {
+      "file": "text-to-speech.md"
+    },
+    {
+      "file": "url-content-extraction.md"
+    },
+    {
+      "file": "video-generation-high-quality.md"
+    },
+    {
+      "file": "weather-forecast.md"
+    },
+    {
+      "file": "web-search-semantic.md"
+    },
+    {
+      "file": "x-twitter-social-user-recent-posts.md"
+    },
+    {
+      "file": "x-twitter-social-user-search.md"
+    }
+  ]
+}

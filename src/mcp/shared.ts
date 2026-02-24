@@ -154,15 +154,6 @@ export async function resolveApiKeyForTool(apiClient: AgentspendApiClient): Prom
       throw error;
     }
 
-    if (error.message.startsWith("Card setup required. Open this URL:\n")) {
-      const configureUrl = error.message.split("\n")[1]?.trim() || null;
-      throw new McpToolError(
-        "Card setup required. Run agentspend_configure and complete card setup before retrying this tool.",
-        "CONFIGURE_REQUIRED",
-        { configure_url: configureUrl },
-      );
-    }
-
     if (error.message.includes("No API key found")) {
       throw new McpToolError(
         "No API key found. Run agentspend_configure first.",

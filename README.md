@@ -20,6 +20,13 @@ agentspend status
 
 `use` accepts direct HTTPS URLs only.
 
+## Billing behavior
+
+- You can begin using services without adding a payment method.
+- AgentSpend allows up to `$5.00` in accrued no-card usage.
+- When usage would exceed `$5.00`, `agentspend use` is blocked until billing is configured.
+- Weekly limit checks still apply independently of billing method.
+
 ## OpenClaw plugin (primary OpenClaw path)
 
 ```bash
@@ -67,6 +74,17 @@ MCP tools:
 ## Credentials
 
 Local credentials are in `~/.agentspend/credentials.json`.
+
+## Skills
+
+- Skill files live in [`skills/`](./skills).
+- Included skills are declared in [`skills/manifest.json`](./skills/manifest.json).
+- Each skill file must start with YAML frontmatter per [`skills/SPEC.md`](./skills/SPEC.md), including `auth_type`.
+- Validate skill metadata with:
+
+```bash
+npm run skills:validate
+```
 
 ## Local backend dev CLI
 

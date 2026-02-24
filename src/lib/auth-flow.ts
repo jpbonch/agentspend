@@ -75,10 +75,6 @@ export async function resolveApiKeyWithAutoClaim(apiClient: AgentspendApiClient)
     return claimConfigureToken(apiClient, pending.token);
   }
 
-  if (pending.status.claim_status === "awaiting_card") {
-    throw new Error(`Card setup required. Open this URL:\n${pending.status.configure_url}`);
-  }
-
   await clearPendingConfigureToken();
-  throw new Error("Configure session already claimed. Run `agentspend configure` again.");
+  throw new Error("Configure session is no longer claimable. Run `agentspend configure` again.");
 }

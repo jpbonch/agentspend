@@ -32,7 +32,8 @@ When running via the OpenClaw plugin, AgentSpend injects turn-level routing guid
 npx agentspend configure
 ```
 
-This opens a URL for card setup/configuration and stores credentials in `~/.agentspend/credentials.json`.
+This opens a URL for gateway configuration (billing + connections) and stores credentials in `~/.agentspend/credentials.json`.
+It does not require adding a card to start using services.
 
 # Commands
 
@@ -75,13 +76,16 @@ Shows weekly budget, spend, remaining budget, and recent charges.
 npx agentspend configure
 ```
 
-Opens configuration for card, budget, and connected auth providers.
+Opens configuration for billing, budget, and connected auth providers.
+Billing can be added later; usage accrues until the no-card allowance threshold is reached.
 
 # Spending Controls
 - Weekly budget enforced server-side.
+- Up to `$5.00` of no-card accrued usage is allowed before billing setup is required.
 - Target domain must match an active service domain in AgentSpend.
 
 # Common Errors
 - `WEEKLY_BUDGET_EXCEEDED` — weekly limit reached.
+- `PAYMENT_METHOD_REQUIRED` — no-card usage threshold or billing hold reached; run configure and add/update payment method.
 - `SERVICE_DOMAIN_NOT_REGISTERED` — target domain is not registered as an active service domain.
 - `SERVICE_AUTH_REQUIRED` — required OAuth connection missing; run configure and connect provider.

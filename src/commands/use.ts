@@ -14,7 +14,8 @@ type UseErrorCode =
   | "PRICE_NOT_CONVERTIBLE"
   | "WEEKLY_BUDGET_EXCEEDED"
   | "SERVICE_DOMAIN_NOT_REGISTERED"
-  | "SERVICE_AUTH_REQUIRED";
+  | "SERVICE_AUTH_REQUIRED"
+  | "PAYMENT_METHOD_REQUIRED";
 
 interface UseErrorDetails {
   weekly_limit_usd6?: number;
@@ -59,7 +60,8 @@ function parseUseErrorCode(value: unknown): UseErrorCode | undefined {
     value === "PRICE_NOT_CONVERTIBLE" ||
     value === "WEEKLY_BUDGET_EXCEEDED" ||
     value === "SERVICE_DOMAIN_NOT_REGISTERED" ||
-    value === "SERVICE_AUTH_REQUIRED"
+    value === "SERVICE_AUTH_REQUIRED" ||
+    value === "PAYMENT_METHOD_REQUIRED"
   ) {
     return value;
   }
@@ -167,6 +169,15 @@ export async function runUse(apiClient: AgentspendApiClient, url: string, option
         console.error(
           body.message ??
             `Service authentication required. Complete connection setup in configure.${configureUrl ? `\n${configureUrl}` : ""}`,
+        );
+        return;
+      }
+
+      if (error.status === 403 && body.code === "PAYMENT_METHOD_REQUIRED") {
+        const configureUrl = body.configure_url ?? body.details?.configure_url;
+        console.error(
+          body.message
+            ?? `Payment method required. Add or update billing details in configure.${configureUrl ? `\n${configureUrl}` : ""}`,
         );
         return;
       }

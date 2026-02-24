@@ -76,7 +76,7 @@ export interface StatusResponse {
   recent_charges: StatusCharge[];
 }
 
-export type ConfigureClaimStatus = "awaiting_card" | "ready_to_claim" | "claimed" | "expired";
+export type ConfigureClaimStatus = "ready_to_claim" | "claimed" | "expired";
 
 export interface ConfigureStatusResponse {
   token: string;
