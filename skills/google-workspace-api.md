@@ -4,7 +4,7 @@ description: "Connected Google account APIs (Gmail, Drive, Calendar, and other G
 domains:
   - "googleapis.com"
 source_url: "https://gmail.googleapis.com/gmail/v1/users/me/threads"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/google-workspace-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/google-workspace-api.md"
 auth_type: "oauth"
 icon_url: "https://www.google.com/favicon.ico"
 ---

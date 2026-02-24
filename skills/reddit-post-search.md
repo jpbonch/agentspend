@@ -4,7 +4,7 @@ description: "Search community/forum posts by keyword and filters."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/reddit/search"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/reddit-post-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/reddit-post-search.md"
 auth_type: "x402"
 icon_url: "https://www.reddit.com/favicon.ico"
 ---

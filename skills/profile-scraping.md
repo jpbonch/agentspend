@@ -4,7 +4,7 @@ description: "Pull profile details from a LinkedIn profile URL."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/clado/linkedin-scrape"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/profile-scraping.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/profile-scraping.md"
 auth_type: "x402"
 icon_url: "https://www.linkedin.com/favicon.ico"
 ---

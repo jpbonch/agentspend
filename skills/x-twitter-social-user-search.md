@@ -4,7 +4,7 @@ description: "Find social accounts/users matching a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/grok/user-search"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/x-twitter-social-user-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/x-twitter-social-user-search.md"
 auth_type: "x402"
 icon_url: "https://x.com/favicon.ico"
 ---

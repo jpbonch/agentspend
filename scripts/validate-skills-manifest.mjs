@@ -6,7 +6,7 @@ const currentFile = fileURLToPath(import.meta.url);
 const repoRoot = path.resolve(path.dirname(currentFile), "..");
 const skillsDir = path.join(repoRoot, "skills");
 const manifestPath = path.join(skillsDir, "manifest.json");
-const SKILL_URL_PREFIX = "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/";
+const SKILL_URL_PREFIX = "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/";
 
 function fail(message) {
   console.error(`[skills:validate] ${message}`);

@@ -4,7 +4,7 @@ description: "Connected Slack workspace APIs for channels, messages, users, and 
 domains:
   - "slack.com"
 source_url: "https://slack.com/api/conversations.list"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/slack-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/slack-api.md"
 auth_type: "oauth"
 icon_url: "https://a.slack-edge.com/80588/marketing/img/meta/favicon-32.png"
 ---

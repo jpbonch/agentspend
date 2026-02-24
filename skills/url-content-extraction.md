@@ -4,7 +4,7 @@ description: "Extract clean content for one or more URLs."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/exa/contents"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/url-content-extraction.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/url-content-extraction.md"
 auth_type: "x402"
 icon_url: "https://exa.ai/favicon.ico"
 ---

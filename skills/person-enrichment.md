@@ -4,7 +4,7 @@ description: "Enrich a single person profile from an identifier (for example, Ap
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/apollo/people-enrich"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/person-enrichment.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/person-enrichment.md"
 auth_type: "x402"
 icon_url: "https://www.apollo.io/favicon.ico"
 ---

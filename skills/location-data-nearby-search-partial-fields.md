@@ -4,7 +4,7 @@ description: "Find places near coordinates/radius with a smaller, cheaper field 
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/google-maps/nearby-search/partial"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/location-data-nearby-search-partial-fields.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/location-data-nearby-search-partial-fields.md"
 auth_type: "x402"
 icon_url: "https://maps.google.com/favicon.ico"
 ---

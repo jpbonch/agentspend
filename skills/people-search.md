@@ -4,7 +4,7 @@ description: "Search people records using keyword and location filters."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/apollo/people-search"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/people-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/people-search.md"
 auth_type: "x402"
 icon_url: "https://www.apollo.io/favicon.ico"
 ---

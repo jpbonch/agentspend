@@ -4,7 +4,7 @@ description: "Fetch recent posts for a specific social handle."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/grok/user-posts"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/x-twitter-social-user-recent-posts.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/x-twitter-social-user-recent-posts.md"
 auth_type: "x402"
 icon_url: "https://x.com/favicon.ico"
 ---

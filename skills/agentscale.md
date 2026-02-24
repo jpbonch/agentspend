@@ -4,7 +4,7 @@ description: "Deploy web apps and APIs to a public URL with a single command."
 domains:
   - "agentscale.co"
 source_url: "https://agentscale.co"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/agentscale.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/agentscale.md"
 auth_type: "x402"
 icon_url: "https://agentscale.co/favicon.ico"
 ---

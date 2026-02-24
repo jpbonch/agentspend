@@ -4,7 +4,7 @@ description: "Transcribe spoken audio into text."
 domains:
   - "x402factory.ai"
 source_url: "https://x402factory.ai/base/stt"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/speech-to-text.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/speech-to-text.md"
 auth_type: "x402"
 icon_url: "https://x402factory.ai/favicon.ico"
 ---

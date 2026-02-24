@@ -4,7 +4,7 @@ description: "Fetch a community post together with its comments by URL."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/reddit/post-comments"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/reddit-community-post-comments.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/reddit-community-post-comments.md"
 auth_type: "x402"
 icon_url: "https://www.reddit.com/favicon.ico"
 ---

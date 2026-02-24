@@ -4,7 +4,7 @@ description: "Connected GitHub account APIs for repositories, issues, pull reque
 domains:
   - "github.com"
 source_url: "https://api.github.com/user/repos"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/github-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/github-api.md"
 auth_type: "oauth"
 icon_url: "https://github.com/favicon.ico"
 ---

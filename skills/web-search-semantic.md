@@ -4,7 +4,7 @@ description: "Semantic web search across pages relevant to a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/exa/search"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/web-search-semantic.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/web-search-semantic.md"
 auth_type: "x402"
 icon_url: "https://exa.ai/favicon.ico"
 ---

@@ -4,7 +4,7 @@ description: "Generate music/audio from a prompt."
 domains:
   - "x402factory.ai"
 source_url: "https://x402factory.ai/base/music"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/music-generation.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/music-generation.md"
 auth_type: "x402"
 icon_url: "https://x402factory.ai/favicon.ico"
 ---

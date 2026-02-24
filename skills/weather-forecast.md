@@ -4,7 +4,7 @@ description: "Get current weather and forecast data for a location."
 domains:
   - "wttr.in"
 source_url: "https://wttr.in"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/weather-forecast.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/weather-forecast.md"
 auth_type: "none"
 icon_url: "https://wttr.in/favicon.ico"
 ---

@@ -4,7 +4,7 @@ description: "Premium video generation with advanced quality and smoother motion
 domains:
   - "x402-gateway-production.up.railway.app"
 source_url: "https://x402-gateway-production.up.railway.app/api/video/quality"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/video-generation-high-quality.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/video-generation-high-quality.md"
 auth_type: "x402"
 icon_url: "https://openai.com/favicon.ico"
 ---

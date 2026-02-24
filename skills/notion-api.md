@@ -4,7 +4,7 @@ description: "Connected Notion workspace APIs for search, pages, databases, and 
 domains:
   - "notion.com"
 source_url: "https://api.notion.com/v1/search"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/notion-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/notion-api.md"
 auth_type: "oauth"
 icon_url: "https://www.notion.so/images/favicon.ico"
 ---

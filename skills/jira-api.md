@@ -4,7 +4,7 @@ description: "Connected Jira Cloud account APIs for projects, issues, and workfl
 domains:
   - "atlassian.net"
 source_url: "https://your-site.atlassian.net/rest/api/3/project/search"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/jira-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/jira-api.md"
 auth_type: "oauth"
 icon_url: "https://www.atlassian.com/favicon.ico"
 ---

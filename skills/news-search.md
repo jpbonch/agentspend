@@ -4,7 +4,7 @@ description: "Search recent news articles for a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/serper/news"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/news-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/news-search.md"
 auth_type: "x402"
 icon_url: "https://serper.dev/favicon.ico"
 ---

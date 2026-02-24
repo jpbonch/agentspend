@@ -11,7 +11,7 @@ description: "What this skill does"
 domains:
   - "example.com"
 source_url: "https://example.com/api/endpoint"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/your-skill.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/your-skill.md"
 auth_type: "none"
 icon_url: "https://example.com/icon.png"
 ---

@@ -4,7 +4,7 @@ description: "Premium image generation with enhanced quality and detail from a t
 domains:
   - "x402-gateway-production.up.railway.app"
 source_url: "https://x402-gateway-production.up.railway.app/api/image/quality"
-skill_url: "https://raw.githubusercontent.com/agentspend/agentspend/main/skills/image-generation-high-quality.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/image-generation-high-quality.md"
 auth_type: "x402"
 icon_url: "https://openai.com/favicon.ico"
 ---

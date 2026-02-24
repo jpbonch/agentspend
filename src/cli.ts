@@ -1,16 +1,21 @@
 import { Command } from "commander";
+import { createRequire } from "node:module";
 import { runConfigure } from "./commands/configure.js";
 import { runUse } from "./commands/use.js";
 import { runSearch } from "./commands/search.js";
 import { runStatus } from "./commands/status.js";
 import { AgentspendApiClient } from "./lib/api.js";
 
+const require = createRequire(import.meta.url);
+const packageJson = require("../package.json") as { version?: string };
+const CLI_VERSION = typeof packageJson.version === "string" ? packageJson.version : "0.0.0";
+
 export async function runCli(options?: { baseUrl?: string; programName?: string }): Promise<void> {
   const program = new Command();
   const apiClient = new AgentspendApiClient(options?.baseUrl);
   const programName = options?.programName ?? "agentspend";
 
-  program.name(programName).description("AgentSpend CLI").version("0.2.0");
+  program.name(programName).description("AgentSpend CLI").version(CLI_VERSION);
 
   program
     .command("use")
