@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import crypto from "node:crypto";
-import { ApiError, AgentspendApiClient } from "./api.js";
+import { ApiError, FerriteApiClient } from "./api.js";
 import {
   clearPendingConfigureToken,
   readCredentials,
@@ -14,7 +14,7 @@ function generateApiKey(): string {
 }
 
 async function getConfigureStatusOrNull(
-  apiClient: AgentspendApiClient,
+  apiClient: FerriteApiClient,
   token: string,
 ): Promise<ConfigureStatusResponse | null> {
   try {
@@ -28,7 +28,7 @@ async function getConfigureStatusOrNull(
   }
 }
 
-export async function claimConfigureToken(apiClient: AgentspendApiClient, token: string): Promise<string> {
+export async function claimConfigureToken(apiClient: FerriteApiClient, token: string): Promise<string> {
   const apiKey = generateApiKey();
   const apiKeyHash = await bcrypt.hash(apiKey, 12);
 
@@ -40,7 +40,7 @@ export async function claimConfigureToken(apiClient: AgentspendApiClient, token:
 }
 
 export async function getPendingConfigureStatus(
-  apiClient: AgentspendApiClient,
+  apiClient: FerriteApiClient,
 ): Promise<{ token: string; status: ConfigureStatusResponse } | null> {
   const token = await readPendingConfigureToken();
 
@@ -58,7 +58,7 @@ export async function getPendingConfigureStatus(
   return { token, status };
 }
 
-export async function resolveApiKeyWithAutoClaim(apiClient: AgentspendApiClient): Promise<string> {
+export async function resolveApiKeyWithAutoClaim(apiClient: FerriteApiClient): Promise<string> {
   const credentials = await readCredentials();
 
   if (credentials) {
@@ -68,7 +68,7 @@ export async function resolveApiKeyWithAutoClaim(apiClient: AgentspendApiClient)
   const pending = await getPendingConfigureStatus(apiClient);
 
   if (!pending) {
-    throw new Error("No API key found. Run `agentspend configure` first.");
+    throw new Error("No API key found. Run `ferrite configure` first.");
   }
 
   if (pending.status.claim_status === "ready_to_claim") {
@@ -76,5 +76,5 @@ export async function resolveApiKeyWithAutoClaim(apiClient: AgentspendApiClient)
   }
 
   await clearPendingConfigureToken();
-  throw new Error("Configure session is no longer claimable. Run `agentspend configure` again.");
+  throw new Error("Configure session is no longer claimable. Run `ferrite configure` again.");
 }

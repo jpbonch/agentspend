@@ -4,7 +4,7 @@ description: "Find social accounts/users matching a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/grok/user-search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/x-twitter-social-user-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/x-twitter-social-user-search.md"
 auth_type: "x402"
 icon_url: "https://x.com/favicon.ico"
 ---
@@ -29,7 +29,7 @@ Related StableEnrich Grok endpoints:
 Example call (user search):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/grok/user-search \
+npx ferrite use https://stableenrich.dev/api/grok/user-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"AI researcher","maxResults":5}'
@@ -38,7 +38,7 @@ npx agentspend use https://stableenrich.dev/api/grok/user-search \
 Example call (broader query):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/grok/user-search \
+npx ferrite use https://stableenrich.dev/api/grok/user-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"fintech founder","maxResults":20}'

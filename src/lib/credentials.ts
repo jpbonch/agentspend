@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import type { Credentials } from "../types.js";
 
-const CREDENTIALS_DIR = path.join(os.homedir(), ".agentspend");
+const CREDENTIALS_DIR = path.join(os.homedir(), ".ferrite");
 const CREDENTIALS_FILE = path.join(CREDENTIALS_DIR, "credentials.json");
 const PENDING_CONFIGURE_FILE = path.join(CREDENTIALS_DIR, "pending-configure.json");
 
@@ -42,7 +42,7 @@ export async function requireApiKey(): Promise<string> {
   const credentials = await readCredentials();
 
   if (!credentials) {
-    throw new Error(`No API key found at ${CREDENTIALS_FILE}. Run \`agentspend configure\` first.`);
+    throw new Error(`No API key found at ${CREDENTIALS_FILE}. Run \`ferrite configure\` first.`);
   }
 
   return credentials.api_key;

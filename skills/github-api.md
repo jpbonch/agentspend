@@ -4,20 +4,20 @@ description: "Connected GitHub account APIs for repositories, issues, pull reque
 domains:
   - "github.com"
 source_url: "https://api.github.com/user/repos"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/github-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/github-api.md"
 auth_type: "oauth"
 icon_url: "https://github.com/favicon.ico"
 ---
 ## GitHub API (OAuth)
 
-`github.com` (via AgentSpend OAuth + Nango)
+`github.com` (via Ferrite OAuth + Nango)
 
 Description: Use your connected GitHub account to call GitHub REST APIs (repos, issues, pulls, users, etc).
-Price: Provider/API dependent. AgentSpend call cost depends on endpoint x402 policy.
+Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
-- Connect GitHub in `agentspend configure` first.
-- Do not send an `Authorization` header; AgentSpend + Nango handles OAuth tokens.
+- Connect GitHub in `ferrite configure` first.
+- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
 
 Headers you should set:
 - `accept:application/vnd.github+json` for GitHub REST media type.
@@ -44,7 +44,7 @@ Common endpoints:
 Example call (authenticated user):
 
 ```bash
-npx agentspend use https://api.github.com/user \
+npx ferrite use https://api.github.com/user \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -53,7 +53,7 @@ npx agentspend use https://api.github.com/user \
 Example call (my repos):
 
 ```bash
-npx agentspend use https://api.github.com/user/repos \
+npx ferrite use https://api.github.com/user/repos \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -62,7 +62,7 @@ npx agentspend use https://api.github.com/user/repos \
 Example call (list repo pull requests):
 
 ```bash
-npx agentspend use https://api.github.com/repos/OWNER/REPO/pulls?state=open&per_page=20 \
+npx ferrite use https://api.github.com/repos/OWNER/REPO/pulls?state=open&per_page=20 \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -71,7 +71,7 @@ npx agentspend use https://api.github.com/repos/OWNER/REPO/pulls?state=open&per_
 Example call (list workflow runs):
 
 ```bash
-npx agentspend use https://api.github.com/repos/OWNER/REPO/actions/runs?per_page=20 \
+npx ferrite use https://api.github.com/repos/OWNER/REPO/actions/runs?per_page=20 \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -80,7 +80,7 @@ npx agentspend use https://api.github.com/repos/OWNER/REPO/actions/runs?per_page
 Example call (create issue):
 
 ```bash
-npx agentspend use https://api.github.com/repos/OWNER/REPO/issues \
+npx ferrite use https://api.github.com/repos/OWNER/REPO/issues \
   --method POST \
   --header "accept:application/vnd.github+json" \
   --header "content-type:application/json" \
@@ -91,7 +91,7 @@ npx agentspend use https://api.github.com/repos/OWNER/REPO/issues \
 Example call (create pull request):
 
 ```bash
-npx agentspend use https://api.github.com/repos/OWNER/REPO/pulls \
+npx ferrite use https://api.github.com/repos/OWNER/REPO/pulls \
   --method POST \
   --header "accept:application/vnd.github+json" \
   --header "content-type:application/json" \
@@ -102,7 +102,7 @@ npx agentspend use https://api.github.com/repos/OWNER/REPO/pulls \
 Example call (read file content):
 
 ```bash
-npx agentspend use https://api.github.com/repos/OWNER/REPO/contents/README.md \
+npx ferrite use https://api.github.com/repos/OWNER/REPO/contents/README.md \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -111,7 +111,7 @@ npx agentspend use https://api.github.com/repos/OWNER/REPO/contents/README.md \
 Example call (create/update file content):
 
 ```bash
-npx agentspend use https://api.github.com/repos/OWNER/REPO/contents/notes/hello.txt \
+npx ferrite use https://api.github.com/repos/OWNER/REPO/contents/notes/hello.txt \
   --method PUT \
   --header "accept:application/vnd.github+json" \
   --header "content-type:application/json" \

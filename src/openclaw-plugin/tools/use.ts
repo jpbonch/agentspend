@@ -1,4 +1,4 @@
-import { ApiError, AgentspendApiClient } from "../../lib/api.js";
+import { ApiError, FerriteApiClient } from "../../lib/api.js";
 import { formatUseCloudResult } from "../../lib/use-cloud-result.js";
 import { normalizeMethod } from "../../lib/request-options.js";
 import {
@@ -29,16 +29,16 @@ function asPaymentMethodRequiredResult(error: ApiError): Record<string, unknown>
     message:
       typeof error.body.message === "string"
         ? error.body.message
-        : "Payment method required. Run agentspend_configure and complete billing setup.",
+        : "Payment method required. Run ferrite_configure and complete billing setup.",
     configure_url: typeof error.body.configure_url === "string" ? error.body.configure_url : null,
     details: isRecord(error.body.details) ? error.body.details : null,
   };
 }
 
-export function createUseTool(apiClient: AgentspendApiClient): AgentToolDefinition {
+export function createUseTool(apiClient: FerriteApiClient): AgentToolDefinition {
   return {
-    name: "agentspend_use",
-    description: "Call a URL through AgentSpend.",
+    name: "ferrite_use",
+    description: "Call a URL through Ferrite.",
     parameters: {
       type: "object",
       additionalProperties: false,

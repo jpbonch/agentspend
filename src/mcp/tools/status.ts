@@ -1,7 +1,7 @@
-import { AgentspendApiClient } from "../../lib/api.js";
+import { FerriteApiClient } from "../../lib/api.js";
 import { resolveApiKeyForTool, toJsonValue, toolSuccess } from "../shared.js";
 
-export async function runStatusTool(apiClient: AgentspendApiClient) {
+export async function runStatusTool(apiClient: FerriteApiClient) {
   const apiKey = await resolveApiKeyForTool(apiClient);
   const response = await apiClient.status(apiKey);
 

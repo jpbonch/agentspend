@@ -1,4 +1,4 @@
-import { ApiError, AgentspendApiClient } from "../lib/api.js";
+import { ApiError, FerriteApiClient } from "../lib/api.js";
 import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 import { formatJson, formatUsd, usd6ToUsd } from "../lib/output.js";
 import { normalizeMethod, parseBody, parseHeaders } from "../lib/request-options.js";
@@ -111,7 +111,7 @@ function printCloudHttpResult(result: UseCloudHttpResult): void {
   }
 }
 
-export async function runUse(apiClient: AgentspendApiClient, url: string, options: UseCommandOptions): Promise<void> {
+export async function runUse(apiClient: FerriteApiClient, url: string, options: UseCommandOptions): Promise<void> {
   const apiKey = await resolveApiKeyWithAutoClaim(apiClient);
 
   try {
@@ -160,7 +160,7 @@ export async function runUse(apiClient: AgentspendApiClient, url: string, option
       }
 
       if (error.status === 403 && body.code === "SERVICE_DOMAIN_NOT_REGISTERED") {
-        console.error("This domain is not registered as an active AgentSpend service domain.");
+        console.error("This domain is not registered as an active Ferrite service domain.");
         return;
       }
 

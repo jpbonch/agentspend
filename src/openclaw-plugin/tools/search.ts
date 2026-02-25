@@ -1,4 +1,4 @@
-import { AgentspendApiClient } from "../../lib/api.js";
+import { FerriteApiClient } from "../../lib/api.js";
 import {
   type AgentToolDefinition,
   requiredString,
@@ -7,10 +7,10 @@ import {
   withToolErrorHandling,
 } from "../shared.js";
 
-export function createSearchTool(apiClient: AgentspendApiClient): AgentToolDefinition {
+export function createSearchTool(apiClient: FerriteApiClient): AgentToolDefinition {
   return {
-    name: "agentspend_search",
-    description: "Search AgentSpend services catalog by keyword.",
+    name: "ferrite_search",
+    description: "Search Ferrite services catalog by keyword.",
     parameters: {
       type: "object",
       additionalProperties: false,

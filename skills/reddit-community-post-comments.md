@@ -4,7 +4,7 @@ description: "Fetch a community post together with its comments by URL."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/reddit/post-comments"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/reddit-community-post-comments.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/reddit-community-post-comments.md"
 auth_type: "x402"
 icon_url: "https://www.reddit.com/favicon.ico"
 ---
@@ -31,7 +31,7 @@ Related StableEnrich endpoint:
 Example call (fetch full post + comments):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/reddit/post-comments \
+npx ferrite use https://stableenrich.dev/api/reddit/post-comments \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://www.reddit.com/r/AskReddit/comments/abc123/example_post"}'
@@ -40,7 +40,7 @@ npx agentspend use https://stableenrich.dev/api/reddit/post-comments \
 Example call (URL from prior search result):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/reddit/post-comments \
+npx ferrite use https://stableenrich.dev/api/reddit/post-comments \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://www.reddit.com/r/MachineLearning/comments/xyz999/example_discussion"}'

@@ -1,5 +1,5 @@
 ---
-name: agentspend
+name: ferrite
 description: Use this skill to get external capabilities on demand. It lets you find and use APIs/services for web search, maps/place lookup, scraping, enrichment, social/news data, image/video generation, text-to-speech, and speech-to-text through one flow.
 ---
 
@@ -14,32 +14,32 @@ Use this when the user asks for a capability you do not have natively and it may
 
 # MCP / Plugin Tools
 If MCP/plugin tools are available, prefer:
-- `agentspend_configure`
-- `agentspend_search`
-- `agentspend_use`
-- `agentspend_status`
+- `ferrite_configure`
+- `ferrite_search`
+- `ferrite_use`
+- `ferrite_status`
 
-When running via the OpenClaw plugin, AgentSpend injects turn-level routing guidance so the agent prefers AgentSpend discovery/use for external API tasks.
+When running via the OpenClaw plugin, Ferrite injects turn-level routing guidance so the agent prefers Ferrite discovery/use for external API tasks.
 
 # Playbook (Default)
-1. `npx agentspend search "<user intent>"`
+1. `npx ferrite search "<user intent>"`
 2. Pick the best matching service and open its `skill_url`.
-3. Use the exact URL/method/headers/body from that skill file with `npx agentspend use <url>`.
-4. If auth/setup is missing, run `npx agentspend configure` and continue after completion.
+3. Use the exact URL/method/headers/body from that skill file with `npx ferrite use <url>`.
+4. If auth/setup is missing, run `npx ferrite configure` and continue after completion.
 
 # Setup
 ```bash
-npx agentspend configure
+npx ferrite configure
 ```
 
-This opens a URL for gateway configuration (billing + connections) and stores credentials in `~/.agentspend/credentials.json`.
+This opens a URL for gateway configuration (billing + connections) and stores credentials in `~/.ferrite/credentials.json`.
 It does not require adding a card to start using services.
 
 # Commands
 
 ## Use
 ```bash
-npx agentspend use <url>
+npx ferrite use <url>
 ```
 
 `<url>` must be a direct HTTPS URL.
@@ -51,7 +51,7 @@ Options:
 
 Examples:
 ```bash
-npx agentspend use https://stableenrich.dev/api/exa/search \
+npx ferrite use https://stableenrich.dev/api/exa/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"latest robotics news","numResults":5}'
@@ -59,21 +59,21 @@ npx agentspend use https://stableenrich.dev/api/exa/search \
 
 ## Search
 ```bash
-npx agentspend search <keywords>
+npx ferrite search <keywords>
 ```
 
 Returns up to 5 matching services with domain and skill link.
 
 ## Status
 ```bash
-npx agentspend status
+npx ferrite status
 ```
 
 Shows weekly budget, spend, remaining budget, and recent charges.
 
 ## Configure
 ```bash
-npx agentspend configure
+npx ferrite configure
 ```
 
 Opens configuration for billing, budget, and connected auth providers.
@@ -82,7 +82,7 @@ Billing can be added later; usage accrues until the no-card allowance threshold 
 # Spending Controls
 - Weekly budget enforced server-side.
 - Up to `$5.00` of no-card accrued usage is allowed before billing setup is required.
-- Target domain must match an active service domain in AgentSpend.
+- Target domain must match an active service domain in Ferrite.
 
 # Common Errors
 - `WEEKLY_BUDGET_EXCEEDED` — weekly limit reached.

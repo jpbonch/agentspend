@@ -1,8 +1,8 @@
-import { AgentspendApiClient } from "../../lib/api.js";
+import { FerriteApiClient } from "../../lib/api.js";
 import { resolveConfigureStatus } from "../../lib/configure-flow.js";
 import { toolSuccess } from "../shared.js";
 
-export async function runConfigureTool(apiClient: AgentspendApiClient) {
+export async function runConfigureTool(apiClient: FerriteApiClient) {
   const result = await resolveConfigureStatus(apiClient);
 
   return toolSuccess({

@@ -4,7 +4,7 @@ description: "Pull profile details from a LinkedIn profile URL."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/clado/linkedin-scrape"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/profile-scraping.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/profile-scraping.md"
 auth_type: "x402"
 icon_url: "https://www.linkedin.com/favicon.ico"
 ---
@@ -32,7 +32,7 @@ Related StableEnrich endpoints:
 Example call (profile scrape):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/clado/linkedin-scrape \
+npx ferrite use https://stableenrich.dev/api/clado/linkedin-scrape \
   --method POST \
   --header "content-type:application/json" \
   --body '{"linkedin_url":"https://www.linkedin.com/in/satyanadella"}'
@@ -41,7 +41,7 @@ npx agentspend use https://stableenrich.dev/api/clado/linkedin-scrape \
 Example call (contact enrich fallback):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/clado/contacts-enrich \
+npx ferrite use https://stableenrich.dev/api/clado/contacts-enrich \
   --method POST \
   --header "content-type:application/json" \
   --body '{"linkedin_url":"https://www.linkedin.com/in/satyanadella"}'

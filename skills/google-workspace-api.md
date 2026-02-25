@@ -4,20 +4,20 @@ description: "Connected Google account APIs (Gmail, Drive, Calendar, and other G
 domains:
   - "googleapis.com"
 source_url: "https://gmail.googleapis.com/gmail/v1/users/me/threads"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/google-workspace-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/google-workspace-api.md"
 auth_type: "oauth"
 icon_url: "https://www.google.com/favicon.ico"
 ---
 ## Google Workspace API (OAuth)
 
-`googleapis.com` (via AgentSpend OAuth + Nango)
+`googleapis.com` (via Ferrite OAuth + Nango)
 
 Description: Use your connected Google account to call Google Workspace APIs (for example Gmail, Drive, Calendar).
-Price: Provider/API dependent. AgentSpend call cost depends on endpoint x402 policy.
+Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
-- Connect Google Workspace in `agentspend configure` first.
-- Do not send an `Authorization` header; AgentSpend + Nango handles OAuth tokens.
+- Connect Google Workspace in `ferrite configure` first.
+- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
 
 Headers you should set:
 - `accept:application/json` for JSON responses.
@@ -43,7 +43,7 @@ Common endpoints:
 Example call (Gmail messages list):
 
 ```bash
-npx agentspend use "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=newer_than:7d" \
+npx ferrite use "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=newer_than:7d" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -51,7 +51,7 @@ npx agentspend use "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxR
 Example call (Gmail send):
 
 ```bash
-npx agentspend use https://gmail.googleapis.com/gmail/v1/users/me/messages/send \
+npx ferrite use https://gmail.googleapis.com/gmail/v1/users/me/messages/send \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -61,7 +61,7 @@ npx agentspend use https://gmail.googleapis.com/gmail/v1/users/me/messages/send 
 Example call (Drive files list):
 
 ```bash
-npx agentspend use "https://www.googleapis.com/drive/v3/files?pageSize=25&fields=files(id,name,mimeType,modifiedTime)" \
+npx ferrite use "https://www.googleapis.com/drive/v3/files?pageSize=25&fields=files(id,name,mimeType,modifiedTime)" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -69,7 +69,7 @@ npx agentspend use "https://www.googleapis.com/drive/v3/files?pageSize=25&fields
 Example call (Calendar event list):
 
 ```bash
-npx agentspend use "https://www.googleapis.com/calendar/v3/calendars/primary/events?singleEvents=true&orderBy=startTime&timeMin=2026-02-24T00:00:00Z" \
+npx ferrite use "https://www.googleapis.com/calendar/v3/calendars/primary/events?singleEvents=true&orderBy=startTime&timeMin=2026-02-24T00:00:00Z" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -77,17 +77,17 @@ npx agentspend use "https://www.googleapis.com/calendar/v3/calendars/primary/eve
 Example call (Calendar create event):
 
 ```bash
-npx agentspend use https://www.googleapis.com/calendar/v3/calendars/primary/events \
+npx ferrite use https://www.googleapis.com/calendar/v3/calendars/primary/events \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
-  --body '{"summary":"AgentSpend sync","start":{"dateTime":"2026-02-25T16:00:00-05:00"},"end":{"dateTime":"2026-02-25T16:30:00-05:00"}}'
+  --body '{"summary":"Ferrite sync","start":{"dateTime":"2026-02-25T16:00:00-05:00"},"end":{"dateTime":"2026-02-25T16:30:00-05:00"}}'
 ```
 
 Example call (People connections list):
 
 ```bash
-npx agentspend use "https://people.googleapis.com/v1/people/me/connections?personFields=names,emailAddresses,organizations&pageSize=50" \
+npx ferrite use "https://people.googleapis.com/v1/people/me/connections?personFields=names,emailAddresses,organizations&pageSize=50" \
   --method GET \
   --header "accept:application/json"
 ```

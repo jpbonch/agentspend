@@ -4,7 +4,7 @@ description: "Search recent news articles for a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/serper/news"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/news-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/news-search.md"
 auth_type: "x402"
 icon_url: "https://serper.dev/favicon.ico"
 ---
@@ -30,7 +30,7 @@ Related StableEnrich endpoint:
 Example call (US + English):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/serper/news \
+npx ferrite use https://stableenrich.dev/api/serper/news \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"OpenAI funding","num":10,"gl":"us","hl":"en"}'
@@ -39,7 +39,7 @@ npx agentspend use https://stableenrich.dev/api/serper/news \
 Example call (UK + English):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/serper/news \
+npx ferrite use https://stableenrich.dev/api/serper/news \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"UK AI regulation","num":5,"gl":"uk","hl":"en"}'

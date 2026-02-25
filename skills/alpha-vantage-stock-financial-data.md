@@ -4,7 +4,7 @@ description: "Stocks, FX, crypto, technical indicators, and fundamentals."
 domains:
   - "alphavantage.co"
 source_url: "https://www.alphavantage.co/query"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/alpha-vantage-stock-financial-data.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/alpha-vantage-stock-financial-data.md"
 auth_type: "api_key"
 icon_url: "https://www.alphavantage.co/favicon.ico"
 ---
@@ -25,7 +25,7 @@ Common functions:
 Example:
 
 ```bash
-npx agentspend use "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=YOUR_ALPHA_VANTAGE_KEY" \
+npx ferrite use "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=YOUR_ALPHA_VANTAGE_KEY" \
   --method GET
 ```
 

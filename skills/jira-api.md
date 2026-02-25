@@ -4,20 +4,20 @@ description: "Connected Jira Cloud account APIs for projects, issues, and workfl
 domains:
   - "atlassian.net"
 source_url: "https://your-site.atlassian.net/rest/api/3/project/search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/jira-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/jira-api.md"
 auth_type: "oauth"
 icon_url: "https://www.atlassian.com/favicon.ico"
 ---
 ## Jira API (OAuth)
 
-`atlassian.net` (via AgentSpend OAuth + Nango)
+`atlassian.net` (via Ferrite OAuth + Nango)
 
 Description: Use your connected Jira Cloud account to call Jira REST APIs for projects, issues, and workflows.
-Price: Provider/API dependent. AgentSpend call cost depends on endpoint x402 policy.
+Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
-- Connect Jira in `agentspend configure` first.
-- Do not send an `Authorization` header; AgentSpend + Nango handles OAuth tokens.
+- Connect Jira in `ferrite configure` first.
+- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
 - Replace `YOUR-SITE` with your Jira Cloud subdomain.
 
 Headers you should set:
@@ -43,7 +43,7 @@ Common endpoints:
 Example call (current user):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/myself" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/myself" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -51,7 +51,7 @@ npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/myself" \
 Example call (list projects):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/project/search" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/project/search" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -59,7 +59,7 @@ npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/project/search" \
 Example call (search issues with JQL):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/search/jql" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/search/jql" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -69,7 +69,7 @@ npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/search/jql" \
 Example call (get issue):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123?fields=summary,status,assignee,description" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123?fields=summary,status,assignee,description" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -77,27 +77,27 @@ npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123?fie
 Example call (create issue):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/issue" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
-  --body '{"fields":{"project":{"key":"ENG"},"summary":"AgentSpend created issue","issuetype":{"name":"Task"},"description":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"type":"text","text":"Created via AgentSpend + Jira OAuth."}]}]}}}'
+  --body '{"fields":{"project":{"key":"ENG"},"summary":"Ferrite created issue","issuetype":{"name":"Task"},"description":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"type":"text","text":"Created via Ferrite + Jira OAuth."}]}]}}}'
 ```
 
 Example call (add issue comment):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/comment" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/comment" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
-  --body '{"body":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"type":"text","text":"Comment from AgentSpend."}]}]}}'
+  --body '{"body":{"type":"doc","version":1,"content":[{"type":"paragraph","content":[{"type":"text","text":"Comment from Ferrite."}]}]}}'
 ```
 
 Example call (transition issue):
 
 ```bash
-npx agentspend use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/transitions" \
+npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/transitions" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \

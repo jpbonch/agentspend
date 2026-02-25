@@ -1,4 +1,4 @@
-import { ApiError, AgentspendApiClient } from "../lib/api.js";
+import { ApiError, FerriteApiClient } from "../lib/api.js";
 import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 
 type JsonObject = Record<string, unknown>;
@@ -167,7 +167,7 @@ export function requiredString(value: unknown, fieldName: string): string {
   return trimmed;
 }
 
-export async function resolveApiKeyForTool(apiClient: AgentspendApiClient): Promise<string> {
+export async function resolveApiKeyForTool(apiClient: FerriteApiClient): Promise<string> {
   try {
     return await resolveApiKeyWithAutoClaim(apiClient);
   } catch (error) {
@@ -177,7 +177,7 @@ export async function resolveApiKeyForTool(apiClient: AgentspendApiClient): Prom
 
     if (error.message.includes("No API key found")) {
       throw new PluginToolError(
-        "No API key found. Run agentspend_configure first.",
+        "No API key found. Run ferrite_configure first.",
         "CONFIGURE_REQUIRED",
       );
     }

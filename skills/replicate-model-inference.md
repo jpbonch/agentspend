@@ -4,7 +4,7 @@ description: "Run and manage ML model predictions via Replicate HTTP API."
 domains:
   - "replicate.com"
 source_url: "https://api.replicate.com/v1/predictions"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/replicate-model-inference.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/replicate-model-inference.md"
 auth_type: "api_key"
 icon_url: "https://replicate.com/favicon.ico"
 ---
@@ -23,10 +23,10 @@ Common endpoints:
 Example:
 
 ```bash
-npx agentspend use https://api.replicate.com/v1/models/replicate/hello-world/predictions \
+npx ferrite use https://api.replicate.com/v1/models/replicate/hello-world/predictions \
   --method POST \
   --header "content-type:application/json" \
-  --body '{"input":{"text":"hello from agentspend"}}'
+  --body '{"input":{"text":"hello from ferrite"}}'
 ```
 
 Docs:

@@ -4,7 +4,7 @@ description: "Search people records using keyword and location filters."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/apollo/people-search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/people-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/people-search.md"
 auth_type: "x402"
 icon_url: "https://www.apollo.io/favicon.ico"
 ---
@@ -39,7 +39,7 @@ Related StableEnrich endpoints:
 Example call (keyword + location):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/apollo/people-search \
+npx ferrite use https://stableenrich.dev/api/apollo/people-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q_keywords":"software engineer","person_locations":["San Francisco"],"per_page":5}'
@@ -48,7 +48,7 @@ npx agentspend use https://stableenrich.dev/api/apollo/people-search \
 Example call (paginated):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/apollo/people-search \
+npx ferrite use https://stableenrich.dev/api/apollo/people-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q_keywords":"product manager","person_locations":["New York"],"per_page":25,"page":2}'
@@ -57,7 +57,7 @@ npx agentspend use https://stableenrich.dev/api/apollo/people-search \
 Example call (find org IDs first):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/apollo/org-search \
+npx ferrite use https://stableenrich.dev/api/apollo/org-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q_keywords":"stripe","organization_locations":["United States"],"per_page":5}'

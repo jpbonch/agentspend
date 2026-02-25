@@ -4,7 +4,7 @@ import { runConfigure } from "./commands/configure.js";
 import { runUse } from "./commands/use.js";
 import { runSearch } from "./commands/search.js";
 import { runStatus } from "./commands/status.js";
-import { AgentspendApiClient } from "./lib/api.js";
+import { FerriteApiClient } from "./lib/api.js";
 
 const require = createRequire(import.meta.url);
 const packageJson = require("../package.json") as { version?: string };
@@ -12,15 +12,15 @@ const CLI_VERSION = typeof packageJson.version === "string" ? packageJson.versio
 
 export async function runCli(options?: { baseUrl?: string; programName?: string }): Promise<void> {
   const program = new Command();
-  const apiClient = new AgentspendApiClient(options?.baseUrl);
-  const programName = options?.programName ?? "agentspend";
+  const apiClient = new FerriteApiClient(options?.baseUrl);
+  const programName = options?.programName ?? "ferrite";
 
-  program.name(programName).description("AgentSpend CLI").version(CLI_VERSION);
+  program.name(programName).description("Ferrite CLI").version(CLI_VERSION);
 
   program
     .command("use")
     .argument("<url>", "Direct HTTPS URL")
-    .description("Call a URL through AgentSpend")
+    .description("Call a URL through Ferrite")
     .option("-X, --method <method>", "HTTP method")
     .option("--body <body>", "Request body (JSON or text)")
     .option("--header <header>", "Header in key:value form", (value, previous: string[]) => {

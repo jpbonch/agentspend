@@ -4,7 +4,7 @@ description: "Extract clean content for one or more URLs."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/exa/contents"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/url-content-extraction.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/url-content-extraction.md"
 auth_type: "x402"
 icon_url: "https://exa.ai/favicon.ico"
 ---
@@ -33,7 +33,7 @@ Related StableEnrich Exa endpoints:
 Example call (single URL):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/exa/contents \
+npx ferrite use https://stableenrich.dev/api/exa/contents \
   --method POST \
   --header "content-type:application/json" \
   --body '{"urls":["https://example.com"]}'
@@ -42,7 +42,7 @@ npx agentspend use https://stableenrich.dev/api/exa/contents \
 Example call (batch of URLs):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/exa/contents \
+npx ferrite use https://stableenrich.dev/api/exa/contents \
   --method POST \
   --header "content-type:application/json" \
   --body '{"urls":["https://openai.com/research","https://docs.github.com/en/rest"]}'

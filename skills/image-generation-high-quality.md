@@ -4,7 +4,7 @@ description: "Premium image generation with enhanced quality and detail from a t
 domains:
   - "x402-gateway-production.up.railway.app"
 source_url: "https://x402-gateway-production.up.railway.app/api/image/quality"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/image-generation-high-quality.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/image-generation-high-quality.md"
 auth_type: "x402"
 icon_url: "https://openai.com/favicon.ico"
 ---
@@ -31,7 +31,7 @@ Related x402engine endpoints:
 Example call (quality image):
 
 ```bash
-npx agentspend use https://x402-gateway-production.up.railway.app/api/image/quality \
+npx ferrite use https://x402-gateway-production.up.railway.app/api/image/quality \
   --method POST \
   --header "content-type:application/json" \
   --body '{"prompt":"minimal black and white logo of a coin with a lightning bolt","width":1024,"height":1024}'
@@ -40,7 +40,7 @@ npx agentspend use https://x402-gateway-production.up.railway.app/api/image/qual
 Example call (quality image with seed):
 
 ```bash
-npx agentspend use https://x402-gateway-production.up.railway.app/api/image/quality \
+npx ferrite use https://x402-gateway-production.up.railway.app/api/image/quality \
   --method POST \
   --header "content-type:application/json" \
   --body '{"prompt":"cinematic portrait of a founder in a modern office","width":1536,"height":1024,"seed":42}'
@@ -49,10 +49,10 @@ npx agentspend use https://x402-gateway-production.up.railway.app/api/image/qual
 Example call (text-in-image variant):
 
 ```bash
-npx agentspend use https://x402-gateway-production.up.railway.app/api/image/text \
+npx ferrite use https://x402-gateway-production.up.railway.app/api/image/text \
   --method POST \
   --header "content-type:application/json" \
-  --body '{"prompt":"poster design with the text \"AGENTSPEND\" in bold sans-serif","image_size":"square"}'
+  --body '{"prompt":"poster design with the text \"FERRITE\" in bold sans-serif","image_size":"square"}'
 ```
 
 Docs:

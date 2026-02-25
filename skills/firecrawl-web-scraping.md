@@ -4,7 +4,7 @@ description: "Scrape, crawl, map, and extract structured web data."
 domains:
   - "firecrawl.dev"
 source_url: "https://api.firecrawl.dev/v2/scrape"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/firecrawl-web-scraping.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/firecrawl-web-scraping.md"
 auth_type: "api_key"
 icon_url: "https://firecrawl.dev/favicon.ico"
 ---
@@ -24,7 +24,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx agentspend use https://api.firecrawl.dev/v2/scrape \
+npx ferrite use https://api.firecrawl.dev/v2/scrape \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://example.com","formats":["markdown"]}'

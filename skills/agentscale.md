@@ -5,7 +5,7 @@ domains:
   - "agentscale.co"
   - "api.agentscale.co"
 source_url: "https://agentscale.co/docs"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/agentscale.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/agentscale.md"
 auth_type: "x402"
 execution_mode: "hybrid_cli"
 icon_url: "https://agentscale.co/favicon.ico"
@@ -18,7 +18,7 @@ Description: Deploy apps and APIs to a public URL quickly.
 
 Execution split (hybrid CLI):
 - CLI steps stay local: `register`, `deploy`, `list`, `account`.
-- Credit purchase stays HTTP and should be called through AgentSpend: `POST https://api.agentscale.co/add-credits`.
+- Credit purchase stays HTTP and should be called through Ferrite: `POST https://api.agentscale.co/add-credits`.
 
 CLI commands:
 
@@ -43,7 +43,7 @@ Command reference (for agents):
 - Success cues to look for:
   - `Deployed to service: <name>`
   - `URL: https://<name>.agentscale.app`
-- If free-tier text mentions `expire in 1 hour`, prompt for top-up via AgentSpend HTTP call.
+- If free-tier text mentions `expire in 1 hour`, prompt for top-up via Ferrite HTTP call.
 
 3. `npx agentscale deploy --name <service-name>`
 - Same as deploy, but pins service name instead of auto-generated name.
@@ -62,12 +62,12 @@ Recommended command flow:
 2. Deploy from target project dir (`deploy`).
 3. Verify service and URL (`list`).
 4. Check credit/tier state (`account`).
-5. If credits needed, call HTTP add-credits via AgentSpend and then re-run `account`.
+5. If credits needed, call HTTP add-credits via Ferrite and then re-run `account`.
 
-Credit top-up via AgentSpend (HTTP x402 path):
+Credit top-up via Ferrite (HTTP x402 path):
 
 ```bash
-npx agentspend use https://api.agentscale.co/add-credits \
+npx ferrite use https://api.agentscale.co/add-credits \
   --method POST \
   --header "x-api-key:<YOUR_AGENTSCALE_API_KEY>" \
   --header "content-type:application/json" \

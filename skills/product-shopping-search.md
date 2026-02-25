@@ -4,7 +4,7 @@ description: "Search shopping/product listings for a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/serper/shopping"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/product-shopping-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/product-shopping-search.md"
 auth_type: "x402"
 icon_url: "https://serper.dev/favicon.ico"
 ---
@@ -30,7 +30,7 @@ Related StableEnrich endpoint:
 Example call (basic shopping search):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/serper/shopping \
+npx ferrite use https://stableenrich.dev/api/serper/shopping \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"wireless earbuds","num":10,"gl":"us","hl":"en"}'
@@ -39,7 +39,7 @@ npx agentspend use https://stableenrich.dev/api/serper/shopping \
 Example call (narrower result set):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/serper/shopping \
+npx ferrite use https://stableenrich.dev/api/serper/shopping \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"standing desk","num":5,"gl":"us","hl":"en"}'

@@ -1,6 +1,6 @@
-# agentspend
+# ferrite
 
-AgentSpend CLI, MCP server, and OpenClaw plugin.
+Ferrite CLI, MCP server, and OpenClaw plugin.
 
 ## Install
 
@@ -12,10 +12,10 @@ npm run build
 ## CLI commands
 
 ```bash
-agentspend configure
-agentspend search <query>
-agentspend use <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--header 'Content-Type:application/json'] [--body '{"hello":"world"}']
-agentspend status
+ferrite configure
+ferrite search <query>
+ferrite use <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--header 'Content-Type:application/json'] [--body '{"hello":"world"}']
+ferrite status
 ```
 
 `use` accepts direct HTTPS URLs only.
@@ -23,57 +23,57 @@ agentspend status
 ## Billing behavior
 
 - You can begin using services without adding a payment method.
-- AgentSpend allows up to `$5.00` in accrued no-card usage.
-- When usage would exceed `$5.00`, `agentspend use` is blocked until billing is configured.
+- Ferrite allows up to `$5.00` in accrued no-card usage.
+- When usage would exceed `$5.00`, `ferrite use` is blocked until billing is configured.
 - Weekly limit checks still apply independently of billing method.
 
 ## OpenClaw plugin (primary OpenClaw path)
 
 ```bash
-openclaw plugins install agentspend
-openclaw plugins enable agentspend
+openclaw plugins install ferrite
+openclaw plugins enable ferrite
 openclaw gateway restart
 ```
 
 Local install from this repo:
 
 ```bash
-openclaw plugins install -l /Users/jpbonch/as/agentspend
-openclaw plugins enable agentspend
+openclaw plugins install -l /Users/jpbonch/as/ferrite
+openclaw plugins enable ferrite
 openclaw gateway restart
 ```
 
 Plugin tools:
-- `agentspend_configure`
-- `agentspend_search`
-- `agentspend_use`
-- `agentspend_status`
+- `ferrite_configure`
+- `ferrite_search`
+- `ferrite_use`
+- `ferrite_status`
 
 ## OpenClaw routing hook
 
-When installed as an OpenClaw plugin, AgentSpend injects routing guidance each turn so the agent prefers:
-1. `agentspend_search`
+When installed as an OpenClaw plugin, Ferrite injects routing guidance each turn so the agent prefers:
+1. `ferrite_search`
 2. Read the selected service `skill_url`
-3. `agentspend_use`
-4. `agentspend_configure` if setup is needed
+3. `ferrite_use`
+4. `ferrite_configure` if setup is needed
 
 ## MCP server (secondary)
 
 Run local stdio MCP server:
 
 ```bash
-agentspend-mcp
+ferrite-mcp
 ```
 
 MCP tools:
-- `agentspend_configure`
-- `agentspend_search`
-- `agentspend_use`
-- `agentspend_status`
+- `ferrite_configure`
+- `ferrite_search`
+- `ferrite_use`
+- `ferrite_status`
 
 ## Credentials
 
-Local credentials are in `~/.agentspend/credentials.json`.
+Local credentials are in `~/.ferrite/credentials.json`.
 
 ## Skills
 

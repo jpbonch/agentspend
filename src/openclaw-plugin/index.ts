@@ -1,5 +1,5 @@
-import { AgentspendApiClient } from "../lib/api.js";
-import { buildAgentspendRoutingDirective } from "./hooks/prompt-routing.js";
+import { FerriteApiClient } from "../lib/api.js";
+import { buildFerriteRoutingDirective } from "./hooks/prompt-routing.js";
 import { createConfigureTool } from "./tools/configure.js";
 import { createSearchTool } from "./tools/search.js";
 import { createStatusTool } from "./tools/status.js";
@@ -42,7 +42,7 @@ function getSessionId(event?: SessionEvent, ctx?: HookContext): string | null {
 }
 
 export default function register(api: OpenClawPluginApi): void {
-  const apiClient = new AgentspendApiClient();
+  const apiClient = new FerriteApiClient();
   const sessionStates = new Map<string, SessionState>();
 
   const maybeInjectReminder = (event?: SessionEvent, ctx?: HookContext): { prependContext: string } | void => {
@@ -59,8 +59,8 @@ export default function register(api: OpenClawPluginApi): void {
     }
 
     state.reminderSent = true;
-    api.logger?.debug?.(`[agentspend] injected routing directive once for session=${sessionId}`);
-    return { prependContext: buildAgentspendRoutingDirective() };
+    api.logger?.debug?.(`[ferrite] injected routing directive once for session=${sessionId}`);
+    return { prependContext: buildFerriteRoutingDirective() };
   };
 
   api.on(
@@ -88,7 +88,7 @@ export default function register(api: OpenClawPluginApi): void {
       }
 
       sessionStates.delete(sessionId);
-      api.logger?.debug?.(`[agentspend] cleaned session state for session=${sessionId}`);
+      api.logger?.debug?.(`[ferrite] cleaned session state for session=${sessionId}`);
     },
     { priority: 10 },
   );

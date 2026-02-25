@@ -4,7 +4,7 @@ description: "Search Google Maps places by natural-language query with a smaller
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/google-maps/text-search/partial"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/location-data-text-search-partial-fields.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/location-data-text-search-partial-fields.md"
 auth_type: "x402"
 icon_url: "https://maps.google.com/favicon.ico"
 ---
@@ -34,7 +34,7 @@ Related StableEnrich endpoints:
 Example call (basic):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"coffee shops in San Francisco","maxResultCount":5}'
@@ -43,7 +43,7 @@ npx agentspend use https://stableenrich.dev/api/google-maps/text-search/partial 
 Example call (with geographic restriction):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"coworking space","locationRestriction":{"circle":{"center":{"latitude":37.7749,"longitude":-122.4194},"radius":2000}},"maxResultCount":10}'
@@ -52,7 +52,7 @@ npx agentspend use https://stableenrich.dev/api/google-maps/text-search/partial 
 Example call (pagination):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"bookstores in Seattle","pageToken":"NEXT_PAGE_TOKEN"}'

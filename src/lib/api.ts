@@ -7,7 +7,7 @@ import type {
   StatusResponse,
 } from "../types.js";
 
-const API_URL = "https://api.agentspend.co";
+const API_URL = "https://api.useferrite.com";
 
 export class ApiError extends Error {
   readonly status: number;
@@ -47,7 +47,7 @@ function errorMessageFromBody(body: unknown, fallback: string): string {
   return fallback;
 }
 
-export class AgentspendApiClient {
+export class FerriteApiClient {
   constructor(private readonly baseUrl = API_URL) {}
 
   private async request<T>(path: string, init: RequestInit = {}, apiKey?: string): Promise<T> {

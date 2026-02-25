@@ -4,7 +4,7 @@ description: "Semantic web search across pages relevant to a query."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/exa/search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/web-search-semantic.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/web-search-semantic.md"
 auth_type: "x402"
 icon_url: "https://exa.ai/favicon.ico"
 ---
@@ -30,7 +30,7 @@ Related StableEnrich Exa endpoints:
 Example call (semantic search):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/exa/search \
+npx ferrite use https://stableenrich.dev/api/exa/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"best practices for building AI agents","numResults":10}'
@@ -39,7 +39,7 @@ npx agentspend use https://stableenrich.dev/api/exa/search \
 Example call (find similar pages):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/exa/find-similar \
+npx ferrite use https://stableenrich.dev/api/exa/find-similar \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://openai.com","numResults":5}'
@@ -48,7 +48,7 @@ npx agentspend use https://stableenrich.dev/api/exa/find-similar \
 Example call (answer mode):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/exa/answer \
+npx ferrite use https://stableenrich.dev/api/exa/answer \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"What is the capital of France?"}'

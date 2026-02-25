@@ -4,7 +4,7 @@ description: "Transcription and speech understanding APIs."
 domains:
   - "deepgram.com"
 source_url: "https://api.deepgram.com/v1/listen"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/deepgram-speech-to-text.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/deepgram-speech-to-text.md"
 auth_type: "api_key"
 icon_url: "https://deepgram.com/favicon.ico"
 ---
@@ -18,7 +18,7 @@ Auth:
 Example (URL-based transcription):
 
 ```bash
-npx agentspend use "https://api.deepgram.com/v1/listen?model=nova-3&smart_format=true" \
+npx ferrite use "https://api.deepgram.com/v1/listen?model=nova-3&smart_format=true" \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://dpgr.am/spacewalk.wav"}'

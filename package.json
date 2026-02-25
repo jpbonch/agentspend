@@ -1,12 +1,12 @@
 {
-  "name": "agentspend",
+  "name": "ferrite",
   "version": "0.3.2",
-  "description": "AgentSpend CLI for agent access to APIs",
+  "description": "Ferrite CLI for agent access to APIs",
   "files": ["dist", "SKILL.md", "openclaw.plugin.json"],
   "type": "module",
   "bin": {
-    "agentspend": "dist/index.js",
-    "agentspend-mcp": "dist/mcp-server.js"
+    "ferrite": "dist/index.js",
+    "ferrite-mcp": "dist/mcp-server.js"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",

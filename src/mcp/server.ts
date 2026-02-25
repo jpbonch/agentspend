@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import type { CallToolResult } from "@modelcontextprotocol/sdk/types.js";
 import { z } from "zod";
-import { AgentspendApiClient } from "../lib/api.js";
+import { FerriteApiClient } from "../lib/api.js";
 import { mcpErrorResult } from "./shared.js";
 import { runConfigureTool } from "./tools/configure.js";
 import { runSearchTool } from "./tools/search.js";
@@ -18,25 +18,25 @@ async function withToolErrorHandling(handler: () => Promise<CallToolResult>): Pr
 }
 
 export async function runMcpServer(): Promise<void> {
-  const apiClient = new AgentspendApiClient();
+  const apiClient = new FerriteApiClient();
   const server = new McpServer({
-    name: "agentspend-mcp",
+    name: "ferrite-mcp",
     version: "0.1.0",
   });
 
   server.registerTool(
-    "agentspend_configure",
+    "ferrite_configure",
     {
-      description: "Start or resume AgentSpend configure flow and return a non-blocking configure URL.",
+      description: "Start or resume Ferrite configure flow and return a non-blocking configure URL.",
       inputSchema: z.object({}),
     },
     async () => withToolErrorHandling(() => runConfigureTool(apiClient)),
   );
 
   server.registerTool(
-    "agentspend_search",
+    "ferrite_search",
     {
-      description: "Search AgentSpend services catalog by keyword.",
+      description: "Search Ferrite services catalog by keyword.",
       inputSchema: z.object({
         query: z.string().min(1),
       }),
@@ -45,9 +45,9 @@ export async function runMcpServer(): Promise<void> {
   );
 
   server.registerTool(
-    "agentspend_use",
+    "ferrite_use",
     {
-      description: "Call a URL through AgentSpend.",
+      description: "Call a URL through Ferrite.",
       inputSchema: z.object({
         url: z.string().min(1),
         method: z.string().min(1).optional(),
@@ -59,7 +59,7 @@ export async function runMcpServer(): Promise<void> {
   );
 
   server.registerTool(
-    "agentspend_status",
+    "ferrite_status",
     {
       description: "Get weekly budget, current spend, remaining budget, and recent charges.",
       inputSchema: z.object({}),

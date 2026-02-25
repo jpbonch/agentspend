@@ -4,20 +4,20 @@ description: "Connected Slack workspace APIs for channels, messages, users, and 
 domains:
   - "slack.com"
 source_url: "https://slack.com/api/conversations.list"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/slack-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/slack-api.md"
 auth_type: "oauth"
 icon_url: "https://a.slack-edge.com/80588/marketing/img/meta/favicon-32.png"
 ---
 ## Slack API (OAuth)
 
-`slack.com` (via AgentSpend OAuth + Nango)
+`slack.com` (via Ferrite OAuth + Nango)
 
 Description: Use your connected Slack workspace APIs for channels, conversations, users, and messages.
-Price: Provider/API dependent. AgentSpend call cost depends on endpoint x402 policy.
+Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
-- Connect Slack in `agentspend configure` first.
-- Do not send an `Authorization` header; AgentSpend + Nango handles OAuth tokens.
+- Connect Slack in `ferrite configure` first.
+- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
 
 Headers you should set:
 - `accept:application/json` for JSON responses.
@@ -44,7 +44,7 @@ Common endpoints:
 Example call (auth test):
 
 ```bash
-npx agentspend use https://slack.com/api/auth.test \
+npx ferrite use https://slack.com/api/auth.test \
   --method POST \
   --header "content-type:application/json" \
   --header "accept:application/json"
@@ -53,7 +53,7 @@ npx agentspend use https://slack.com/api/auth.test \
 Example call (list channels):
 
 ```bash
-npx agentspend use https://slack.com/api/conversations.list \
+npx ferrite use https://slack.com/api/conversations.list \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -63,7 +63,7 @@ npx agentspend use https://slack.com/api/conversations.list \
 Example call (channel history):
 
 ```bash
-npx agentspend use https://slack.com/api/conversations.history \
+npx ferrite use https://slack.com/api/conversations.history \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -73,17 +73,17 @@ npx agentspend use https://slack.com/api/conversations.history \
 Example call (post message):
 
 ```bash
-npx agentspend use https://slack.com/api/chat.postMessage \
+npx ferrite use https://slack.com/api/chat.postMessage \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
-  --body '{"channel":"C12345678","text":"Hello from AgentSpend"}'
+  --body '{"channel":"C12345678","text":"Hello from Ferrite"}'
 ```
 
 Example call (reply in thread):
 
 ```bash
-npx agentspend use https://slack.com/api/chat.postMessage \
+npx ferrite use https://slack.com/api/chat.postMessage \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -93,7 +93,7 @@ npx agentspend use https://slack.com/api/chat.postMessage \
 Example call (lookup a user):
 
 ```bash
-npx agentspend use https://slack.com/api/users.info \
+npx ferrite use https://slack.com/api/users.info \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \

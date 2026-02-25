@@ -4,7 +4,7 @@ description: "Generate and transform images with Stability AI REST endpoints."
 domains:
   - "stability.ai"
 source_url: "https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/stability-ai-image-generation.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/stability-ai-image-generation.md"
 auth_type: "api_key"
 icon_url: "https://stability.ai/favicon.ico"
 ---
@@ -23,7 +23,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx agentspend use https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image \
+npx ferrite use https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image \
   --method POST \
   --header "content-type:application/json" \
   --header "accept:application/json" \

@@ -4,7 +4,7 @@ description: "Get detailed Google Maps place information for a known place ID."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/google-maps/place-details/full?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/place-details-lookup-full-fields.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/place-details-lookup-full-fields.md"
 auth_type: "x402"
 icon_url: "https://maps.google.com/favicon.ico"
 ---
@@ -28,21 +28,21 @@ Related StableEnrich endpoints:
 Example call (full details by placeId):
 
 ```bash
-npx agentspend use "https://stableenrich.dev/api/google-maps/place-details/full?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
+npx ferrite use "https://stableenrich.dev/api/google-maps/place-details/full?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
   --method GET
 ```
 
 Example call (partial details variant):
 
 ```bash
-npx agentspend use "https://stableenrich.dev/api/google-maps/place-details/partial?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
+npx ferrite use "https://stableenrich.dev/api/google-maps/place-details/partial?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
   --method GET
 ```
 
 Example call (search then detail lookup):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"best ramen in Austin","maxResultCount":3}'

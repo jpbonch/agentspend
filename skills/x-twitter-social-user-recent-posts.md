@@ -4,7 +4,7 @@ description: "Fetch recent posts for a specific social handle."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/grok/user-posts"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/x-twitter-social-user-recent-posts.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/x-twitter-social-user-recent-posts.md"
 auth_type: "x402"
 icon_url: "https://x.com/favicon.ico"
 ---
@@ -29,7 +29,7 @@ Related StableEnrich Grok endpoints:
 Example call (recent posts):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/grok/user-posts \
+npx ferrite use https://stableenrich.dev/api/grok/user-posts \
   --method POST \
   --header "content-type:application/json" \
   --body '{"handle":"elonmusk","maxResults":5}'
@@ -38,7 +38,7 @@ npx agentspend use https://stableenrich.dev/api/grok/user-posts \
 Example call (deeper post sample):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/grok/user-posts \
+npx ferrite use https://stableenrich.dev/api/grok/user-posts \
   --method POST \
   --header "content-type:application/json" \
   --body '{"handle":"sama","maxResults":20}'

@@ -4,7 +4,7 @@ description: "AI-optimized web search, extraction, and crawl endpoints."
 domains:
   - "tavily.com"
 source_url: "https://api.tavily.com/search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/tavily-ai-optimized-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/tavily-ai-optimized-search.md"
 auth_type: "api_key"
 icon_url: "https://tavily.com/favicon.ico"
 ---
@@ -24,7 +24,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx agentspend use https://api.tavily.com/search \
+npx ferrite use https://api.tavily.com/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"latest SEC filings for NVIDIA","search_depth":"basic","max_results":5}'

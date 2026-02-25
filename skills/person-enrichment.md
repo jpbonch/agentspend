@@ -4,7 +4,7 @@ description: "Enrich a single person profile from an identifier (for example, Ap
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/apollo/people-enrich"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/person-enrichment.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/person-enrichment.md"
 auth_type: "x402"
 icon_url: "https://www.apollo.io/favicon.ico"
 ---
@@ -30,7 +30,7 @@ Related StableEnrich endpoints:
 Example call (by person ID):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/apollo/people-enrich \
+npx ferrite use https://stableenrich.dev/api/apollo/people-enrich \
   --method POST \
   --header "content-type:application/json" \
   --body '{"id":"5c4efb6fa3ae613258c36ac7"}'
@@ -39,7 +39,7 @@ npx agentspend use https://stableenrich.dev/api/apollo/people-enrich \
 Example call (by email):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/apollo/people-enrich \
+npx ferrite use https://stableenrich.dev/api/apollo/people-enrich \
   --method POST \
   --header "content-type:application/json" \
   --body '{"email":"tim@apple.com"}'
@@ -48,7 +48,7 @@ npx agentspend use https://stableenrich.dev/api/apollo/people-enrich \
 Example call (bulk enrich up to 10):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/apollo/people-enrich/bulk \
+npx ferrite use https://stableenrich.dev/api/apollo/people-enrich/bulk \
   --method POST \
   --header "content-type:application/json" \
   --body '{"details":[{"email":"tim@apple.com"},{"email":"satya@microsoft.com"}]}'

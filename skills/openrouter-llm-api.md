@@ -4,7 +4,7 @@ description: "Unified chat and response APIs across multiple model providers thr
 domains:
   - "openrouter.ai"
 source_url: "https://openrouter.ai/api/v1/chat/completions"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/openrouter-llm-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/openrouter-llm-api.md"
 auth_type: "api_key"
 icon_url: "https://openrouter.ai/favicon.ico"
 ---
@@ -13,7 +13,7 @@ icon_url: "https://openrouter.ai/favicon.ico"
 Base URL: `https://openrouter.ai/api/v1`
 
 Auth behavior:
-- AgentSpend injects `Authorization: Bearer <OPENROUTER_API_KEY>` for `openrouter.ai`.
+- Ferrite injects `Authorization: Bearer <OPENROUTER_API_KEY>` for `openrouter.ai`.
 - You can add `HTTP-Referer` and `X-Title` headers for app attribution/ranking in OpenRouter.
 
 Common endpoints:
@@ -27,18 +27,18 @@ Common endpoints:
 Example call (chat completion):
 
 ```bash
-npx agentspend use https://openrouter.ai/api/v1/chat/completions \
+npx ferrite use https://openrouter.ai/api/v1/chat/completions \
   --method POST \
   --header "content-type:application/json" \
   --header "http-referer:https://example.com" \
-  --header "x-title:AgentSpend OpenRouter Skill" \
+  --header "x-title:Ferrite OpenRouter Skill" \
   --body '{"model":"openai/gpt-4o-mini","messages":[{"role":"system","content":"You are concise."},{"role":"user","content":"Summarize retrieval-augmented generation in 3 bullets."}]}'
 ```
 
 Example call (responses API):
 
 ```bash
-npx agentspend use https://openrouter.ai/api/v1/responses \
+npx ferrite use https://openrouter.ai/api/v1/responses \
   --method POST \
   --header "content-type:application/json" \
   --body '{"model":"openai/gpt-4o-mini","input":"Write a 4-line poem about distributed systems.","stream":false}'
@@ -47,14 +47,14 @@ npx agentspend use https://openrouter.ai/api/v1/responses \
 Example call (list models):
 
 ```bash
-npx agentspend use https://openrouter.ai/api/v1/models \
+npx ferrite use https://openrouter.ai/api/v1/models \
   --method GET
 ```
 
 Example call (inspect your key metadata):
 
 ```bash
-npx agentspend use https://openrouter.ai/api/v1/key \
+npx ferrite use https://openrouter.ai/api/v1/key \
   --method GET
 ```
 

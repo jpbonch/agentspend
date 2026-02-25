@@ -4,7 +4,7 @@ description: "Search community/forum posts by keyword and filters."
 domains:
   - "stableenrich.dev"
 source_url: "https://stableenrich.dev/api/reddit/search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/reddit-post-search.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/reddit-post-search.md"
 auth_type: "x402"
 icon_url: "https://www.reddit.com/favicon.ico"
 ---
@@ -34,7 +34,7 @@ Related StableEnrich endpoint:
 Example call (basic search):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/reddit/search \
+npx ferrite use https://stableenrich.dev/api/reddit/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"AI agents","sort":"top","timeframe":"week","maxResults":10}'
@@ -43,7 +43,7 @@ npx agentspend use https://stableenrich.dev/api/reddit/search \
 Example call (fresh posts):
 
 ```bash
-npx agentspend use https://stableenrich.dev/api/reddit/search \
+npx ferrite use https://stableenrich.dev/api/reddit/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"open source MCP server","sort":"new","timeframe":"day","maxResults":20}'

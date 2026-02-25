@@ -1,4 +1,4 @@
-import { AgentspendApiClient } from "../../lib/api.js";
+import { FerriteApiClient } from "../../lib/api.js";
 import {
   type AgentToolDefinition,
   resolveApiKeyForTool,
@@ -7,9 +7,9 @@ import {
   withToolErrorHandling,
 } from "../shared.js";
 
-export function createStatusTool(apiClient: AgentspendApiClient): AgentToolDefinition {
+export function createStatusTool(apiClient: FerriteApiClient): AgentToolDefinition {
   return {
-    name: "agentspend_status",
+    name: "ferrite_status",
     description: "Get weekly budget, current spend, remaining budget, and recent charges.",
     parameters: {
       type: "object",

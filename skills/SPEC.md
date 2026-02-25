@@ -11,7 +11,7 @@ description: "What this skill does"
 domains:
   - "example.com"
 source_url: "https://example.com/api/endpoint"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/your-skill.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/your-skill.md"
 auth_type: "none"
 execution_mode: "http"
 icon_url: "https://example.com/icon.png"
@@ -41,7 +41,7 @@ icon_url: "https://example.com/icon.png"
   - `cli`: local CLI-first workflow.
   - `hybrid_cli`: mixed workflow where CLI steps are local but payment/auth HTTP calls remain explicit.
 - Recommended `auth_type` values:
-  - `none`: no upstream auth injected by AgentSpend.
-  - `oauth`: AgentSpend-managed OAuth connection flow.
+  - `none`: no upstream auth injected by Ferrite.
+  - `oauth`: Ferrite-managed OAuth connection flow.
   - `api_key`: platform-managed domain API key (configured server-side, not in the skill file).
   - `x402`: micropayment-authenticated endpoint.

@@ -1,10 +1,10 @@
-import { ApiError, AgentspendApiClient } from "./api.js";
+import { ApiError, FerriteApiClient } from "./api.js";
 import { claimConfigureToken, getPendingConfigureStatus } from "./auth-flow.js";
 import { clearPendingConfigureToken, readCredentials, savePendingConfigureToken } from "./credentials.js";
 import type { ConfigureStatusResponse } from "../types.js";
 
 async function tryAuthenticatedConfigure(
-  apiClient: AgentspendApiClient,
+  apiClient: FerriteApiClient,
   apiKey: string,
 ): Promise<ConfigureStatusResponse | null> {
   try {
@@ -23,7 +23,7 @@ export interface ConfigureFlowResult {
   message: string;
 }
 
-export async function resolveConfigureStatus(apiClient: AgentspendApiClient): Promise<ConfigureFlowResult> {
+export async function resolveConfigureStatus(apiClient: FerriteApiClient): Promise<ConfigureFlowResult> {
   const credentials = await readCredentials();
 
   if (credentials) {
@@ -50,7 +50,7 @@ export async function resolveConfigureStatus(apiClient: AgentspendApiClient): Pr
         };
       }
 
-      throw new Error("API key was claimed, but configure session could not be created. Run agentspend configure again.");
+      throw new Error("API key was claimed, but configure session could not be created. Run ferrite configure again.");
     }
 
     await clearPendingConfigureToken();

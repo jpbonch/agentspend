@@ -4,20 +4,20 @@ description: "Connected Notion workspace APIs for search, pages, databases, and 
 domains:
   - "notion.com"
 source_url: "https://api.notion.com/v1/search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/notion-api.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/notion-api.md"
 auth_type: "oauth"
 icon_url: "https://www.notion.so/images/favicon.ico"
 ---
 ## Notion API (OAuth)
 
-`notion.com` (via AgentSpend OAuth + Nango)
+`notion.com` (via Ferrite OAuth + Nango)
 
 Description: Use your connected Notion workspace to search and manage pages/databases/blocks.
-Price: Provider/API dependent. AgentSpend call cost depends on endpoint x402 policy.
+Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
-- Connect Notion in `agentspend configure` first.
-- Do not send an `Authorization` header; AgentSpend + Nango handles OAuth tokens.
+- Connect Notion in `ferrite configure` first.
+- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
 
 Headers you should set:
 - `notion-version:2025-09-03` (or the version your workspace/integration is pinned to).
@@ -41,7 +41,7 @@ Common endpoints:
 Example call (search):
 
 ```bash
-npx agentspend use https://api.notion.com/v1/search \
+npx ferrite use https://api.notion.com/v1/search \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -52,7 +52,7 @@ npx agentspend use https://api.notion.com/v1/search \
 Example call (retrieve page):
 
 ```bash
-npx agentspend use https://api.notion.com/v1/pages/PAGE_ID \
+npx ferrite use https://api.notion.com/v1/pages/PAGE_ID \
   --method GET \
   --header "accept:application/json" \
   --header "notion-version:2025-09-03"
@@ -61,7 +61,7 @@ npx agentspend use https://api.notion.com/v1/pages/PAGE_ID \
 Example call (query a data source):
 
 ```bash
-npx agentspend use https://api.notion.com/v1/data_sources/DATA_SOURCE_ID/query \
+npx ferrite use https://api.notion.com/v1/data_sources/DATA_SOURCE_ID/query \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -72,23 +72,23 @@ npx agentspend use https://api.notion.com/v1/data_sources/DATA_SOURCE_ID/query \
 Example call (create page under a parent page):
 
 ```bash
-npx agentspend use https://api.notion.com/v1/pages \
+npx ferrite use https://api.notion.com/v1/pages \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
   --header "notion-version:2025-09-03" \
-  --body '{"parent":{"page_id":"PARENT_PAGE_ID"},"properties":{"title":{"title":[{"type":"text","text":{"content":"AgentSpend Note"}}]}}}'
+  --body '{"parent":{"page_id":"PARENT_PAGE_ID"},"properties":{"title":{"title":[{"type":"text","text":{"content":"Ferrite Note"}}]}}}'
 ```
 
 Example call (append a paragraph block):
 
 ```bash
-npx agentspend use https://api.notion.com/v1/blocks/PAGE_OR_BLOCK_ID/children \
+npx ferrite use https://api.notion.com/v1/blocks/PAGE_OR_BLOCK_ID/children \
   --method PATCH \
   --header "accept:application/json" \
   --header "content-type:application/json" \
   --header "notion-version:2025-09-03" \
-  --body '{"children":[{"object":"block","type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":"Hello from AgentSpend"}}]}}]}'
+  --body '{"children":[{"object":"block","type":"paragraph","paragraph":{"rich_text":[{"type":"text","text":{"content":"Hello from Ferrite"}}]}}]}'
 ```
 
 Official docs:

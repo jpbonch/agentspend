@@ -4,7 +4,7 @@ description: "Find, verify, and enrich professional email addresses."
 domains:
   - "hunter.io"
 source_url: "https://api.hunter.io/v2/domain-search"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/hunter-email-addresses.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/hunter-email-addresses.md"
 auth_type: "api_key"
 icon_url: "https://hunter.io/favicon.ico"
 ---
@@ -23,7 +23,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx agentspend use "https://api.hunter.io/v2/domain-search?domain=stripe.com&api_key=YOUR_HUNTER_KEY" \
+npx ferrite use "https://api.hunter.io/v2/domain-search?domain=stripe.com&api_key=YOUR_HUNTER_KEY" \
   --method GET
 ```
 

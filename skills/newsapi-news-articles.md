@@ -4,7 +4,7 @@ description: "Search top headlines and article feeds from global news sources."
 domains:
   - "newsapi.org"
 source_url: "https://newsapi.org/v2/top-headlines"
-skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/newsapi-news-articles.md"
+skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/newsapi-news-articles.md"
 auth_type: "api_key"
 icon_url: "https://newsapi.org/favicon.ico"
 ---
@@ -24,7 +24,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx agentspend use "https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=10" \
+npx ferrite use "https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=10" \
   --method GET
 ```
 

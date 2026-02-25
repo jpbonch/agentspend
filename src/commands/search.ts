@@ -1,7 +1,7 @@
-import { AgentspendApiClient } from "../lib/api.js";
+import { FerriteApiClient } from "../lib/api.js";
 import { resolveApiKeyWithAutoClaim } from "../lib/auth-flow.js";
 
-export async function runSearch(apiClient: AgentspendApiClient, query: string): Promise<void> {
+export async function runSearch(apiClient: FerriteApiClient, query: string): Promise<void> {
   const apiKey = await resolveApiKeyWithAutoClaim(apiClient);
   const response = await apiClient.search(apiKey, query);
 
