@@ -16,7 +16,7 @@ export default function register(api: OpenClawPluginApi): void {
   const apiClient = new AgentspendApiClient();
 
   api.on(
-    "before_prompt_build",
+    "session_start",
     () => {
       api.logger?.debug?.("[agentspend] injected routing directive");
       return { prependContext: buildAgentspendRoutingDirective() };
