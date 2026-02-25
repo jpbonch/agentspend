@@ -83,6 +83,39 @@
     },
     {
       "file": "x-twitter-social-user-search.md"
+    },
+    {
+      "file": "tavily-ai-optimized-search.md"
+    },
+    {
+      "file": "newsapi-news-articles.md"
+    },
+    {
+      "file": "alpha-vantage-stock-financial-data.md"
+    },
+    {
+      "file": "firecrawl-web-scraping.md"
+    },
+    {
+      "file": "scrapingbee-web-scraping-js-rendering.md"
+    },
+    {
+      "file": "screenshotone-url-screenshots.md"
+    },
+    {
+      "file": "stability-ai-image-generation.md"
+    },
+    {
+      "file": "deepgram-speech-to-text.md"
+    },
+    {
+      "file": "replicate-model-inference.md"
+    },
+    {
+      "file": "pdfco-pdf-manipulation.md"
+    },
+    {
+      "file": "hunter-email-addresses.md"
     }
   ]
 }

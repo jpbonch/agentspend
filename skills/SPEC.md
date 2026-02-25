@@ -34,3 +34,8 @@ icon_url: "https://example.com/icon.png"
 
 - Only the frontmatter is structured. The body of the skill file can use any Markdown format.
 - `manifest.json` is the source of truth for which `.md` files are included.
+- Recommended `auth_type` values:
+  - `none`: no upstream auth injected by AgentSpend.
+  - `oauth`: AgentSpend-managed OAuth connection flow.
+  - `api_key`: platform-managed domain API key (configured server-side, not in the skill file).
+  - `x402`: micropayment-authenticated endpoint.
