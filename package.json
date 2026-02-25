@@ -1,5 +1,5 @@
 {
-  "name": "ferrite",
+  "name": "@jpbonch/ferrite",
   "version": "0.3.2",
   "description": "Ferrite CLI for agent access to APIs",
   "files": ["dist", "SKILL.md", "openclaw.plugin.json"],
@@ -18,6 +18,9 @@
   },
   "openclaw": {
     "extensions": ["./dist/openclaw-plugin/index.js"]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.18.0",

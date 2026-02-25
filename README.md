@@ -30,7 +30,7 @@ ferrite status
 ## OpenClaw plugin (primary OpenClaw path)
 
 ```bash
-openclaw plugins install ferrite
+openclaw plugins install @jpbonch/ferrite
 openclaw plugins enable ferrite
 openclaw gateway restart
 ```
