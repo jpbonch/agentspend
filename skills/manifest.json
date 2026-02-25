@@ -116,6 +116,9 @@
     },
     {
       "file": "hunter-email-addresses.md"
+    },
+    {
+      "file": "openrouter-llm-api.md"
     }
   ]
 }
