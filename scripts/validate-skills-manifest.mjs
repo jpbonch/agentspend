@@ -7,6 +7,7 @@ const repoRoot = path.resolve(path.dirname(currentFile), "..");
 const skillsDir = path.join(repoRoot, "skills");
 const manifestPath = path.join(skillsDir, "manifest.json");
 const SKILL_URL_PREFIX = "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/";
+const ALLOWED_EXECUTION_MODES = new Set(["http", "cli", "hybrid_cli"]);
 
 function fail(message) {
   console.error(`[skills:validate] ${message}`);
@@ -192,6 +193,17 @@ for (const [index, item] of manifest.skills.entries()) {
 
   if (typeof frontmatter.source_url === "string" && frontmatter.source_url.trim() && !isHttpsUrl(frontmatter.source_url)) {
     fail(`${file}: source_url must be an https URL when provided`);
+    hasError = true;
+  }
+
+  if (
+    typeof frontmatter.execution_mode === "string" &&
+    frontmatter.execution_mode.trim() &&
+    !ALLOWED_EXECUTION_MODES.has(frontmatter.execution_mode.trim())
+  ) {
+    fail(
+      `${file}: execution_mode must be one of ${Array.from(ALLOWED_EXECUTION_MODES).join(", ")}`,
+    );
     hasError = true;
   }
 }

@@ -13,6 +13,7 @@ domains:
 source_url: "https://example.com/api/endpoint"
 skill_url: "https://raw.githubusercontent.com/jpbonch/agentspend/main/skills/your-skill.md"
 auth_type: "none"
+execution_mode: "http"
 icon_url: "https://example.com/icon.png"
 ---
 ```
@@ -29,11 +30,16 @@ icon_url: "https://example.com/icon.png"
 ## Optional fields
 
 - `source_url` (https URL)
+- `execution_mode` (string)
 
 ## Notes
 
 - Only the frontmatter is structured. The body of the skill file can use any Markdown format.
 - `manifest.json` is the source of truth for which `.md` files are included.
+- Recommended `execution_mode` values:
+  - `http`: HTTP/API-first workflow.
+  - `cli`: local CLI-first workflow.
+  - `hybrid_cli`: mixed workflow where CLI steps are local but payment/auth HTTP calls remain explicit.
 - Recommended `auth_type` values:
   - `none`: no upstream auth injected by AgentSpend.
   - `oauth`: AgentSpend-managed OAuth connection flow.
