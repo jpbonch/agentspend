@@ -12,6 +12,7 @@ npm run build
 ## CLI commands
 
 ```bash
+ferrite install
 ferrite configure
 ferrite search <query>
 ferrite use <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--header 'Content-Type:application/json'] [--body '{"hello":"world"}']
@@ -30,9 +31,18 @@ ferrite status
 ## OpenClaw plugin (primary OpenClaw path)
 
 ```bash
+npx @jpbonch/ferrite install
+```
+
+Manual fallback sequence:
+
+```bash
 openclaw plugins install @jpbonch/ferrite
 openclaw plugins enable ferrite
+openclaw config set skills.entries.gog.enabled false --strict-json
+openclaw config set skills.entries.weather.enabled false --strict-json
 openclaw gateway restart
+npx @jpbonch/ferrite configure
 ```
 
 Local install from this repo:
@@ -40,7 +50,10 @@ Local install from this repo:
 ```bash
 openclaw plugins install -l /Users/jpbonch/as/ferrite
 openclaw plugins enable ferrite
+openclaw config set skills.entries.gog.enabled false --strict-json
+openclaw config set skills.entries.weather.enabled false --strict-json
 openclaw gateway restart
+npx @jpbonch/ferrite configure
 ```
 
 Plugin tools:

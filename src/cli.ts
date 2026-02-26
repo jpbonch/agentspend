@@ -1,6 +1,7 @@
 import { Command } from "commander";
 import { createRequire } from "node:module";
 import { runConfigure } from "./commands/configure.js";
+import { runInstall } from "./commands/install.js";
 import { runUse } from "./commands/use.js";
 import { runSearch } from "./commands/search.js";
 import { runStatus } from "./commands/status.js";
@@ -44,6 +45,10 @@ export async function runCli(options?: { baseUrl?: string; programName?: string 
 
   program.command("configure").description("Run onboarding/configuration flow").action(async () => {
     await runConfigure(apiClient);
+  });
+
+  program.command("install").description("Install and configure Ferrite for OpenClaw").action(async () => {
+    await runInstall(apiClient);
   });
 
   await program.parseAsync(process.argv);
