@@ -1,6 +1,6 @@
 {
   "name": "@jpbonch/ferrite",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Ferrite CLI for agent access to APIs",
   "files": [
     "dist",
