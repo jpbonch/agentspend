@@ -10,14 +10,14 @@ icon_url: "https://www.notion.so/images/favicon.ico"
 ---
 ## Notion API (OAuth)
 
-`notion.com` (via Ferrite OAuth + Nango)
+`notion.com` (via Ferrite OAuth)
 
 Description: Use your connected Notion workspace to search and manage pages/databases/blocks.
 Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
 - Connect Notion in `ferrite configure` first.
-- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
+- Do not send an `Authorization` header; Ferrite handles OAuth tokens.
 
 Headers you should set:
 - `notion-version:2025-09-03` (or the version your workspace/integration is pinned to).

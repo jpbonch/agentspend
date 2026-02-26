@@ -10,14 +10,14 @@ icon_url: "https://github.com/favicon.ico"
 ---
 ## GitHub API (OAuth)
 
-`github.com` (via Ferrite OAuth + Nango)
+`github.com` (via Ferrite OAuth)
 
 Description: Use your connected GitHub account to call GitHub REST APIs (repos, issues, pulls, users, etc).
 Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
 - Connect GitHub in `ferrite configure` first.
-- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
+- Do not send an `Authorization` header; Ferrite handles OAuth tokens.
 
 Headers you should set:
 - `accept:application/vnd.github+json` for GitHub REST media type.

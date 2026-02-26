@@ -10,14 +10,14 @@ icon_url: "https://www.atlassian.com/favicon.ico"
 ---
 ## Jira API (OAuth)
 
-`atlassian.net` (via Ferrite OAuth + Nango)
+`atlassian.net` (via Ferrite OAuth)
 
 Description: Use your connected Jira Cloud account to call Jira REST APIs for projects, issues, and workflows.
 Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
 - Connect Jira in `ferrite configure` first.
-- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
+- Do not send an `Authorization` header; Ferrite handles OAuth tokens.
 - Replace `YOUR-SITE` with your Jira Cloud subdomain.
 
 Headers you should set:

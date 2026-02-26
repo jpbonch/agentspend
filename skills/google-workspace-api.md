@@ -10,14 +10,14 @@ icon_url: "https://www.google.com/favicon.ico"
 ---
 ## Google Workspace API (OAuth)
 
-`googleapis.com` (via Ferrite OAuth + Nango)
+`googleapis.com` (via Ferrite OAuth)
 
 Description: Use your connected Google account to call Google Workspace APIs (for example Gmail, Drive, Calendar).
 Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
 - Connect Google Workspace in `ferrite configure` first.
-- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
+- Do not send an `Authorization` header; Ferrite handles OAuth tokens.
 
 Headers you should set:
 - `accept:application/json` for JSON responses.

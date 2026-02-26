@@ -10,14 +10,14 @@ icon_url: "https://a.slack-edge.com/80588/marketing/img/meta/favicon-32.png"
 ---
 ## Slack API (OAuth)
 
-`slack.com` (via Ferrite OAuth + Nango)
+`slack.com` (via Ferrite OAuth)
 
 Description: Use your connected Slack workspace APIs for channels, conversations, users, and messages.
 Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
 OAuth behavior:
 - Connect Slack in `ferrite configure` first.
-- Do not send an `Authorization` header; Ferrite + Nango handles OAuth tokens.
+- Do not send an `Authorization` header; Ferrite handles OAuth tokens.
 
 Headers you should set:
 - `accept:application/json` for JSON responses.
