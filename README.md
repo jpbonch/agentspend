@@ -1,6 +1,6 @@
 # ferrite
 
-Ferrite gives agents one gateway for discovering and calling external APIs without hardcoding provider-specific auth and billing logic. It packages the same flow as a CLI, an MCP server, and an OpenClaw plugin so an agent can find the right service, call it, and handle setup/payment requirements consistently.
+Ferrite gives agents one gateway for discovering and calling external APIs without hardcoding provider-specific auth and billing logic. It packages the same flow as a CLI and an OpenClaw plugin so an agent can find the right service, call it, and handle setup/payment requirements consistently.
 In practice, this enables an agent to add capabilities like web/news search, scraping, maps/place lookup, CRM/workspace integrations, enrichment, and media generation through one consistent toolchain.
 
 Website: [useferrite.com](https://useferrite.com)
@@ -30,7 +30,7 @@ ferrite use <url> [--method GET|POST|PUT|PATCH|DELETE|...] [--header 'Content-Ty
 ferrite status
 ```
 
-`use` accepts direct HTTPS URLs only.
+`use` accepts direct HTTPS URLs only, and only for whitelisted service domains (the APIs represented in `skills/`). Calls to non-whitelisted domains are rejected.
 
 ### `ferrite install`
 Installs and enables the Ferrite OpenClaw plugin, verifies required tools are available, runs initial configure, and schedules an OpenClaw gateway restart. An agent should call this for first-time OpenClaw setup when Ferrite is not yet installed and ready.
@@ -42,7 +42,8 @@ Starts or resumes the Ferrite onboarding flow and returns the configure URL for 
 Searches Ferrite’s service catalog and returns matched services with `domain` and `skill_url` so the agent can choose the right integration. An agent should call this first for any task that may require an external API or paid capability.
 
 ### `ferrite use <url> ...`
-Sends an HTTP request through Ferrite using the selected service URL, method, headers, and body, then returns the API result plus payment/budget context when relevant. An agent should call this after selecting a service and preparing a concrete request from its skill instructions.
+Sends an HTTP request through Ferrite using the selected service URL, method, headers, and body, then returns the API result plus payment/budget context when relevant. This only works for whitelisted APIs, which are the services documented in `skills/`; requests outside that allowlist are blocked.
+An agent should call this after selecting a service and preparing a concrete request from its skill instructions.
 
 ### `ferrite status`
 Shows weekly budget, spent amount, remaining budget, and recent charges for the current Ferrite account. An agent should call this when the user asks about spend limits, after billing-related failures, or before potentially expensive runs.
@@ -71,44 +72,11 @@ openclaw gateway restart
 npx @jpbonch/ferrite configure
 ```
 
-Local install from this repo:
-
-```bash
-openclaw plugins install -l /Users/jpbonch/as/ferrite
-openclaw plugins enable ferrite
-openclaw config set skills.entries.gog.enabled false --strict-json
-openclaw config set skills.entries.weather.enabled false --strict-json
-openclaw gateway restart
-npx @jpbonch/ferrite configure
-```
-
 Plugin tools:
 - `ferrite_configure`: Returns a configure URL and setup state. Agents should call this when setup/auth/billing is required before continuing.
 - `ferrite_search`: Searches Ferrite services by keyword. Agents should call this first to discover the best service for a requested capability.
 - `ferrite_use`: Executes an HTTP call through Ferrite and returns result + action-required signals when applicable. Agents should call this after selecting a service and constructing the exact request payload.
 - `ferrite_status`: Returns budget/spend/remaining balance and recent charges. Agents should call this for budget checks and billing troubleshooting.
-
-## OpenClaw routing hook
-
-When installed as an OpenClaw plugin, Ferrite injects routing guidance each turn so the agent prefers:
-1. `ferrite_search`
-2. Read the selected service `skill_url`
-3. `ferrite_use`
-4. `ferrite_configure` if setup is needed
-
-## MCP server (secondary)
-
-Run local stdio MCP server:
-
-```bash
-ferrite-mcp
-```
-
-MCP tools:
-- `ferrite_configure`: Starts/resumes setup and returns a configure URL. Call when API key/auth/payment setup is missing.
-- `ferrite_search`: Finds relevant services and skill docs for the user’s intent. Call before choosing an endpoint.
-- `ferrite_use`: Proxies the selected API request through Ferrite policy and billing checks. Call once URL/method/headers/body are known.
-- `ferrite_status`: Reports weekly budget and recent charges. Call for usage visibility and spend-limit debugging.
 
 ## Credentials
 
@@ -123,12 +91,4 @@ Local credentials are in `~/.ferrite/credentials.json`.
 
 ```bash
 npm run skills:validate
-```
-
-## Local backend dev CLI
-
-Use the local entrypoint (fixed to `http://127.0.0.1:8787`) when testing against local backend:
-
-```bash
-bun run dev:local -- configure
 ```
