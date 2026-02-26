@@ -1,4 +1,4 @@
-import { spawnSync, type SpawnSyncReturns } from "node:child_process";
+import { spawn, spawnSync, type SpawnSyncReturns } from "node:child_process";
 import { runConfigure } from "./configure.js";
 import { FerriteApiClient } from "../lib/api.js";
 
@@ -173,6 +173,23 @@ function firstLine(message: string): string {
   return line || "Unknown error";
 }
 
+function scheduleGatewayRestart(): void {
+  const deferredRestartScript = [
+    "setTimeout(() => {",
+    "  const cp = require('node:child_process');",
+    "  const child = cp.spawn('openclaw', ['gateway', 'restart'], { detached: true, stdio: 'ignore' });",
+    "  child.unref();",
+    "}, 8000);",
+  ].join("\n");
+
+  const child = spawn(process.execPath, ["-e", deferredRestartScript], {
+    detached: true,
+    stdio: "ignore",
+  });
+
+  child.unref();
+}
+
 function verifyPluginTools(): void {
   const output = runCommand("openclaw", ["plugins", "info", "ferrite", "--json"]);
   const combined = `${output.stdout}\n${output.stderr}`;
@@ -267,12 +284,6 @@ export async function runInstall(apiClient: FerriteApiClient): Promise<void> {
       },
     },
     {
-      label: "Restart OpenClaw gateway",
-      run: async () => {
-        runCommand("openclaw", ["gateway", "restart"]);
-      },
-    },
-    {
       label: "Verify Ferrite plugin tools",
       run: async () => {
         verifyPluginTools();
@@ -282,6 +293,12 @@ export async function runInstall(apiClient: FerriteApiClient): Promise<void> {
       label: "Run Ferrite configure flow",
       run: async () => {
         await runConfigure(apiClient);
+      },
+    },
+    {
+      label: "Scheduling gateway restart",
+      run: async () => {
+        scheduleGatewayRestart();
       },
     },
   ];
@@ -311,4 +328,5 @@ export async function runInstall(apiClient: FerriteApiClient): Promise<void> {
   }
 
   console.log("Ferrite install completed successfully.");
+  console.log("Gateway will restart soon.");
 }
