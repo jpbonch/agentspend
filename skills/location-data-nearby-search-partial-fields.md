@@ -35,7 +35,7 @@ Related StableEnrich endpoints:
 Example call (basic nearby):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"locationRestriction":{"circle":{"center":{"latitude":37.7749,"longitude":-122.4194},"radius":1000}},"maxResultCount":5}'
@@ -44,7 +44,7 @@ npx ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
 Example call (larger radius + include photos):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"locationRestriction":{"circle":{"center":{"latitude":34.0522,"longitude":-118.2437},"radius":3000}},"excludeFields":[],"maxResultCount":10}'
@@ -53,7 +53,7 @@ npx ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
 Example call (pagination):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/nearby-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"locationRestriction":{"circle":{"center":{"latitude":40.7128,"longitude":-74.0060},"radius":1500}},"pageToken":"NEXT_PAGE_TOKEN"}'

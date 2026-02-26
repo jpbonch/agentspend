@@ -25,7 +25,7 @@ Common functions:
 Example:
 
 ```bash
-npx ferrite use "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=YOUR_ALPHA_VANTAGE_KEY" \
+npx @jpbonch/ferrite use "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=MSFT&apikey=YOUR_ALPHA_VANTAGE_KEY" \
   --method GET
 ```
 

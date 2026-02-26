@@ -33,7 +33,7 @@ Related StableEnrich Exa endpoints:
 Example call (single URL):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/exa/contents \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/contents \
   --method POST \
   --header "content-type:application/json" \
   --body '{"urls":["https://example.com"]}'
@@ -42,7 +42,7 @@ npx ferrite use https://stableenrich.dev/api/exa/contents \
 Example call (batch of URLs):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/exa/contents \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/contents \
   --method POST \
   --header "content-type:application/json" \
   --body '{"urls":["https://openai.com/research","https://docs.github.com/en/rest"]}'

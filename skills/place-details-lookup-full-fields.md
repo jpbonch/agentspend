@@ -28,21 +28,21 @@ Related StableEnrich endpoints:
 Example call (full details by placeId):
 
 ```bash
-npx ferrite use "https://stableenrich.dev/api/google-maps/place-details/full?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
+npx @jpbonch/ferrite use "https://stableenrich.dev/api/google-maps/place-details/full?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
   --method GET
 ```
 
 Example call (partial details variant):
 
 ```bash
-npx ferrite use "https://stableenrich.dev/api/google-maps/place-details/partial?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
+npx @jpbonch/ferrite use "https://stableenrich.dev/api/google-maps/place-details/partial?placeId=ChIJN1t_tDeuEmsRUsoyG83frY4" \
   --method GET
 ```
 
 Example call (search then detail lookup):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"best ramen in Austin","maxResultCount":3}'

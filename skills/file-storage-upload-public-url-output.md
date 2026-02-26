@@ -18,7 +18,7 @@ Price: $0.005 per upload (published).
 Example call (upload from URL):
 
 ```bash
-npx ferrite use https://pylon-file-storage-api.fly.dev/upload \
+npx @jpbonch/ferrite use https://pylon-file-storage-api.fly.dev/upload \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://example.com/report.pdf","filename":"report.pdf"}'

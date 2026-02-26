@@ -30,7 +30,7 @@ Related StableEnrich Exa endpoints:
 Example call (semantic search):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/exa/search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"best practices for building AI agents","numResults":10}'
@@ -39,7 +39,7 @@ npx ferrite use https://stableenrich.dev/api/exa/search \
 Example call (find similar pages):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/exa/find-similar \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/find-similar \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://openai.com","numResults":5}'
@@ -48,7 +48,7 @@ npx ferrite use https://stableenrich.dev/api/exa/find-similar \
 Example call (answer mode):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/exa/answer \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/answer \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"What is the capital of France?"}'

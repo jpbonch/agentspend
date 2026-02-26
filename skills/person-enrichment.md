@@ -30,7 +30,7 @@ Related StableEnrich endpoints:
 Example call (by person ID):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/apollo/people-enrich \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/apollo/people-enrich \
   --method POST \
   --header "content-type:application/json" \
   --body '{"id":"5c4efb6fa3ae613258c36ac7"}'
@@ -39,7 +39,7 @@ npx ferrite use https://stableenrich.dev/api/apollo/people-enrich \
 Example call (by email):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/apollo/people-enrich \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/apollo/people-enrich \
   --method POST \
   --header "content-type:application/json" \
   --body '{"email":"tim@apple.com"}'
@@ -48,7 +48,7 @@ npx ferrite use https://stableenrich.dev/api/apollo/people-enrich \
 Example call (bulk enrich up to 10):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/apollo/people-enrich/bulk \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/apollo/people-enrich/bulk \
   --method POST \
   --header "content-type:application/json" \
   --body '{"details":[{"email":"tim@apple.com"},{"email":"satya@microsoft.com"}]}'

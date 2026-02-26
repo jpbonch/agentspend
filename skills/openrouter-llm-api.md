@@ -27,7 +27,7 @@ Common endpoints:
 Example call (chat completion):
 
 ```bash
-npx ferrite use https://openrouter.ai/api/v1/chat/completions \
+npx @jpbonch/ferrite use https://openrouter.ai/api/v1/chat/completions \
   --method POST \
   --header "content-type:application/json" \
   --header "http-referer:https://example.com" \
@@ -38,7 +38,7 @@ npx ferrite use https://openrouter.ai/api/v1/chat/completions \
 Example call (responses API):
 
 ```bash
-npx ferrite use https://openrouter.ai/api/v1/responses \
+npx @jpbonch/ferrite use https://openrouter.ai/api/v1/responses \
   --method POST \
   --header "content-type:application/json" \
   --body '{"model":"openai/gpt-4o-mini","input":"Write a 4-line poem about distributed systems.","stream":false}'
@@ -47,14 +47,14 @@ npx ferrite use https://openrouter.ai/api/v1/responses \
 Example call (list models):
 
 ```bash
-npx ferrite use https://openrouter.ai/api/v1/models \
+npx @jpbonch/ferrite use https://openrouter.ai/api/v1/models \
   --method GET
 ```
 
 Example call (inspect your key metadata):
 
 ```bash
-npx ferrite use https://openrouter.ai/api/v1/key \
+npx @jpbonch/ferrite use https://openrouter.ai/api/v1/key \
   --method GET
 ```
 

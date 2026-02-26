@@ -22,14 +22,14 @@ If MCP/plugin tools are available, prefer:
 When running via the OpenClaw plugin, Ferrite injects turn-level routing guidance so the agent prefers Ferrite discovery/use for external API tasks.
 
 # Playbook (Default)
-1. `npx ferrite search "<user intent>"`
+1. `npx @jpbonch/ferrite search "<user intent>"`
 2. Pick the best matching service and open its `skill_url`.
-3. Use the exact URL/method/headers/body from that skill file with `npx ferrite use <url>`.
-4. If auth/setup is missing, run `npx ferrite configure` and continue after completion.
+3. Use the exact URL/method/headers/body from that skill file with `npx @jpbonch/ferrite use <url>`.
+4. If auth/setup is missing, run `npx @jpbonch/ferrite configure` and continue after completion.
 
 # Setup
 ```bash
-npx ferrite configure
+npx @jpbonch/ferrite configure
 ```
 
 This opens a URL for gateway configuration (billing + connections) and stores credentials in `~/.ferrite/credentials.json`.
@@ -39,7 +39,7 @@ It does not require adding a card to start using services.
 
 ## Use
 ```bash
-npx ferrite use <url>
+npx @jpbonch/ferrite use <url>
 ```
 
 `<url>` must be a direct HTTPS URL.
@@ -51,7 +51,7 @@ Options:
 
 Examples:
 ```bash
-npx ferrite use https://stableenrich.dev/api/exa/search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"latest robotics news","numResults":5}'
@@ -59,21 +59,21 @@ npx ferrite use https://stableenrich.dev/api/exa/search \
 
 ## Search
 ```bash
-npx ferrite search <keywords>
+npx @jpbonch/ferrite search <keywords>
 ```
 
 Returns up to 5 matching services with domain and skill link.
 
 ## Status
 ```bash
-npx ferrite status
+npx @jpbonch/ferrite status
 ```
 
 Shows weekly budget, spend, remaining budget, and recent charges.
 
 ## Configure
 ```bash
-npx ferrite configure
+npx @jpbonch/ferrite configure
 ```
 
 Opens configuration for billing, budget, and connected auth providers.

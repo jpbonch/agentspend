@@ -31,7 +31,7 @@ Related StableEnrich endpoint:
 Example call (fetch full post + comments):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/reddit/post-comments \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/reddit/post-comments \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://www.reddit.com/r/AskReddit/comments/abc123/example_post"}'
@@ -40,7 +40,7 @@ npx ferrite use https://stableenrich.dev/api/reddit/post-comments \
 Example call (URL from prior search result):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/reddit/post-comments \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/reddit/post-comments \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://www.reddit.com/r/MachineLearning/comments/xyz999/example_discussion"}'

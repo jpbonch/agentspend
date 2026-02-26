@@ -44,7 +44,7 @@ Common endpoints:
 Example call (auth test):
 
 ```bash
-npx ferrite use https://slack.com/api/auth.test \
+npx @jpbonch/ferrite use https://slack.com/api/auth.test \
   --method POST \
   --header "content-type:application/json" \
   --header "accept:application/json"
@@ -53,7 +53,7 @@ npx ferrite use https://slack.com/api/auth.test \
 Example call (list channels):
 
 ```bash
-npx ferrite use https://slack.com/api/conversations.list \
+npx @jpbonch/ferrite use https://slack.com/api/conversations.list \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -63,7 +63,7 @@ npx ferrite use https://slack.com/api/conversations.list \
 Example call (channel history):
 
 ```bash
-npx ferrite use https://slack.com/api/conversations.history \
+npx @jpbonch/ferrite use https://slack.com/api/conversations.history \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -73,7 +73,7 @@ npx ferrite use https://slack.com/api/conversations.history \
 Example call (post message):
 
 ```bash
-npx ferrite use https://slack.com/api/chat.postMessage \
+npx @jpbonch/ferrite use https://slack.com/api/chat.postMessage \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -83,7 +83,7 @@ npx ferrite use https://slack.com/api/chat.postMessage \
 Example call (reply in thread):
 
 ```bash
-npx ferrite use https://slack.com/api/chat.postMessage \
+npx @jpbonch/ferrite use https://slack.com/api/chat.postMessage \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -93,7 +93,7 @@ npx ferrite use https://slack.com/api/chat.postMessage \
 Example call (lookup a user):
 
 ```bash
-npx ferrite use https://slack.com/api/users.info \
+npx @jpbonch/ferrite use https://slack.com/api/users.info \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \

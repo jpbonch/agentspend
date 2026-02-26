@@ -67,7 +67,7 @@ Recommended command flow:
 Credit top-up via Ferrite (HTTP x402 path):
 
 ```bash
-npx ferrite use https://api.agentscale.co/add-credits \
+npx @jpbonch/ferrite use https://api.agentscale.co/add-credits \
   --method POST \
   --header "x-api-key:<YOUR_AGENTSCALE_API_KEY>" \
   --header "content-type:application/json" \

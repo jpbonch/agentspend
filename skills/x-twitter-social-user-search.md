@@ -29,7 +29,7 @@ Related StableEnrich Grok endpoints:
 Example call (user search):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/grok/user-search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"AI researcher","maxResults":5}'
@@ -38,7 +38,7 @@ npx ferrite use https://stableenrich.dev/api/grok/user-search \
 Example call (broader query):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/grok/user-search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"fintech founder","maxResults":20}'

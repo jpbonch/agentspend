@@ -23,7 +23,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx ferrite use https://api.replicate.com/v1/models/replicate/hello-world/predictions \
+npx @jpbonch/ferrite use https://api.replicate.com/v1/models/replicate/hello-world/predictions \
   --method POST \
   --header "content-type:application/json" \
   --body '{"input":{"text":"hello from ferrite"}}'

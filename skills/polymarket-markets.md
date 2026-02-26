@@ -18,6 +18,6 @@ Price: Usually free endpoint behavior; no x402 payment required for most calls.
 Example call:
 
 ```bash
-npx ferrite use "https://gamma-api.polymarket.com/markets?limit=10" \
+npx @jpbonch/ferrite use "https://gamma-api.polymarket.com/markets?limit=10" \
   --method GET
 ```

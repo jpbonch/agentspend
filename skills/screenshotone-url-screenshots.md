@@ -19,7 +19,7 @@ Auth:
 Example:
 
 ```bash
-npx ferrite use "https://api.screenshotone.com/take?url=https://example.com&access_key=YOUR_SCREENSHOTONE_KEY&full_page=true" \
+npx @jpbonch/ferrite use "https://api.screenshotone.com/take?url=https://example.com&access_key=YOUR_SCREENSHOTONE_KEY&full_page=true" \
   --method GET
 ```
 

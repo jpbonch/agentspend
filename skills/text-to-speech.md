@@ -18,7 +18,7 @@ Price: $0.02 per request (published by x402engine docs).
 Example call:
 
 ```bash
-npx ferrite use https://x402-gateway-production.up.railway.app/api/tts/elevenlabs \
+npx @jpbonch/ferrite use https://x402-gateway-production.up.railway.app/api/tts/elevenlabs \
   --method POST \
   --header "content-type:application/json" \
   --body '{"text":"Hello from Ferrite","voice_id":"21m00Tcm4TlvDq8ikWAM","format":"mp3_44100_128"}' 

@@ -34,7 +34,7 @@ Related StableEnrich endpoints:
 Example call (basic):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"coffee shops in San Francisco","maxResultCount":5}'
@@ -43,7 +43,7 @@ npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
 Example call (with geographic restriction):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"coworking space","locationRestriction":{"circle":{"center":{"latitude":37.7749,"longitude":-122.4194},"radius":2000}},"maxResultCount":10}'
@@ -52,7 +52,7 @@ npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
 Example call (pagination):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/google-maps/text-search/partial \
   --method POST \
   --header "content-type:application/json" \
   --body '{"textQuery":"bookstores in Seattle","pageToken":"NEXT_PAGE_TOKEN"}'

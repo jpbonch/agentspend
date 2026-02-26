@@ -32,7 +32,7 @@ Related StableEnrich endpoints:
 Example call (profile scrape):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/clado/linkedin-scrape \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/clado/linkedin-scrape \
   --method POST \
   --header "content-type:application/json" \
   --body '{"linkedin_url":"https://www.linkedin.com/in/satyanadella"}'
@@ -41,7 +41,7 @@ npx ferrite use https://stableenrich.dev/api/clado/linkedin-scrape \
 Example call (contact enrich fallback):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/clado/contacts-enrich \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/clado/contacts-enrich \
   --method POST \
   --header "content-type:application/json" \
   --body '{"linkedin_url":"https://www.linkedin.com/in/satyanadella"}'

@@ -35,7 +35,7 @@ Related x402engine endpoints:
 Example call (quality video):
 
 ```bash
-npx ferrite use https://x402-gateway-production.up.railway.app/api/video/quality \
+npx @jpbonch/ferrite use https://x402-gateway-production.up.railway.app/api/video/quality \
   --method POST \
   --header "content-type:application/json" \
   --body '{"prompt":"cinematic drone shot over neon city at night","duration":"5","aspect_ratio":"16:9"}'
@@ -44,7 +44,7 @@ npx ferrite use https://x402-gateway-production.up.railway.app/api/video/quality
 Example call (quality video with negative prompt):
 
 ```bash
-npx ferrite use https://x402-gateway-production.up.railway.app/api/video/quality \
+npx @jpbonch/ferrite use https://x402-gateway-production.up.railway.app/api/video/quality \
   --method POST \
   --header "content-type:application/json" \
   --body '{"prompt":"product reveal on rotating pedestal, studio lighting","duration":"10","aspect_ratio":"1:1","negative_prompt":"blur, low quality, distortion"}'
@@ -53,7 +53,7 @@ npx ferrite use https://x402-gateway-production.up.railway.app/api/video/quality
 Example call (image-to-video animate):
 
 ```bash
-npx ferrite use https://x402-gateway-production.up.railway.app/api/video/animate \
+npx @jpbonch/ferrite use https://x402-gateway-production.up.railway.app/api/video/animate \
   --method POST \
   --header "content-type:application/json" \
   --body '{"prompt":"the subject smiles and turns toward camera","image_url":"https://images.unsplash.com/photo-1529778873920-4da4926a72c2?w=512","duration":"5","aspect_ratio":"16:9"}'

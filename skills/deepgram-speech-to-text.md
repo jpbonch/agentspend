@@ -18,7 +18,7 @@ Auth:
 Example (URL-based transcription):
 
 ```bash
-npx ferrite use "https://api.deepgram.com/v1/listen?model=nova-3&smart_format=true" \
+npx @jpbonch/ferrite use "https://api.deepgram.com/v1/listen?model=nova-3&smart_format=true" \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://dpgr.am/spacewalk.wav"}'

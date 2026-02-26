@@ -34,7 +34,7 @@ Related StableEnrich endpoint:
 Example call (basic search):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/reddit/search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/reddit/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"AI agents","sort":"top","timeframe":"week","maxResults":10}'
@@ -43,7 +43,7 @@ npx ferrite use https://stableenrich.dev/api/reddit/search \
 Example call (fresh posts):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/reddit/search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/reddit/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"open source MCP server","sort":"new","timeframe":"day","maxResults":20}'

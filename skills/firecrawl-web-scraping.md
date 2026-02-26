@@ -24,7 +24,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx ferrite use https://api.firecrawl.dev/v2/scrape \
+npx @jpbonch/ferrite use https://api.firecrawl.dev/v2/scrape \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://example.com","formats":["markdown"]}'

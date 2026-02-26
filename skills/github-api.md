@@ -44,7 +44,7 @@ Common endpoints:
 Example call (authenticated user):
 
 ```bash
-npx ferrite use https://api.github.com/user \
+npx @jpbonch/ferrite use https://api.github.com/user \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -53,7 +53,7 @@ npx ferrite use https://api.github.com/user \
 Example call (my repos):
 
 ```bash
-npx ferrite use https://api.github.com/user/repos \
+npx @jpbonch/ferrite use https://api.github.com/user/repos \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -62,7 +62,7 @@ npx ferrite use https://api.github.com/user/repos \
 Example call (list repo pull requests):
 
 ```bash
-npx ferrite use https://api.github.com/repos/OWNER/REPO/pulls?state=open&per_page=20 \
+npx @jpbonch/ferrite use https://api.github.com/repos/OWNER/REPO/pulls?state=open&per_page=20 \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -71,7 +71,7 @@ npx ferrite use https://api.github.com/repos/OWNER/REPO/pulls?state=open&per_pag
 Example call (list workflow runs):
 
 ```bash
-npx ferrite use https://api.github.com/repos/OWNER/REPO/actions/runs?per_page=20 \
+npx @jpbonch/ferrite use https://api.github.com/repos/OWNER/REPO/actions/runs?per_page=20 \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -80,7 +80,7 @@ npx ferrite use https://api.github.com/repos/OWNER/REPO/actions/runs?per_page=20
 Example call (create issue):
 
 ```bash
-npx ferrite use https://api.github.com/repos/OWNER/REPO/issues \
+npx @jpbonch/ferrite use https://api.github.com/repos/OWNER/REPO/issues \
   --method POST \
   --header "accept:application/vnd.github+json" \
   --header "content-type:application/json" \
@@ -91,7 +91,7 @@ npx ferrite use https://api.github.com/repos/OWNER/REPO/issues \
 Example call (create pull request):
 
 ```bash
-npx ferrite use https://api.github.com/repos/OWNER/REPO/pulls \
+npx @jpbonch/ferrite use https://api.github.com/repos/OWNER/REPO/pulls \
   --method POST \
   --header "accept:application/vnd.github+json" \
   --header "content-type:application/json" \
@@ -102,7 +102,7 @@ npx ferrite use https://api.github.com/repos/OWNER/REPO/pulls \
 Example call (read file content):
 
 ```bash
-npx ferrite use https://api.github.com/repos/OWNER/REPO/contents/README.md \
+npx @jpbonch/ferrite use https://api.github.com/repos/OWNER/REPO/contents/README.md \
   --method GET \
   --header "accept:application/vnd.github+json" \
   --header "x-github-api-version:2022-11-28"
@@ -111,7 +111,7 @@ npx ferrite use https://api.github.com/repos/OWNER/REPO/contents/README.md \
 Example call (create/update file content):
 
 ```bash
-npx ferrite use https://api.github.com/repos/OWNER/REPO/contents/notes/hello.txt \
+npx @jpbonch/ferrite use https://api.github.com/repos/OWNER/REPO/contents/notes/hello.txt \
   --method PUT \
   --header "accept:application/vnd.github+json" \
   --header "content-type:application/json" \

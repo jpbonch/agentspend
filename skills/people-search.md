@@ -39,7 +39,7 @@ Related StableEnrich endpoints:
 Example call (keyword + location):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/apollo/people-search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/apollo/people-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q_keywords":"software engineer","person_locations":["San Francisco"],"per_page":5}'
@@ -48,7 +48,7 @@ npx ferrite use https://stableenrich.dev/api/apollo/people-search \
 Example call (paginated):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/apollo/people-search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/apollo/people-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q_keywords":"product manager","person_locations":["New York"],"per_page":25,"page":2}'
@@ -57,7 +57,7 @@ npx ferrite use https://stableenrich.dev/api/apollo/people-search \
 Example call (find org IDs first):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/apollo/org-search \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/apollo/org-search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q_keywords":"stripe","organization_locations":["United States"],"per_page":5}'

@@ -18,7 +18,7 @@ Price: $0.02 per second
 Example call:
 
 ```bash
-npx ferrite use https://x402factory.ai/base/music \
+npx @jpbonch/ferrite use https://x402factory.ai/base/music \
   --method POST \
   --header "content-type:application/json" \
   --body '{"prompt":"ambient synthwave for coding focus"}' 

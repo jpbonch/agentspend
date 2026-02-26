@@ -23,7 +23,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx ferrite use "https://api.hunter.io/v2/domain-search?domain=stripe.com&api_key=YOUR_HUNTER_KEY" \
+npx @jpbonch/ferrite use "https://api.hunter.io/v2/domain-search?domain=stripe.com&api_key=YOUR_HUNTER_KEY" \
   --method GET
 ```
 

@@ -18,6 +18,6 @@ Price: Usually free endpoint behavior; no x402 payment required for most calls.
 Example call:
 
 ```bash
-npx ferrite use "https://wttr.in/San%20Francisco?format=j1" \
+npx @jpbonch/ferrite use "https://wttr.in/San%20Francisco?format=j1" \
   --method GET
 ```

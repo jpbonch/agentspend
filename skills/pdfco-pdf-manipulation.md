@@ -18,7 +18,7 @@ Auth:
 Example:
 
 ```bash
-npx ferrite use https://api.pdf.co/v1/pdf/convert/to/csv \
+npx @jpbonch/ferrite use https://api.pdf.co/v1/pdf/convert/to/csv \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://pdfco-test-files.s3.us-west-2.amazonaws.com/pdf-to-csv/sample.pdf","inline":true}'

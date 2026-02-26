@@ -24,7 +24,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx ferrite use https://api.tavily.com/search \
+npx @jpbonch/ferrite use https://api.tavily.com/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"latest SEC filings for NVIDIA","search_depth":"basic","max_results":5}'

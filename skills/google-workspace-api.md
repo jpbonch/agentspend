@@ -43,7 +43,7 @@ Common endpoints:
 Example call (Gmail messages list):
 
 ```bash
-npx ferrite use "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=newer_than:7d" \
+npx @jpbonch/ferrite use "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResults=25&q=newer_than:7d" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -51,7 +51,7 @@ npx ferrite use "https://gmail.googleapis.com/gmail/v1/users/me/messages?maxResu
 Example call (Gmail send):
 
 ```bash
-npx ferrite use https://gmail.googleapis.com/gmail/v1/users/me/messages/send \
+npx @jpbonch/ferrite use https://gmail.googleapis.com/gmail/v1/users/me/messages/send \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -61,7 +61,7 @@ npx ferrite use https://gmail.googleapis.com/gmail/v1/users/me/messages/send \
 Example call (Drive files list):
 
 ```bash
-npx ferrite use "https://www.googleapis.com/drive/v3/files?pageSize=25&fields=files(id,name,mimeType,modifiedTime)" \
+npx @jpbonch/ferrite use "https://www.googleapis.com/drive/v3/files?pageSize=25&fields=files(id,name,mimeType,modifiedTime)" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -69,7 +69,7 @@ npx ferrite use "https://www.googleapis.com/drive/v3/files?pageSize=25&fields=fi
 Example call (Calendar event list):
 
 ```bash
-npx ferrite use "https://www.googleapis.com/calendar/v3/calendars/primary/events?singleEvents=true&orderBy=startTime&timeMin=2026-02-24T00:00:00Z" \
+npx @jpbonch/ferrite use "https://www.googleapis.com/calendar/v3/calendars/primary/events?singleEvents=true&orderBy=startTime&timeMin=2026-02-24T00:00:00Z" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -77,7 +77,7 @@ npx ferrite use "https://www.googleapis.com/calendar/v3/calendars/primary/events
 Example call (Calendar create event):
 
 ```bash
-npx ferrite use https://www.googleapis.com/calendar/v3/calendars/primary/events \
+npx @jpbonch/ferrite use https://www.googleapis.com/calendar/v3/calendars/primary/events \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -87,7 +87,7 @@ npx ferrite use https://www.googleapis.com/calendar/v3/calendars/primary/events 
 Example call (People connections list):
 
 ```bash
-npx ferrite use "https://people.googleapis.com/v1/people/me/connections?personFields=names,emailAddresses,organizations&pageSize=50" \
+npx @jpbonch/ferrite use "https://people.googleapis.com/v1/people/me/connections?personFields=names,emailAddresses,organizations&pageSize=50" \
   --method GET \
   --header "accept:application/json"
 ```

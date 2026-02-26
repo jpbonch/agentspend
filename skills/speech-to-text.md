@@ -18,7 +18,7 @@ Price: Variable by audio duration. x402Factory publishes `$0.01 per started minu
 Example call:
 
 ```bash
-npx ferrite use https://x402factory.ai/base/stt \
+npx @jpbonch/ferrite use https://x402factory.ai/base/stt \
   --method POST \
   --header "content-type:application/json" \
   --body '{"audioUrl":"https://example.com/audio.wav"}' 

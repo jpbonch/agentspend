@@ -23,7 +23,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx ferrite use https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image \
+npx @jpbonch/ferrite use https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image \
   --method POST \
   --header "content-type:application/json" \
   --header "accept:application/json" \

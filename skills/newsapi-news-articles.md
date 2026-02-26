@@ -24,7 +24,7 @@ Common endpoints:
 Example:
 
 ```bash
-npx ferrite use "https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=10" \
+npx @jpbonch/ferrite use "https://newsapi.org/v2/top-headlines?country=us&category=technology&pageSize=10" \
   --method GET
 ```
 

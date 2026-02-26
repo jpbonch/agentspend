@@ -30,7 +30,7 @@ Related StableEnrich endpoint:
 Example call (US + English):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/serper/news \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/serper/news \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"OpenAI funding","num":10,"gl":"us","hl":"en"}'
@@ -39,7 +39,7 @@ npx ferrite use https://stableenrich.dev/api/serper/news \
 Example call (UK + English):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/serper/news \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/serper/news \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"UK AI regulation","num":5,"gl":"uk","hl":"en"}'

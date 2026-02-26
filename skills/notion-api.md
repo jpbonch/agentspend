@@ -41,7 +41,7 @@ Common endpoints:
 Example call (search):
 
 ```bash
-npx ferrite use https://api.notion.com/v1/search \
+npx @jpbonch/ferrite use https://api.notion.com/v1/search \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -52,7 +52,7 @@ npx ferrite use https://api.notion.com/v1/search \
 Example call (retrieve page):
 
 ```bash
-npx ferrite use https://api.notion.com/v1/pages/PAGE_ID \
+npx @jpbonch/ferrite use https://api.notion.com/v1/pages/PAGE_ID \
   --method GET \
   --header "accept:application/json" \
   --header "notion-version:2025-09-03"
@@ -61,7 +61,7 @@ npx ferrite use https://api.notion.com/v1/pages/PAGE_ID \
 Example call (query a data source):
 
 ```bash
-npx ferrite use https://api.notion.com/v1/data_sources/DATA_SOURCE_ID/query \
+npx @jpbonch/ferrite use https://api.notion.com/v1/data_sources/DATA_SOURCE_ID/query \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -72,7 +72,7 @@ npx ferrite use https://api.notion.com/v1/data_sources/DATA_SOURCE_ID/query \
 Example call (create page under a parent page):
 
 ```bash
-npx ferrite use https://api.notion.com/v1/pages \
+npx @jpbonch/ferrite use https://api.notion.com/v1/pages \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -83,7 +83,7 @@ npx ferrite use https://api.notion.com/v1/pages \
 Example call (append a paragraph block):
 
 ```bash
-npx ferrite use https://api.notion.com/v1/blocks/PAGE_OR_BLOCK_ID/children \
+npx @jpbonch/ferrite use https://api.notion.com/v1/blocks/PAGE_OR_BLOCK_ID/children \
   --method PATCH \
   --header "accept:application/json" \
   --header "content-type:application/json" \

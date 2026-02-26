@@ -29,7 +29,7 @@ Related StableEnrich Grok endpoints:
 Example call (recent posts):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/grok/user-posts \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-posts \
   --method POST \
   --header "content-type:application/json" \
   --body '{"handle":"elonmusk","maxResults":5}'
@@ -38,7 +38,7 @@ npx ferrite use https://stableenrich.dev/api/grok/user-posts \
 Example call (deeper post sample):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/grok/user-posts \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-posts \
   --method POST \
   --header "content-type:application/json" \
   --body '{"handle":"sama","maxResults":20}'

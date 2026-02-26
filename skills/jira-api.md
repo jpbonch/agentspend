@@ -43,7 +43,7 @@ Common endpoints:
 Example call (current user):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/myself" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/myself" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -51,7 +51,7 @@ npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/myself" \
 Example call (list projects):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/project/search" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/project/search" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -59,7 +59,7 @@ npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/project/search" \
 Example call (search issues with JQL):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/search/jql" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/search/jql" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -69,7 +69,7 @@ npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/search/jql" \
 Example call (get issue):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123?fields=summary,status,assignee,description" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123?fields=summary,status,assignee,description" \
   --method GET \
   --header "accept:application/json"
 ```
@@ -77,7 +77,7 @@ npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123?fields
 Example call (create issue):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -87,7 +87,7 @@ npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue" \
 Example call (add issue comment):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/comment" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/comment" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \
@@ -97,7 +97,7 @@ npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/commen
 Example call (transition issue):
 
 ```bash
-npx ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/transitions" \
+npx @jpbonch/ferrite use "https://YOUR-SITE.atlassian.net/rest/api/3/issue/ENG-123/transitions" \
   --method POST \
   --header "accept:application/json" \
   --header "content-type:application/json" \

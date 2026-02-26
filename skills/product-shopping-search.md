@@ -30,7 +30,7 @@ Related StableEnrich endpoint:
 Example call (basic shopping search):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/serper/shopping \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/serper/shopping \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"wireless earbuds","num":10,"gl":"us","hl":"en"}'
@@ -39,7 +39,7 @@ npx ferrite use https://stableenrich.dev/api/serper/shopping \
 Example call (narrower result set):
 
 ```bash
-npx ferrite use https://stableenrich.dev/api/serper/shopping \
+npx @jpbonch/ferrite use https://stableenrich.dev/api/serper/shopping \
   --method POST \
   --header "content-type:application/json" \
   --body '{"q":"standing desk","num":5,"gl":"us","hl":"en"}'
