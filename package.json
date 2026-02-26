@@ -1,8 +1,12 @@
 {
   "name": "@jpbonch/ferrite",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Ferrite CLI for agent access to APIs",
-  "files": ["dist", "SKILL.md", "openclaw.plugin.json"],
+  "files": [
+    "dist",
+    "SKILL.md",
+    "openclaw.plugin.json"
+  ],
   "type": "module",
   "bin": {
     "ferrite": "dist/index.js",
@@ -17,7 +21,9 @@
     "skills:validate": "node scripts/validate-skills-manifest.mjs"
   },
   "openclaw": {
-    "extensions": ["./dist/openclaw-plugin/index.js"]
+    "extensions": [
+      "./dist/openclaw-plugin/index.js"
+    ]
   },
   "publishConfig": {
     "access": "public"
