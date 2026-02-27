@@ -122,6 +122,18 @@
     },
     {
       "file": "context7-documentation-api.md"
+    },
+    {
+      "file": "supabase-management-api.md"
+    },
+    {
+      "file": "vercel-api.md"
+    },
+    {
+      "file": "stripe-api.md"
+    },
+    {
+      "file": "twilio-sms-voice-api.md"
     }
   ]
 }
