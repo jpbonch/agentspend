@@ -1,49 +1,51 @@
 ---
-name: "X/Twitter Social User Search"
-description: "Find social accounts/users matching a query."
+name: "X API User Search"
+description: "Search X users by keyword via the official X API."
 domains:
-  - "stableenrich.dev"
-source_url: "https://stableenrich.dev/api/grok/user-search"
+  - "api.x.com"
+source_url: "https://docs.x.com/x-api/users/search-users"
 skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/x-twitter-social-user-search.md"
-auth_type: "x402"
+auth_type: "api_key"
 icon_url: "https://x.com/favicon.ico"
 ---
-### Grok X/Twitter User Search
+### X API Search Users
 
-`https://stableenrich.dev/api/grok/user-search`
+`GET https://api.x.com/2/users/search`
 
-Description: Find X/Twitter users matching a query.
-Price: $0.02 per request (published).
+Description: Retrieve users matching a search query.
+Estimated Ferrite platform fee: $0.01 per request (configurable).
+
+Authentication:
+- `Authorization: Bearer <token>` (platform-managed key on `api.x.com`)
 
 Headers:
-- `content-type:application/json`
+- `accept:application/json`
+- `authorization: Bearer <token>` (injected by Ferrite platform key unless you provide your own)
 
-Body guidance:
-- `query` (string, required)
-- `maxResults` (number, optional)
+Query parameters:
+- `query` (string, required): user search text.
+- `max_results` (integer, optional): `1` to `1000`, default `100`.
+- `next_token` (string, optional): pagination token from a prior response.
+- `user.fields` (string, optional): comma-separated user fields.
+- `expansions` (string, optional): object expansions.
+- `tweet.fields`, `media.fields`, `place.fields`, `poll.fields` (optional): additional expanded fields.
 
-Related StableEnrich Grok endpoints:
-- `POST /api/grok/user-posts`
-- `POST /api/grok/x-search`
-
-Example call (user search):
+Example call (keyword search):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-search \
-  --method POST \
-  --header "content-type:application/json" \
-  --body '{"query":"AI researcher","maxResults":5}'
+npx @jpbonch/ferrite use "https://api.x.com/2/users/search?query=ai%20researcher&max_results=25&user.fields=description,public_metrics,verified" \
+  --method GET \
+  --header "accept:application/json"
 ```
 
-Example call (broader query):
+Example call (pagination):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-search \
-  --method POST \
-  --header "content-type:application/json" \
-  --body '{"query":"fintech founder","maxResults":20}'
+npx @jpbonch/ferrite use "https://api.x.com/2/users/search?query=ai%20researcher&max_results=25&next_token=NEXT_PAGE_TOKEN&user.fields=description,public_metrics,verified" \
+  --method GET \
+  --header "accept:application/json"
 ```
 
 Docs:
-- https://stableenrich.dev/llms.txt
-- https://stableenrich.dev/docs
+- https://docs.x.com/x-api/users/search-users
+- https://docs.x.com/x-api/users/search/introduction

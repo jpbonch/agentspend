@@ -1,49 +1,58 @@
 ---
-name: "X/Twitter Social User Recent Posts"
-description: "Fetch recent posts for a specific social handle."
+name: "X API User Recent Posts"
+description: "Fetch recent posts from a user timeline via the official X API."
 domains:
-  - "stableenrich.dev"
-source_url: "https://stableenrich.dev/api/grok/user-posts"
+  - "api.x.com"
+source_url: "https://docs.x.com/x-api/users/get-posts"
 skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/x-twitter-social-user-recent-posts.md"
-auth_type: "x402"
+auth_type: "api_key"
 icon_url: "https://x.com/favicon.ico"
 ---
-### Grok X/Twitter User Recent Posts
+### X API User Recent Posts
 
-`https://stableenrich.dev/api/grok/user-posts`
+Primary endpoint:
 
-Description: Fetch recent posts for a specific social handle.
-Price: $0.02 per request (published).
+`GET https://api.x.com/2/users/{id}/tweets`
+
+Estimated Ferrite platform fee: $0.01 per request (configurable).
+
+If you only have a handle, resolve it first:
+
+`GET https://api.x.com/2/users/by/username/{username}`
+
+Authentication:
+- `Authorization: Bearer <token>` (platform-managed key on `api.x.com`)
 
 Headers:
-- `content-type:application/json`
+- `accept:application/json`
+- `authorization: Bearer <token>` (injected by Ferrite platform key unless you provide your own)
 
-Body guidance:
-- `handle` (string, required): account handle without `@`.
-- `maxResults` (number, optional)
+Query parameters for `GET /2/users/{id}/tweets`:
+- `max_results` (integer, optional): `5` to `100`, default `10`.
+- `exclude` (string, optional): comma-separated exclusions (`replies`, `retweets`).
+- `pagination_token` (string, optional): pagination token.
+- `since_id`, `until_id` (string, optional): ID range filters.
+- `start_time`, `end_time` (string, optional): ISO-8601 timestamp filters.
+- `tweet.fields` (string, optional): comma-separated tweet fields.
+- `expansions` (string, optional): object expansions.
+- `user.fields`, `media.fields`, `place.fields`, `poll.fields` (optional): expanded object fields.
 
-Related StableEnrich Grok endpoints:
-- `POST /api/grok/user-search`
-- `POST /api/grok/x-search`
-
-Example call (recent posts):
+Example call (lookup user ID by handle):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-posts \
-  --method POST \
-  --header "content-type:application/json" \
-  --body '{"handle":"elonmusk","maxResults":5}'
+npx @jpbonch/ferrite use "https://api.x.com/2/users/by/username/elonmusk?user.fields=id,username,public_metrics" \
+  --method GET \
+  --header "accept:application/json"
 ```
 
-Example call (deeper post sample):
+Example call (fetch recent posts by user ID):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/grok/user-posts \
-  --method POST \
-  --header "content-type:application/json" \
-  --body '{"handle":"sama","maxResults":20}'
+npx @jpbonch/ferrite use "https://api.x.com/2/users/44196397/tweets?max_results=20&exclude=replies,retweets&tweet.fields=created_at,public_metrics,lang&expansions=author_id&user.fields=username,name,profile_image_url" \
+  --method GET \
+  --header "accept:application/json"
 ```
 
 Docs:
-- https://stableenrich.dev/llms.txt
-- https://stableenrich.dev/docs
+- https://docs.x.com/x-api/users/get-posts
+- https://docs.x.com/x-api/users/get-user-by-username
