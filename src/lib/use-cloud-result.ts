@@ -1,6 +1,6 @@
 import type { UseCloudHttpResult } from "../types.js";
 
-const MAX_BODY_CHARS = 6000;
+const MAX_BODY_CHARS = 50000;
 const BODY_PREVIEW_CHARS = 1200;
 
 function toJsonValue(body: unknown): unknown {
