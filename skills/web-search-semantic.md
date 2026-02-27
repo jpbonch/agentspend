@@ -2,35 +2,38 @@
 name: "Web Search (Semantic)"
 description: "Semantic web search across pages relevant to a query."
 domains:
-  - "stableenrich.dev"
-source_url: "https://stableenrich.dev/api/exa/search"
+  - "api.exa.ai"
+source_url: "https://api.exa.ai/search"
 skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/web-search-semantic.md"
-auth_type: "x402"
+auth_type: "api_key"
 icon_url: "https://exa.ai/favicon.ico"
 ---
 ### Exa Web Search
 
-`https://stableenrich.dev/api/exa/search`
+`https://api.exa.ai/search`
 
 Description: Semantic web search across pages relevant to a query.
-Price: $0.01 per request (published).
+
+Auth:
+- Ferrite injects `x-api-key: <EXA_API_KEY>` for `api.exa.ai`.
 
 Headers:
 - `content-type:application/json`
 
 Body guidance:
 - `query` (string, required)
-- `numResults` (number, optional; up to 100)
+- `numResults` (number, optional)
 
-Related StableEnrich Exa endpoints:
-- `POST /api/exa/find-similar`
-- `POST /api/exa/contents`
-- `POST /api/exa/answer`
+Related Exa endpoints:
+- `POST /search`
+- `POST /findSimilar`
+- `POST /contents`
+- `POST /answer`
 
 Example call (semantic search):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/search \
+npx @jpbonch/ferrite use https://api.exa.ai/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"best practices for building AI agents","numResults":10}'
@@ -39,7 +42,7 @@ npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/search \
 Example call (find similar pages):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/find-similar \
+npx @jpbonch/ferrite use https://api.exa.ai/findSimilar \
   --method POST \
   --header "content-type:application/json" \
   --body '{"url":"https://openai.com","numResults":5}'
@@ -48,12 +51,13 @@ npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/find-similar \
 Example call (answer mode):
 
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/answer \
+npx @jpbonch/ferrite use https://api.exa.ai/answer \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"What is the capital of France?"}'
 ```
 
 Docs:
-- https://stableenrich.dev/llms.txt
-- https://stableenrich.dev/docs
+- https://exa.ai/docs/reference/getting-started
+- https://exa.ai/docs/reference/search
+- https://exa.ai/docs/reference/find-similar

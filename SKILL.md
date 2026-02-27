@@ -51,7 +51,7 @@ Options:
 
 Examples:
 ```bash
-npx @jpbonch/ferrite use https://stableenrich.dev/api/exa/search \
+npx @jpbonch/ferrite use https://api.exa.ai/search \
   --method POST \
   --header "content-type:application/json" \
   --body '{"query":"latest robotics news","numResults":5}'
