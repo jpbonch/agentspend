@@ -44,4 +44,5 @@ icon_url: "https://example.com/icon.png"
   - `none`: no upstream auth injected by Ferrite.
   - `oauth`: Ferrite-managed OAuth connection flow.
   - `api_key`: platform-managed domain API key (configured server-side, not in the skill file).
+  - `user_api_key`: user-managed domain API key connected in Ferrite Configure and injected per user.
   - `x402`: micropayment-authenticated endpoint.
