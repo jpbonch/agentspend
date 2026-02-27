@@ -122,6 +122,9 @@
     },
     {
       "file": "openrouter-llm-api.md"
+    },
+    {
+      "file": "context7-documentation-api.md"
     }
   ]
 }
