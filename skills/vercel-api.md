@@ -1,23 +1,24 @@
 ---
 name: "Vercel API"
-description: "Connected Vercel account APIs for projects, deployments, domains, and environment variables."
+description: "Deploy and manage Vercel projects, deployments, domains, and environment variables with a user-provided API token."
 domains:
   - "api.vercel.com"
 source_url: "https://api.vercel.com/v9/projects"
 skill_url: "https://raw.githubusercontent.com/jpbonch/ferrite/main/skills/vercel-api.md"
-auth_type: "oauth"
+auth_type: "user_api_key"
 icon_url: "https://vercel.com/favicon.ico"
 ---
-## Vercel API (OAuth)
+## Vercel API
 
-`api.vercel.com` (via Ferrite OAuth)
+Base URL: `https://api.vercel.com`
 
-Description: Use your connected Vercel account to deploy and manage projects, deployments, domains, and environment variables.
+Description: Deploy and manage Vercel projects, deployments, domains, and environment variables.
 Price: Provider/API dependent. Ferrite call cost depends on endpoint x402 policy.
 
-OAuth behavior:
-- Connect Vercel in `ferrite configure` first.
-- Do not send an `Authorization` header; Ferrite injects OAuth tokens.
+Auth behavior:
+- Connect your Vercel API token in Ferrite Configure from the Services list (`Vercel` -> `Connect`).
+- Ferrite stores your key per account and injects it automatically for `api.vercel.com`.
+- If you send `Authorization` (or configured query auth) on a request, your request value is used and Ferrite does not overwrite it.
 
 Team scoping guidance:
 - For team-scoped resources, include `teamId=<TEAM_ID>` in query params.
@@ -70,9 +71,9 @@ npx @jpbonch/ferrite use "https://api.vercel.com/v10/projects/PROJECT_NAME/env?u
   --body '[{"key":"API_BASE_URL","value":"https://example.com","target":["production","preview"],"type":"encrypted"}]'
 ```
 
-Official docs:
-- https://vercel.com/docs/integrations/oauth2-overview
-- https://vercel.com/docs/integrations/scopes-permissions
+Docs:
+- https://vercel.com/docs/rest-api
+- https://vercel.com/guides/how-do-i-use-a-vercel-api-access-token
 - https://vercel.com/docs/rest-api/reference/endpoints/projects/retrieve-a-list-of-projects
 - https://vercel.com/docs/rest-api/reference/endpoints/projects/create-a-new-project
 - https://vercel.com/docs/rest-api/reference/endpoints/projects/edit-an-existing-project
