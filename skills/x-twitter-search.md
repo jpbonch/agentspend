@@ -1,6 +1,6 @@
 ---
 name: "X/Twitter Search"
-description: "Search X/Twitter posts and users, including recent/all post search and user timelines."
+description: "Search X and Twitter posts and users, including recent/all post search and user timelines."
 domains:
   - "api.x.com"
 source_url: "https://api.x.com/2/tweets/search/recent"
