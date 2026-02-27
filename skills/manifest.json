@@ -82,10 +82,7 @@
       "file": "web-search-semantic.md"
     },
     {
-      "file": "x-twitter-social-user-recent-posts.md"
-    },
-    {
-      "file": "x-twitter-social-user-search.md"
+      "file": "x-twitter-search.md"
     },
     {
       "file": "tavily-ai-optimized-search.md"
