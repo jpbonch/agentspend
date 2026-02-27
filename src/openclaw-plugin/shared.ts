@@ -31,6 +31,14 @@ class PluginToolError extends Error {
   }
 }
 
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function maybeString(value: unknown): string | null {
+  return typeof value === "string" && value.trim().length > 0 ? value : null;
+}
+
 function toToolResult(payload: JsonObject, isError = false): AgentToolResult {
   return {
     isError,
@@ -88,35 +96,73 @@ export function toJsonValue(body: unknown): unknown {
 }
 
 function apiErrorCode(body: unknown): string | undefined {
-  if (typeof body !== "object" || body === null) {
+  if (!isRecord(body)) {
     return undefined;
   }
 
-  const code = (body as Record<string, unknown>).code;
+  const code = body.code;
   return typeof code === "string" ? code : undefined;
+}
+
+function apiErrorConfigureUrl(body: unknown): string | null {
+  if (!isRecord(body)) {
+    return null;
+  }
+
+  const direct = maybeString(body.configure_url);
+  if (direct) {
+    return direct;
+  }
+
+  if (!isRecord(body.details)) {
+    return null;
+  }
+
+  return maybeString(body.details.configure_url);
+}
+
+function setupRequiredError(configureUrl: string | null): AgentToolResult {
+  return toolError("Setup is required before I can continue.", {
+    needs_setup: true,
+    configure_url: configureUrl,
+  });
 }
 
 export function pluginErrorResult(error: unknown): AgentToolResult {
   if (error instanceof PluginToolError) {
-    return toolError(error.message, {
-      code: error.code,
-      details: error.details ?? null,
-    });
+    if (error.code === "CONFIGURE_REQUIRED") {
+      return setupRequiredError(null);
+    }
+
+    return toolError("That request could not be completed. Please try again.");
   }
 
   if (error instanceof ApiError) {
-    return toolError(error.message, {
-      status: error.status,
-      code: apiErrorCode(error.body) ?? null,
-      details: toJsonValue(error.body),
-    });
+    const code = apiErrorCode(error.body);
+    const configureUrl = apiErrorConfigureUrl(error.body);
+    const isSetupError =
+      code === "CONFIGURE_REQUIRED"
+      || code === "SERVICE_AUTH_REQUIRED"
+      || code === "PAYMENT_METHOD_REQUIRED"
+      || configureUrl !== null
+      || error.status === 401;
+
+    if (isSetupError) {
+      return setupRequiredError(configureUrl);
+    }
+
+    if (error.status >= 500) {
+      return toolError("The service is temporarily unavailable. Please try again in a moment.");
+    }
+
+    return toolError("That request could not be completed. Please try again.");
   }
 
   if (error instanceof Error) {
-    return toolError(error.message);
+    return toolError("That request could not be completed. Please try again.");
   }
 
-  return toolError(String(error));
+  return toolError("That request could not be completed. Please try again.");
 }
 
 export function assertRecord(value: unknown, errorMessage: string): Record<string, unknown> {
@@ -176,10 +222,7 @@ export async function resolveApiKeyForTool(apiClient: FerriteApiClient): Promise
     }
 
     if (error.message.includes("No API key found")) {
-      throw new PluginToolError(
-        "No API key found. Run ferrite_configure first.",
-        "CONFIGURE_REQUIRED",
-      );
+      throw new PluginToolError("Setup is required before I can continue.", "CONFIGURE_REQUIRED");
     }
 
     throw error;

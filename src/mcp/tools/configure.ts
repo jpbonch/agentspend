@@ -4,12 +4,14 @@ import { toolSuccess } from "../shared.js";
 
 export async function runConfigureTool(apiClient: FerriteApiClient) {
   const result = await resolveConfigureStatus(apiClient);
+  const needsSetup = !result.status.has_api_key;
+  const message = needsSetup
+    ? "Please finish setup using this link, then reply \"done\"."
+    : "Setup is complete.";
 
   return toolSuccess({
+    needs_setup: needsSetup,
     configure_url: result.status.configure_url,
-    claim_status: result.status.claim_status,
-    has_card_on_file: result.status.has_card_on_file,
-    has_api_key: result.status.has_api_key,
-    message: result.message,
+    message,
   });
 }

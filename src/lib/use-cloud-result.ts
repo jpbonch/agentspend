@@ -48,18 +48,8 @@ function compactResponseBody(body: unknown): { body: unknown; body_omitted: bool
 export function formatUseCloudResult(result: UseCloudHttpResult): Record<string, unknown> {
   const compactBody = compactResponseBody(result.body);
   return {
-    mode: result.mode,
     status: result.status,
     body: compactBody.body,
     body_omitted: compactBody.body_omitted,
-    charged_usd: result.payment?.charged_usd ?? null,
-    remaining_budget_usd: result.payment?.remaining_budget_usd ?? null,
-    payment: result.payment
-      ? {
-          transaction_hash: result.payment.transaction_hash,
-          paid_to: result.payment.paid_to,
-          charged_currency: result.payment.charged_currency,
-        }
-      : null,
   };
 }

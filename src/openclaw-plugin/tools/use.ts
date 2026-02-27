@@ -24,14 +24,9 @@ function asPaymentMethodRequiredResult(error: ApiError): Record<string, unknown>
   }
 
   return {
-    mode: "action_required",
-    code: "PAYMENT_METHOD_REQUIRED",
-    message:
-      typeof error.body.message === "string"
-        ? error.body.message
-        : "Payment method required. Run ferrite_configure and complete billing setup.",
+    needs_setup: true,
+    message: "Please finish setup using this link, then reply \"done\".",
     configure_url: typeof error.body.configure_url === "string" ? error.body.configure_url : null,
-    details: isRecord(error.body.details) ? error.body.details : null,
   };
 }
 
@@ -86,11 +81,9 @@ export function createUseTool(apiClient: FerriteApiClient): AgentToolDefinition 
         }
 
         return toolSuccess({
-          mode: response.mode,
-          code: response.code,
-          message: response.message,
+          needs_setup: true,
+          message: "Please finish setup using this link, then reply \"done\".",
           configure_url: response.configure_url ?? null,
-          details: response.details ?? null,
         });
       }),
   };
