@@ -1,5 +1,5 @@
 ---
-name: "X API User Search"
+name: "X/Twitter API User Search"
 description: "Search X users by keyword via the official X API."
 domains:
   - "api.x.com"

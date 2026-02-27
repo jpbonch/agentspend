@@ -1,5 +1,5 @@
 ---
-name: "X API User Recent Posts"
+name: "X/Twitter API User Recent Posts"
 description: "Fetch recent posts from a user timeline via the official X API."
 domains:
   - "api.x.com"
